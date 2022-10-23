@@ -4,14 +4,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class JwtDto {
+public class JwtDTO {
     private String token;
     
-    public JwtDto() {
+    public JwtDTO() {
     	
     }
     
-    public JwtDto(String token) {
+    public JwtDTO(String token) {
     	this.token = token;
     }
 }

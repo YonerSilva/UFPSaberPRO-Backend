@@ -2,10 +2,8 @@ package com.ufps.UFPSaberPRO.security.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import javax.persistence.*;
 import lombok.Data;
-import java.util.Set;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -45,8 +43,8 @@ public class Usuario implements Serializable{
     @Column(name = "usu_fechaCreacion")
     private LocalDateTime usu_fechaCreacion;
     
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name="usuario_rol", joinColumns = @JoinColumn(name="id_usuario"),inverseJoinColumns=@JoinColumn(name="id_rol"))
-    private Set<Rol> roles = new HashSet<>();
+    @JoinColumn(name = "id_rol",referencedColumnName = "id_rol")
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Rol.class)
+    private Rol rol;
 
 }

@@ -13,10 +13,8 @@ import com.ufps.UFPSaberPRO.security.entity.*;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,7 +38,6 @@ public class AuthController {
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final PasswordEncoder passwordEncoder;
     private final UserService userService;
-    private final RoleService roleService;
     private final JwtProvider jwtProvider;
     
     @Autowired
@@ -52,7 +49,6 @@ public class AuthController {
         this.authenticationManagerBuilder = authenticationManagerBuilder;
         this.passwordEncoder = passwordEncoder;
         this.userService = userService;
-        this.roleService = roleService;
         this.jwtProvider = jwtProvider;
     }
 
@@ -73,7 +69,7 @@ public class AuthController {
                 Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
                 String jwt = jwtProvider.generateToken(authentication);
-                JwtDto jwtDto = new JwtDto(jwt);
+                JwtDTO jwtDto = new JwtDTO(jwt);
                 usuario.setUsu_password("");
             	rtn.put("error", null);
                 rtn.put("message", "¡Bienvenido(a)! "+ usuario.getUsu_nombre()+" "+usuario.getUsu_apellido());
@@ -98,11 +94,11 @@ public class AuthController {
 
     @Operation(summary = "Se registra un nuevo usuario.")
     @PostMapping("/register")
-    public ResponseEntity<Object> register(@Valid @RequestBody NuevoUsuario nuevoUsuario, BindingResult bindingResult) {
+    public ResponseEntity<Object> register(@Valid @RequestBody UsuarioDTO nuevoUsuario, BindingResult bindingResult) {
         Map<String, Object> rtn = new LinkedHashMap<>();
     	try {
             if (bindingResult.hasErrors()) {
-            	rtn.put("error", "Revise los campos e intente nuevamente.");
+            	rtn.put("error", bindingResult.getFieldError().getDefaultMessage());
             	rtn.put("message", "¡Oops! Ha ocurrido un error con los datos ingresados.");
                 return new ResponseEntity<>(rtn,HttpStatus.BAD_REQUEST);
             }
@@ -114,11 +110,7 @@ public class AuthController {
             user.setUsu_password(passwordEncoder.encode(nuevoUsuario.getUsu_password()));
             ProgramaDTO prg = programaService.buscarPorId(nuevoUsuario.getPrograma());
             user.setPrograma(new ProgramaConverter().converterToEntity(prg));
-            Set<Rol> roles = new HashSet<>();
-            for (Long rol : nuevoUsuario.getUsu_roles()) {
-				roles.add(new Rol(rol));
-			}
-            user.setRoles(roles);
+            user.setRol(new Rol(nuevoUsuario.getRol()));
             userService.save(user);
             rtn.put("error", null);
         	rtn.put("message", "¡Éxito!, usted se ha registrado correctamente.");
@@ -132,7 +124,7 @@ public class AuthController {
     
     @Operation(summary = "Valida la autenticación de un usuario respeecto al token.")
     @PostMapping("/validateToken")
-    public ResponseEntity<Boolean> validateToken(@RequestBody JwtDto jwt) {
+    public ResponseEntity<Boolean> validateToken(@RequestBody JwtDTO jwt) {
         try {
             String token = jwt.getToken();
             if (token != "" || token != null) {

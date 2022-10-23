@@ -18,8 +18,8 @@ public class Rol implements Serializable {
     @Column(name = "id_rol")
     private Long id_rol;   
     
-    @Column(name = "rol_name")
-    private String rol_name;   
+    @Column(name = "rol_nombre")
+    private String rol_nombre;   
     
     public Rol() {
     	

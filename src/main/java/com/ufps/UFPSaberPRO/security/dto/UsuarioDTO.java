@@ -1,15 +1,12 @@
 package com.ufps.UFPSaberPRO.security.dto;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 import lombok.Data;
 
 @Data
-public class NuevoUsuario {
+public class UsuarioDTO {
 
     @NotEmpty
     private String usu_nombre;
@@ -20,29 +17,27 @@ public class NuevoUsuario {
     @NotEmpty
     private String usu_codigo;
     
-    @NotBlank
+    @NotEmpty
+    @Email
     private String usu_email;
     
-    @NotBlank
+    @NotEmpty
     private String usu_password;
     
-    @NotBlank
+    @NotEmpty
     private Long programa;
     
-    private Set<Long> usu_roles = new HashSet<>();
+    @NotEmpty
+    private Long rol;
     
-    public NuevoUsuario() {
-    	
-    }
-    
-    public NuevoUsuario(@NotBlank String nombre, @NotBlank String apellido, @NotBlank String codigo, @NotBlank String email, @NotBlank String password,
-            @NotBlank Long programa, Set<Long> roles) {
+    public UsuarioDTO(String nombre,  String apellido, String codigo, String email, String password,
+             Long programa, Long rol) {
         this.usu_nombre = nombre;
         this.usu_apellido = apellido;
         this.usu_codigo = codigo;
         this.usu_email = email;
         this.usu_password = password;
         this.programa = programa;
-        this.usu_roles = roles;
+        this.rol = rol;
     } 
 }
