@@ -42,9 +42,6 @@ private static final long serialVersionUID = 1L;
     
     //FK programa
     
-    @CreationTimestamp
-    @Column(name = "opc_fechaCreacion")
-    private Date opc_fechaCreacion;
     
     public Opcion() {
     	

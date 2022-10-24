@@ -40,9 +40,6 @@ private static final long serialVersionUID = 1L;
     /* FK categoria
      * FK usu_creacion
     */
-    @CreationTimestamp
-    @Column(name = "sub_fechaCreado")
-    private Date sub_fechaCreado;
    
     public Subcategoria() {
     	

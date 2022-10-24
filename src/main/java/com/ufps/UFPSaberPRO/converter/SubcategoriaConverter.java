@@ -16,7 +16,6 @@ public class SubcategoriaConverter {
 		subcategoria.setId_subcategoria(entity.getId_subcategoria());
 		subcategoria.setSub_nombre(entity.getSub_nombre());
 		subcategoria.setSub_descripcion(entity.getSub_descripcion());
-		//subcategoria.setSub_fechaCreado(entity.getSub_fechaCreado);
 		return subcategoria;
 	}
 	
@@ -25,7 +24,6 @@ public class SubcategoriaConverter {
 		subcategoria.setId_subcategoria(dto.getId_subcategoria());
 		subcategoria.setSub_nombre(dto.getSub_nombre());
 		subcategoria.setSub_descripcion(dto.getSub_descripcion());
-		//subcategoria.setSub_fechaCreado(dto.getSub_fechaCreado);
 		return subcategoria;
 	}
 

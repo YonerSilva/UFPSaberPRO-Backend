@@ -22,10 +22,6 @@ public class OpcionDTO {
 	@NotEmpty
     private Boolean opc_respuesta;
 	
-	@NotBlank
-	@NotEmpty
-    private Date opc_fechaCreacion;
-	
 	
 	public OpcionDTO() {
 		
