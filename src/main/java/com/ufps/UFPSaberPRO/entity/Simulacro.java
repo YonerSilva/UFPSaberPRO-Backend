@@ -1,6 +1,7 @@
 package com.ufps.UFPSaberPRO.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -11,6 +12,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ufps.UFPSaberPRO.security.entity.Usuario;
 
@@ -33,11 +37,12 @@ private static final long serialVersionUID = 1L;
     @Column(name = "simu_descripcion", length = 256)
     private String simu_descripcion;
     
-    @CreationTimestamp
+    @Column(name = "simu_puntajeMaximo")
+    private Integer simu_puntajeMaximo;
+    
     @Column(name = "simu_fechaInicial")
     private Date simu_fechaInicial;
     
-    @CreationTimestamp
     @Column(name = "simu_fechaFinal")
     private Date simu_fechaFinal;
     
@@ -46,9 +51,6 @@ private static final long serialVersionUID = 1L;
     
     @Column(name = "simu_estado", length = 5)
     private String simu_estado;
-    
-    @Column(name = "simu_codigo", unique = true, nullable = false, length = 120)
-    private String simu_codigo;
     
     @CreationTimestamp
     @Column(name = "simu_fechaCreacion")

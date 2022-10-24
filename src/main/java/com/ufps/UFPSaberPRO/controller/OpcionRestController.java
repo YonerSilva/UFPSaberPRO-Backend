@@ -23,12 +23,12 @@ import com.ufps.UFPSaberPRO.serviceImpl.ProgramaServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
-@RequestMapping("/api/programas")
+@RequestMapping("/api/opciones")
 @CrossOrigin("*")
-public class ProgramaRestController {
+public class OpcionRestController {
 	
 	@Autowired
-	private ProgramaServiceImpl programaService;
+	private OpcionRestController opcionService;
 	
 
 }

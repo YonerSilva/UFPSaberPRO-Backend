@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ufps.UFPSaberPRO.converter.SubcategoriaConverter;
 import com.ufps.UFPSaberPRO.dao.SubcategoriaRepository;
-import com.ufps.UFPSaberPRO.dto.SubcategoriaDTO;
 import com.ufps.UFPSaberPRO.entity.Subcategoria;
 import com.ufps.UFPSaberPRO.service.SubcategoriaService;
 

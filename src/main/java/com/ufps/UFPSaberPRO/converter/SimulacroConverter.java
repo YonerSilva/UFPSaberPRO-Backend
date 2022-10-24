@@ -16,12 +16,12 @@ public class SimulacroConverter {
 		simulacro.setId_simulacro(entity.getId_simulacro());
 		simulacro.setSimu_nombre(entity.getSimu_nombre());
 		simulacro.setSimu_descripcion(entity.getSimu_descripcion());
-		simulacro.setSimu_fechaInicial(entity.getSimu_fechaInicial());
-		simulacro.setSimu_fechaFinal(entity.getSimu_fechaFinal());
+		//simulacro.setSimu_fechaInicial(entity.getSimu_fechaInicial());
+		//simulacro.setSimu_fechaFinal(entity.getSimu_fechaFinal());
 		simulacro.setSimu_duracion(entity.getSimu_duracion());
 		simulacro.setSimu_estado(entity.getSimu_estado());
-		simulacro.setSimu_codigo(entity.getSimu_codigo());
-		simulacro.setSimu_fechaCreacion(entity.getSimu_fechaCreacion());
+		//simulacro.setSimu_codigo(entity.getSimu_codigo());
+		//simulacro.setSimu_fechaCreacion(entity.getSimu_fechaCreacion());
 		return simulacro;
 	}
 	
@@ -30,11 +30,11 @@ public class SimulacroConverter {
 		simulacro.setId_simulacro(dto.getId_simulacro());
 		simulacro.setSimu_nombre(dto.getSimu_nombre());
 		simulacro.setSimu_descripcion(dto.getSimu_descripcion());
-		simulacro.setSimu_fechaInicial(dto.getSimu_fechaInicial());
-		simulacro.setSimu_fechaFinal(dto.getSimu_fechaFinal());
+		/*simulacro.setSimu_fechaInicial(dto.getSimu_fechaInicial());
+		simulacro.setSimu_fechaFinal(dto.getSimu_fechaFinal());*/
 		simulacro.setSimu_duracion(dto.getSimu_duracion());
 		simulacro.setSimu_estado(dto.getSimu_estado());
-		simulacro.setSimu_codigo(dto.getSimu_codigo());
+		//simulacro.setSimu_codigo(dto.getSimu_codigo());
 		return simulacro;
 	}
 }

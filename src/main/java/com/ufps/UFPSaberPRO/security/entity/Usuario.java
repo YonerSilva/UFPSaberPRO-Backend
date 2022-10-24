@@ -2,12 +2,16 @@ package com.ufps.UFPSaberPRO.security.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 import lombok.Data;
 
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.ufps.UFPSaberPRO.entity.Programa;
+import com.ufps.UFPSaberPRO.entity.Simulacro;
 
 @Entity
 @Data
@@ -46,5 +50,8 @@ public class Usuario implements Serializable{
     @JoinColumn(name = "id_rol",referencedColumnName = "id_rol")
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Rol.class)
     private Rol rol;
-
+    
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name="simu_usu", joinColumns = @JoinColumn(name="id_usuario"),inverseJoinColumns=@JoinColumn(name="id_simulacro"))
+    private List<Simulacro> simulacros = new ArrayList<>();
 }

@@ -17,7 +17,7 @@ public class OpcionConverter {
 		opcion.setOpc_imagen(entity.getOpc_imagen());
 		opcion.setOpc_descripcion(entity.getOpc_descripcion());
 		opcion.setOpc_respuesta(entity.getOpc_respuesta());
-		opcion.setOpc_fechaCreacion(entity.getOpc_fechaCreacion());
+		//opcion.setOpc_fechaCreacion(entity.getOpc_fechaCreacion());
 		return opcion;
 	}
 	

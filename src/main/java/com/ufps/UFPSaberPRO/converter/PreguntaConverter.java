@@ -17,7 +17,7 @@ public class PreguntaConverter {
 		pregunta.setPreg_imagen(entity.getPreg_imagen());
 		pregunta.setPreg_descripcion(entity.getPreg_descripcion());
 		pregunta.setPreg_estado(entity.getPreg_estado());
-		pregunta.setPreg_fechaCreacion(entity.getPreg_fechaCreacion());
+		//pregunta.setPreg_fechaCreacion(entity.getPreg_fechaCreacion());
 		return pregunta;
 	}
 	
@@ -27,7 +27,7 @@ public class PreguntaConverter {
 		pregunta.setPreg_imagen(dto.getPreg_imagen());
 		pregunta.setPreg_descripcion(dto.getPreg_descripcion());
 		pregunta.setPreg_estado(dto.getPreg_estado());
-		pregunta.setPreg_fechaCreacion(dto.getPreg_fechaCreacion());
+		//pregunta.setPreg_fechaCreacion(dto.getPreg_fechaCreacion());
 		return pregunta;
 	}
 

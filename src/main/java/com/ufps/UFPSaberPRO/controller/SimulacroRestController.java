@@ -19,16 +19,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ufps.UFPSaberPRO.dto.ProgramaDTO;
 import com.ufps.UFPSaberPRO.serviceImpl.ProgramaServiceImpl;
+import com.ufps.UFPSaberPRO.serviceImpl.SimulacroServiceImpl;
 
 import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
-@RequestMapping("/api/programas")
+@RequestMapping("/api/simulacros")
 @CrossOrigin("*")
-public class ProgramaRestController {
+public class SimulacroRestController {
 	
 	@Autowired
-	private ProgramaServiceImpl programaService;
+	private SimulacroServiceImpl simulacroService;
 	
 
 }
