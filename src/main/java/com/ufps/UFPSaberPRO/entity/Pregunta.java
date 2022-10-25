@@ -1,51 +1,54 @@
-    package com.ufps.UFPSaberPRO.entity;
+package com.ufps.UFPSaberPRO.entity;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
-
+import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.ufps.UFPSaberPRO.security.entity.Usuario;
-
 import lombok.Data;
 
 @Entity
-@Table(name = "opcion", schema = "public")
+@Table(name = "pregunta", schema = "public")
 @Data
-public class Pregunta implements Serializable{
-private static final long serialVersionUID = 1L;
-    
+public class Pregunta implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_pregunta")
 	private Long id_pregunta;
-	
+
 	@Column(name = "preg_imagen", length = 256)
 	private String preg_imagen;
-       
-    @Column(name = "preg_descripcion", length = 500)
-    private String preg_descripcion;
-    
-    @CreationTimestamp
-    @Column(name = "preg_fechaCreacion")
-    private Date preg_fechaCreacion;
-    
-    @Column(name = "preg_estado", length = 5)
-    private String preg_estado;
-    
-    public Pregunta() {
-    	
-    }
-    
+
+	@Column(name = "preg_descripcion", length = 500)
+	private String preg_descripcion;
+
+	@Column(name = "preg_estado", length = 5)
+	private String preg_estado;
+
+	@JoinColumn(name = "id_subcategoria", referencedColumnName = "id_subcategoria")
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Subcategoria.class)
+	private Subcategoria subcategoria;
+
+	@CreationTimestamp
+	@Column(name = "preg_fechaCreacion")
+	private LocalDateTime preg_fechaCreacion;
+
+	@Column(name = "usu_creacion")
+	private Long usu_creacion;
+
+	public Pregunta() {
+
+	}
+
 }

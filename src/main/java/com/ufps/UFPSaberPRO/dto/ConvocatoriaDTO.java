@@ -30,6 +30,13 @@ public class ConvocatoriaDTO {
 	@NotEmpty
     private String convo_estado;
 	
+	@NotBlank
+	@NotEmpty
+    private Long programa;
+	
+	@NotBlank
+	@NotEmpty
+    private Long simulacro;
 	
 	public ConvocatoriaDTO() {
 		

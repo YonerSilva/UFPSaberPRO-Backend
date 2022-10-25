@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ufps.UFPSaberPRO.dto.ProgramaDTO;
+import com.ufps.UFPSaberPRO.serviceImpl.OpcionServiceImpl;
 import com.ufps.UFPSaberPRO.serviceImpl.ProgramaServiceImpl;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,7 +29,7 @@ import io.swagger.v3.oas.annotations.Operation;
 public class OpcionRestController {
 	
 	@Autowired
-	private OpcionRestController opcionService;
+	private OpcionServiceImpl opcionService;
 	
 
 }
