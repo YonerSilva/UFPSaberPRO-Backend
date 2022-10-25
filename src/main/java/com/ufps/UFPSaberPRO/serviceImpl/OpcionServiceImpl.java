@@ -19,5 +19,29 @@ public class OpcionServiceImpl implements OpcionService{
 	
 	@Autowired
 	private OpcionRepository opcionDao;
+
+	@Override
+	public OpcionDTO buscar(Long id_opcion) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void guardar(OpcionDTO opcion) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void eliminar(Long id_opcion) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<OpcionDTO> getOpciones() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

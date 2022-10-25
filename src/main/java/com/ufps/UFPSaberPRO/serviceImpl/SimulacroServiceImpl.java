@@ -19,6 +19,30 @@ public class SimulacroServiceImpl implements SimulacroService{
 	
 	@Autowired
 	private SimulacroRepository simulacroDao;
+
+	@Override
+	public SimulacroDTO buscar(Long id_simulacro) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void guardar(SimulacroDTO simulacro) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void eliminar(Long id_simulacro) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<SimulacroDTO> getSimulacros() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }

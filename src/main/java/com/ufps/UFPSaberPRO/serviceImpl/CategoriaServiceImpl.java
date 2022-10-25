@@ -19,4 +19,28 @@ public class CategoriaServiceImpl implements CategoriaService{
 	
 	@Autowired
 	private CategoriaRepository categoriaDao;
+
+	@Override
+	public CategoriaDTO buscar(Long id_categoria) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void guardar(CategoriaDTO categoria) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void eliminar(Long id_categoria) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<CategoriaDTO> getCategorias() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

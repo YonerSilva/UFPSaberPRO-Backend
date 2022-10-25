@@ -58,6 +58,7 @@ public class AuthController {
         Map<String, Object> rtn = new LinkedHashMap<>();
         if (bidBindingResult.hasErrors()) {
             rtn.put("error", bidBindingResult.getFieldError().getDefaultMessage());
+            rtn.put("message", "Los campos estan incorrectos.");
             rtn.put("usuario", null);
             rtn.put("token", null);
             return new ResponseEntity<>(rtn, HttpStatus.BAD_REQUEST);
@@ -108,12 +109,12 @@ public class AuthController {
             user.setUsu_codigo(nuevoUsuario.getUsu_codigo());
             user.setUsu_email(nuevoUsuario.getUsu_email());
             user.setUsu_password(passwordEncoder.encode(nuevoUsuario.getUsu_password()));
-            ProgramaDTO prg = programaService.buscarPorId(nuevoUsuario.getPrograma());
+            ProgramaDTO prg = programaService.buscarPorCodigo(nuevoUsuario.getCod_programa());
             user.setPrograma(new ProgramaConverter().converterToEntity(prg));
             user.setRol(new Rol(nuevoUsuario.getRol()));
             userService.save(user);
             rtn.put("error", null);
-        	rtn.put("message", "¡Éxito!, usted se ha registrado correctamente.");
+        	rtn.put("message", "¡Éxito!, se ha registrado correctamente.");
             return new ResponseEntity<>(rtn,HttpStatus.CREATED);
         } catch (Exception e) {
             rtn.put("error", e.getMessage());

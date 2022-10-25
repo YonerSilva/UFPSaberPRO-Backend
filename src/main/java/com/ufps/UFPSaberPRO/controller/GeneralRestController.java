@@ -21,7 +21,7 @@ import com.ufps.UFPSaberPRO.serviceImpl.ProgramaServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
-@RequestMapping("/api/general")
+@RequestMapping("/auth/api/general")
 @CrossOrigin("*")
 public class GeneralRestController {
 	

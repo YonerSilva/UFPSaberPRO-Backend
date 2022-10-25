@@ -19,5 +19,29 @@ public class ConvocatoriaServiceImpl implements ConvocatoriaService{
 	
 	@Autowired
 	private ConvocatoriaRepository convocatoriaDao;
+
+	@Override
+	public ConvocatoriaDTO buscar(Long id_convocatoria) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void guardar(ConvocatoriaDTO convocatoria) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void eliminar(Long id_convocatoria) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<ConvocatoriaDTO> getConvocatorias() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

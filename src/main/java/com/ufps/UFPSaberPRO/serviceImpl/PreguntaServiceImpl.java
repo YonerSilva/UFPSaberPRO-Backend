@@ -19,5 +19,29 @@ public class PreguntaServiceImpl implements PreguntaService{
 	
 	@Autowired
 	private PreguntaRepository preguntaDao;
+
+	@Override
+	public PreguntaDTO buscar(Long id_pregunta) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void guardar(PreguntaDTO pregunta) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void eliminar(Long id_pregunta) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<PreguntaDTO> getPreguntas() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
