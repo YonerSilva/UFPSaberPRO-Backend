@@ -42,4 +42,10 @@ public class Subcategoria implements Serializable {
 
 	}
 
+	public Subcategoria(Long id_subcategoria) {
+		this.id_subcategoria = id_subcategoria;
+	}
+	
+	
+
 }

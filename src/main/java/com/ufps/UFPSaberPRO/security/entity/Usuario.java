@@ -54,4 +54,13 @@ public class Usuario implements Serializable{
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="simu_usu", joinColumns = @JoinColumn(name="id_usuario"),inverseJoinColumns=@JoinColumn(name="id_simulacro"))
     private List<Simulacro> simulacros = new ArrayList<>();
+
+    public Usuario() {
+    	
+	}
+    
+	public Usuario(Long id_usuario) {
+		this.id_usuario = id_usuario;
+	}
+    
 }

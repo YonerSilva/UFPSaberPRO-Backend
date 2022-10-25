@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import com.ufps.UFPSaberPRO.dto.OpcionDTO;
 import com.ufps.UFPSaberPRO.entity.Opcion;
+import com.ufps.UFPSaberPRO.entity.Pregunta;
 
 
 @Component
@@ -17,6 +18,7 @@ public class OpcionConverter {
 		opcion.setOpc_imagen(entity.getOpc_imagen());
 		opcion.setOpc_descripcion(entity.getOpc_descripcion());
 		opcion.setOpc_respuesta(entity.getOpc_respuesta());
+		opcion.setPregunta(entity.getPregunta().getId_pregunta());
 		return opcion;
 	}
 	
@@ -26,6 +28,7 @@ public class OpcionConverter {
 		opcion.setOpc_imagen(dto.getOpc_imagen());
 		opcion.setOpc_descripcion(dto.getOpc_descripcion());
 		opcion.setOpc_respuesta(dto.getOpc_respuesta());
+		opcion.setPregunta(new Pregunta(dto.getId_opcion()));
 		return opcion;
 	}
 

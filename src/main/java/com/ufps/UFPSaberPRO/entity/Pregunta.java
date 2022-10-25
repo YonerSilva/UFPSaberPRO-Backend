@@ -51,4 +51,9 @@ public class Pregunta implements Serializable {
 
 	}
 
+	public Pregunta(Long id_pregunta) {
+		this.id_pregunta = id_pregunta;
+	}
+
+	
 }

@@ -22,9 +22,24 @@ public class OpcionDTO {
 	@NotEmpty
     private Boolean opc_respuesta;
 	
+	@NotBlank
+	@NotEmpty
+	private Long pregunta;
+	
 	
 	public OpcionDTO() {
 		
 	}
+
+	public OpcionDTO(Long id_opcion,  String opc_imagen,  String opc_descripcion,
+			 Boolean opc_respuesta,  Long pregunta) {
+		this.id_opcion = id_opcion;
+		this.opc_imagen = opc_imagen;
+		this.opc_descripcion = opc_descripcion;
+		this.opc_respuesta = opc_respuesta;
+		this.pregunta = pregunta;
+	}
+	
+	
 
 }

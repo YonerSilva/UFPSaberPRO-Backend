@@ -55,4 +55,9 @@ public class Simulacro implements Serializable {
 
 	}
 
+	public Simulacro(Long id_simulacro) {
+		this.id_simulacro = id_simulacro;
+	}
+
+	
 }

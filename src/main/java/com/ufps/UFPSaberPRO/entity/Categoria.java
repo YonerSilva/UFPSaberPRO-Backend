@@ -44,6 +44,16 @@ public class Categoria implements Serializable {
 	@Column(name = "cate_fechaCreacion")
 	private LocalDateTime cate_fechaCreacion;
 
+	public Categoria() {
+		
+	}
+
+	public Categoria(Long id_categoria) {
+		this.id_categoria = id_categoria;
+	}
+
+	
+
 	
 
 }

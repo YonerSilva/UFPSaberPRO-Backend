@@ -5,6 +5,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.stereotype.Component;
 
 import com.ufps.UFPSaberPRO.dto.SubcatergoriaDTO;
+import com.ufps.UFPSaberPRO.entity.Categoria;
 import com.ufps.UFPSaberPRO.entity.Subcategoria;
 
 
@@ -16,6 +17,8 @@ public class SubcategoriaConverter {
 		subcategoria.setId_subcategoria(entity.getId_subcategoria());
 		subcategoria.setSub_nombre(entity.getSub_nombre());
 		subcategoria.setSub_descripcion(entity.getSub_descripcion());
+		subcategoria.setCategoria(entity.getCategoria().getId_categoria());
+		subcategoria.setUsu_creacion(entity.getUsu_creacion());
 		return subcategoria;
 	}
 	
@@ -24,6 +27,8 @@ public class SubcategoriaConverter {
 		subcategoria.setId_subcategoria(dto.getId_subcategoria());
 		subcategoria.setSub_nombre(dto.getSub_nombre());
 		subcategoria.setSub_descripcion(dto.getSub_descripcion());
+		subcategoria.setCategoria(new Categoria(dto.getCategoria()));
+		subcategoria.setUsu_creacion(dto.getUsu_creacion());
 		return subcategoria;
 	}
 
