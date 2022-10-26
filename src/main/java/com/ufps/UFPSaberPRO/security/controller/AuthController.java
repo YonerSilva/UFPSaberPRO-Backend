@@ -129,8 +129,7 @@ public class AuthController {
         try {
             String token = jwt.getToken();
             if (token != "" || token != null) {
-                boolean valida = jwtProvider.validateToken(token);
-                return new ResponseEntity<Boolean>(valida, HttpStatus.ACCEPTED);
+                return new ResponseEntity<Boolean>(jwtProvider.validateToken(token), HttpStatus.OK);
             }
         } catch (Exception e) {
             log.info(e.getMessage());
