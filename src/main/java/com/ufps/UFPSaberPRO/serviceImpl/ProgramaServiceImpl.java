@@ -36,6 +36,13 @@ public class ProgramaServiceImpl implements ProgramaService{
 
 	@Transactional
 	@Override
+	public void update(ProgramaDTO programa) {
+		Programa prg = new ProgramaConverter().converterToEntity(programa);
+		programaDao.update(prg.getId_programa(),prg.getPrg_codigo(), prg.getPrg_email(), prg.getPrg_nombre());
+	}
+	
+	@Transactional
+	@Override
 	public void guardar(ProgramaDTO programa) {
 		Programa prg = new ProgramaConverter().converterToEntity(programa);
 		programaDao.save(prg);

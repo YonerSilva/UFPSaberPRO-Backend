@@ -32,14 +32,14 @@ public class Simulacro implements Serializable {
 	@Column(name = "simu_descripcion", length = 256)
 	private String simu_descripcion;
 
-	@Column(name = "simu_puntajeMaximo")
-	private Integer simu_puntajeMaximo;
+	@Column(name = "simu_puntaje_maximo")
+	private Integer simu_puntaje_maximo;
 
-	@Column(name = "simu_fechaInicial")
-	private Date simu_fechaInicial;
+	@Column(name = "simu_fecha_inicial")
+	private Date simu_fecha_inicial;
 
-	@Column(name = "simu_fechaFinal")
-	private Date simu_fechaFinal;
+	@Column(name = "simu_fecha_final")
+	private Date simu_fecha_final;
 
 	@Column(name = "simu_duracion", length = 10)
 	private String simu_duracion;
@@ -48,8 +48,8 @@ public class Simulacro implements Serializable {
 	private String simu_estado;
 
 	@CreationTimestamp
-	@Column(name = "simu_fechaCreacion")
-	private LocalDateTime simu_fechaCreacion;
+	@Column(name = "simu_fecha_creacion")
+	private LocalDateTime simu_fecha_creacion;
 
 	public Simulacro() {
 
@@ -58,6 +58,4 @@ public class Simulacro implements Serializable {
 	public Simulacro(Long id_simulacro) {
 		this.id_simulacro = id_simulacro;
 	}
-
-	
 }

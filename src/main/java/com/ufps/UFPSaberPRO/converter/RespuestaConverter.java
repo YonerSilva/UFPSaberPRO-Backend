@@ -16,7 +16,7 @@ public class RespuestaConverter {
 		respuesta.setId_respuesta(entity.getId_respuesta());
 		respuesta.setPregunta(entity.getPregunta().getId_pregunta());
 		respuesta.setOpciones(entity.getOpciones());
-		respuesta.setRta_puntajeObtenido(entity.getRta_puntajeObtenido());
+		respuesta.setRta_puntaje_obtenido(entity.getRta_puntaje_obtenido());
 		return respuesta;
 	}
 
@@ -25,7 +25,7 @@ public class RespuestaConverter {
 		respuesta.setId_respuesta(dto.getId_respuesta());
 		respuesta.setPregunta(new Pregunta(dto.getId_respuesta()));
 		respuesta.setOpciones(dto.getOpciones());
-		respuesta.setRta_puntajeObtenido(dto.getRta_puntajeObtenido());
+		respuesta.setRta_puntaje_obtenido(dto.getRta_puntaje_obtenido());
 		return respuesta;
 	}
 }

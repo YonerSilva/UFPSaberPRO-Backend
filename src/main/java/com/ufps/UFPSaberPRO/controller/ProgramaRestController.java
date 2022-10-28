@@ -30,6 +30,7 @@ public class ProgramaRestController {
 	@Autowired
 	private ProgramaServiceImpl programaService;
 	
+	@Operation(summary = "Obtiene una lista de programas.")
 	@GetMapping("/getProgramas")
 	public ResponseEntity<Object> getProgramas(){
 		Map<String,Object> datos = new LinkedHashMap<>();
@@ -100,4 +101,27 @@ public class ProgramaRestController {
 			return new ResponseEntity<Object>(datos, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	@Operation(summary = "Actualiza un programa existente en la base de datos.")
+	@PostMapping("/actualizarPrograma")
+	public ResponseEntity<Object> actualizarPrograma(@Valid @RequestBody ProgramaDTO programa, BindingResult bidBindingResult){
+		Map<String,Object> datos = new LinkedHashMap<>();
+		try {
+			if (bidBindingResult.hasErrors()) {
+				datos.put("error", bidBindingResult.getFieldError().getDefaultMessage());
+				datos.put("message", "Ha ocurrido un error con los datos ingresados, verifique e intente nuevamente.");
+				return new ResponseEntity<Object>(datos, HttpStatus.INTERNAL_SERVER_ERROR);
+			}else {
+				programaService.update(programa);
+				datos.put("error", null);
+				datos.put("message", "¡Proceso Exitoso!");
+				return new ResponseEntity<Object>(datos, HttpStatus.CREATED);
+			}
+		} catch (Exception e) {
+			datos.put("error", e.getMessage());
+			datos.put("message", "Ha ocurrido un error interno con los datos.");
+			return new ResponseEntity<Object>(datos, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
 }

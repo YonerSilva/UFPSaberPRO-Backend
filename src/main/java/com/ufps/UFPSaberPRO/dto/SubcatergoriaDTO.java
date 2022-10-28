@@ -2,6 +2,7 @@ package com.ufps.UFPSaberPRO.dto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import com.ufps.UFPSaberPRO.entity.Categoria;
 
@@ -21,28 +22,9 @@ public class SubcatergoriaDTO {
 	@NotEmpty
 	private String sub_descripcion;
 
-	@NotBlank
-	@NotEmpty
+	@NotNull
 	private Long categoria;
 	
-	@NotBlank
-	@NotEmpty
+	@NotNull
 	private Long usu_creacion;
-	
-	public SubcatergoriaDTO() {
-		
-	}
-
-	public SubcatergoriaDTO(Long id_subcategoria, String sub_nombre,
-			 String sub_descripcion, Long categoria,
-			 Long usu_creacion) {
-		this.id_subcategoria = id_subcategoria;
-		this.sub_nombre = sub_nombre;
-		this.sub_descripcion = sub_descripcion;
-		this.categoria = categoria;
-		this.usu_creacion = usu_creacion;
-	}
-	
-	
-
 }

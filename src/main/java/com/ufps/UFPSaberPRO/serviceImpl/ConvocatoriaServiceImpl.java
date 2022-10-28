@@ -21,27 +21,36 @@ public class ConvocatoriaServiceImpl implements ConvocatoriaService{
 	private ConvocatoriaRepository convocatoriaDao;
 
 	@Override
+	@Transactional
 	public ConvocatoriaDTO buscar(Long id_convocatoria) {
-		// TODO Auto-generated method stub
-		return null;
+		Convocatoria convo = convocatoriaDao.findById(id_convocatoria).get();
+		ConvocatoriaDTO convocatoria = new ConvocatoriaConverter().converterToDTO(convo);
+		return convocatoria;
 	}
 
 	@Override
+	@Transactional
 	public void guardar(ConvocatoriaDTO convocatoria) {
-		// TODO Auto-generated method stub
-		
+		Convocatoria convo = new ConvocatoriaConverter().converterToEntity(convocatoria);
+		convocatoriaDao.save(convo);
 	}
 
 	@Override
+	@Transactional
 	public void eliminar(Long id_convocatoria) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
+	@Transactional
 	public List<ConvocatoriaDTO> getConvocatorias() {
-		// TODO Auto-generated method stub
-		return null;
+		List<ConvocatoriaDTO> convocatorias = new ArrayList<>();
+		ConvocatoriaConverter converter = new ConvocatoriaConverter();
+		for (Convocatoria convo : convocatoriaDao.findAll()) {
+			convocatorias.add(converter.converterToDTO(convo));
+		}
+		return convocatorias;
 	}
 	
 }

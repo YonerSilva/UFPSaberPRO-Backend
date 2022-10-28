@@ -38,5 +38,9 @@ public class Simu_Preg implements Serializable {
 	public Simu_Preg() {
 
 	}
+	
+	public Simu_Preg(Long id_simu_preg) {
+		this.id_simu_preg=id_simu_preg;
+	}
 
 }

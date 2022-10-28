@@ -32,8 +32,8 @@ public class Respuesta implements Serializable{
 	@Column(name = "opciones")
 	private String opciones;
 
-    @Column(name = "rta_puntajeObtenido")
-    private Integer rta_puntajeObtenido;
+    @Column(name = "rta_puntaje_obtenido")
+    private Integer rta_puntaje_obtenido;
 
 	public Respuesta() {
 		

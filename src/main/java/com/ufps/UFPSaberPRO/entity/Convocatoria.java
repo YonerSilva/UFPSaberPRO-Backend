@@ -35,11 +35,11 @@ public class Convocatoria implements Serializable {
 	@Column(name = "convo_descripcion", length = 256)
 	private String convo_descripcion;
 
-	@Column(name = "convo_fechaInicial")
-	private Date convo_fechaInicial;
+	@Column(name = "convo_fecha_inicial")
+	private Date convo_fecha_inicial;
 
-	@Column(name = "convo_fechaFinal")
-	private Date convo_fechaFinal;
+	@Column(name = "convo_fecha_final")
+	private Date convo_fecha_final;
 
 	@Column(name = "convo_estado", length = 5)
 	private String convo_estado;
@@ -50,14 +50,14 @@ public class Convocatoria implements Serializable {
 
 	@JoinColumn(name = "id_simulacro", referencedColumnName = "id_simulacro")
 	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Simulacro.class)
-	private Simulacro simulacro;
+	private Long simulacro;
 
 	@Column(name = "usu_creacion")
 	private Long usu_creacion;
 
 	@CreationTimestamp
-	@Column(name = "convo_fechaCreacion")
-	private LocalDateTime convo_fechaCreacion;
+	@Column(name = "convo_fecha_creacion")
+	private LocalDateTime convo_fecha_creacion;
 
 	public Convocatoria() {
 

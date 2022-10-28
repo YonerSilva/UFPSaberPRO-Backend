@@ -14,7 +14,7 @@ public class Simu_UsuConverter {
 		simu_usu.setId_simu_usu(entity.getId_simu_usu());
 		simu_usu.setSimu_usu_presentado(entity.getSimu_usu_presentado());
 		simu_usu.setSimu_usu_codigo(entity.getSimu_usu_codigo());
-		simu_usu.setSimu_usu_puntajeTotal(entity.getSimu_usu_puntajeTotal());
+		simu_usu.setSimu_usu_puntaje_total(entity.getSimu_usu_puntaje_total());
 		simu_usu.setSimulacro(entity.getSimulacro().getId_simulacro());
 		simu_usu.setUsuario(entity.getUsuario().getId_usuario());
 		return simu_usu;
@@ -25,7 +25,7 @@ public class Simu_UsuConverter {
 		simu_usu.setId_simu_usu(dto.getId_simu_usu());
 		simu_usu.setSimu_usu_presentado(dto.getSimu_usu_presentado());
 		simu_usu.setSimu_usu_codigo(dto.getSimu_usu_codigo());
-		simu_usu.setSimu_usu_puntajeTotal(dto.getSimu_usu_puntajeTotal());
+		simu_usu.setSimu_usu_puntaje_total(dto.getSimu_usu_puntaje_total());
 		simu_usu.setSimulacro(new Simulacro(dto.getId_simu_usu()));
 		simu_usu.setUsuario(new Usuario(dto.getId_simu_usu()));
 		return simu_usu;

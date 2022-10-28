@@ -37,8 +37,8 @@ public class Simu_Usu implements Serializable {
 	@Column(name = "simu_usu_codigo", length = 120)
 	private String simu_usu_codigo;
 
-	@Column(name = "simu_usu_puntajeTotal")
-	private Integer simu_usu_puntajeTotal;
+	@Column(name = "simu_usu_puntaje_total")
+	private Integer simu_usu_puntaje_total;
 
 	@JoinColumn(name = "id_simulacro", referencedColumnName = "id_simulacro")
 	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Simulacro.class)
@@ -56,4 +56,7 @@ public class Simu_Usu implements Serializable {
 
 	}
 
+	public Simu_Usu(Long id_simu_usu) {
+		this.id_simu_usu=id_simu_usu;
+	}
 }

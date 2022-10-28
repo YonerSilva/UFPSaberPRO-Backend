@@ -2,6 +2,8 @@ package com.ufps.UFPSaberPRO.dto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import java.util.Date;
 
 import lombok.Data;
@@ -18,25 +20,10 @@ public class CategoriaDTO {
 	@NotEmpty
 	private String cate_descripcion;
 	
-	@NotBlank
-	@NotEmpty
+	@NotNull
 	private Long programa;
 	
-	@NotBlank
-	@NotEmpty
+	@NotNull
 	private Long usu_creacion;
 	
-	public CategoriaDTO() {
-		
-	}
-	
-	public CategoriaDTO(Long id_categoria,String cate_nombre,String cate_descripcion, Long programa,
-			 Long usu_creacion) {
-		this.id_categoria = id_categoria;
-		this.cate_nombre = cate_nombre;
-		this.cate_descripcion = cate_descripcion;
-		this.programa = programa;
-		this.usu_creacion = usu_creacion;
-	}
-
 }

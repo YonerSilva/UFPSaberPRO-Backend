@@ -2,10 +2,8 @@ package com.ufps.UFPSaberPRO.dto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
-import com.ufps.UFPSaberPRO.entity.Programa;
-
-import java.time.LocalDateTime;
 import java.util.Date;
 
 import lombok.Data;
@@ -22,48 +20,21 @@ public class ConvocatoriaDTO {
 	@NotEmpty
     private String convo_descripcion;
 	
-	@NotBlank
-	@NotEmpty
-    private Date convo_fechaInicial;
+	@NotNull
+    private Date convo_fecha_inicial;
 	
-	@NotBlank
-	@NotEmpty
-    private Date convo_fechaFinal;
+	@NotNull
+    private Date convo_fecha_final;
 	
 	@NotBlank
 	@NotEmpty
     private String convo_estado;
 	
-	@NotBlank
-	@NotEmpty
-    private Long programa;
-	
-	
+	@NotNull
+	private Long programa;
+		
     private Long simulacro;
-	
-	@NotBlank
-	@NotEmpty
-	private Long usu_creacion;
-	
-	public ConvocatoriaDTO() {
-		
-	}
-	
-	public ConvocatoriaDTO(Long id_convocatoria,String convo_nombre,
-			 String convo_descripcion,  Date convo_fechaInicial,
-			 Date convo_fechaFinal, String convo_estado,
-			Long programa,  Long simulacro, Long usu_creacion) {
-		
-		this.id_convocatoria = id_convocatoria;
-		this.convo_nombre = convo_nombre;
-		this.convo_descripcion = convo_descripcion;
-		this.convo_fechaInicial = convo_fechaInicial;
-		this.convo_fechaFinal = convo_fechaFinal;
-		this.convo_estado = convo_estado;
-		this.programa = programa;
-		this.simulacro = simulacro;
-		this.usu_creacion = usu_creacion;
-	}
-
-
+    	
+    @NotNull
+	private Long usu_creacion;	
 }

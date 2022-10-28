@@ -16,12 +16,11 @@ public class SimulacroConverter {
 		simulacro.setId_simulacro(entity.getId_simulacro());
 		simulacro.setSimu_nombre(entity.getSimu_nombre());
 		simulacro.setSimu_descripcion(entity.getSimu_descripcion());
-		simulacro.setSimu_puntajeMaximo(entity.getSimu_puntajeMaximo());
-		simulacro.setSimu_fechaInicial(entity.getSimu_fechaInicial());
-		simulacro.setSimu_fechaFinal(entity.getSimu_fechaFinal());
+		simulacro.setSimu_puntaje_maximo(entity.getSimu_puntaje_maximo());
+		simulacro.setSimu_fecha_inicial(entity.getSimu_fecha_inicial());
+		simulacro.setSimu_fecha_final(entity.getSimu_fecha_final());
 		simulacro.setSimu_duracion(entity.getSimu_duracion());
 		simulacro.setSimu_estado(entity.getSimu_estado());
-		//simulacro.setSimu_fechaCreacion(entity.getSimu_fechaCreacion());
 		return simulacro;
 	}
 	
@@ -30,9 +29,9 @@ public class SimulacroConverter {
 		simulacro.setId_simulacro(dto.getId_simulacro());
 		simulacro.setSimu_nombre(dto.getSimu_nombre());
 		simulacro.setSimu_descripcion(dto.getSimu_descripcion());
-		simulacro.setSimu_puntajeMaximo(dto.getSimu_puntajeMaximo());
-		simulacro.setSimu_fechaInicial(dto.getSimu_fechaInicial());
-		simulacro.setSimu_fechaFinal(dto.getSimu_fechaFinal());
+		simulacro.setSimu_puntaje_maximo(dto.getSimu_puntaje_maximo());
+		simulacro.setSimu_fecha_inicial(dto.getSimu_fecha_inicial());
+		simulacro.setSimu_fecha_final(dto.getSimu_fecha_final());
 		simulacro.setSimu_duracion(dto.getSimu_duracion());
 		simulacro.setSimu_estado(dto.getSimu_estado());
 		return simulacro;

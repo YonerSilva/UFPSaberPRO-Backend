@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ufps.UFPSaberPRO.dto.ConvocatoriaDTO;
 import com.ufps.UFPSaberPRO.dto.ProgramaDTO;
+import com.ufps.UFPSaberPRO.dto.SimulacroDTO;
 import com.ufps.UFPSaberPRO.serviceImpl.ProgramaServiceImpl;
 import com.ufps.UFPSaberPRO.serviceImpl.SimulacroServiceImpl;
 
@@ -31,5 +33,98 @@ public class SimulacroRestController {
 	@Autowired
 	private SimulacroServiceImpl simulacroService;
 	
-
+	@Operation(summary = "Obtiene una lista de simulacros.")
+	@GetMapping("/getSimulacros")
+	public ResponseEntity<Object> getSimulacros(){
+		Map<String,Object> datos = new LinkedHashMap<>();
+		try {
+			List<SimulacroDTO> simulacros = simulacroService.getSimulacros();
+			if(simulacros.size()>0) {
+				datos.put("error", null);
+				datos.put("message", "¡Proceso Exitoso!");
+				datos.put("simulacros", simulacros);
+				return new ResponseEntity<Object>(datos, HttpStatus.OK);
+			}else {
+				datos.put("error", null);
+				datos.put("message", "No se encontraron simulacros.");
+				datos.put("simulacros", null);
+				return new ResponseEntity<Object>(datos, HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			datos.put("error", e.getMessage());
+			datos.put("message", "No se encontraron simulacros.");
+			datos.put("simulacros", null);
+			return new ResponseEntity<Object>(datos, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@Operation(summary = "Obtiene un simulacro en especifico por el id.")
+	@GetMapping("/getSimulacro")
+	public ResponseEntity<Object> getSimulacro(@Valid @RequestParam String id_simulacro){
+		Map<String,Object> datos = new LinkedHashMap<>();
+		try {
+			Long id_simu = Long.parseLong(id_simulacro);
+			SimulacroDTO simulacro = simulacroService.buscar(id_simu);
+			if(simulacro==null) {
+				datos.put("error", "El identificador del simulacro no existe.");
+				datos.put("message", "No existe un simulacro con ese identificador.");
+				datos.put("simulacro", null);
+				return new ResponseEntity<Object>(datos, HttpStatus.OK);
+			}else {
+				datos.put("error", null);
+				datos.put("message", "¡Proceso Exitoso!");
+				datos.put("simulacro", simulacro);
+			}
+		} catch (Exception e) {
+			datos.put("error", e.getMessage());
+			datos.put("message", "Ha ocurrido un error al buscar la simulacro.");
+			datos.put("simulacro", null);
+			return new ResponseEntity<Object>(datos, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<Object>(datos, HttpStatus.OK);
+	}
+	
+	@Operation(summary = "Registra un nuevo simulacro en la base de datos.")
+	@PostMapping("/guardarSimulacro")
+	public ResponseEntity<Object> guardarSimulacro(@Valid @RequestBody SimulacroDTO nuevoSimulacro, BindingResult bidBindingResult){
+		Map<String,Object> datos = new LinkedHashMap<>();
+		try {
+			if (bidBindingResult.hasErrors()) {
+				datos.put("error", bidBindingResult.getFieldError().getDefaultMessage());
+				datos.put("message", "Ha ocurrido un error con los datos ingresados, verifique e intente nuevamente.");
+				return new ResponseEntity<Object>(datos, HttpStatus.INTERNAL_SERVER_ERROR);
+			}else {
+				simulacroService.guardar(nuevoSimulacro);
+				datos.put("error", null);
+				datos.put("message", "¡Proceso Exitoso!");
+				return new ResponseEntity<Object>(datos, HttpStatus.CREATED);
+			}
+		} catch (Exception e) {
+			datos.put("error", e.getMessage());
+			datos.put("message", "Ha ocurrido un error interno con los datos.");
+			return new ResponseEntity<Object>(datos, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@Operation(summary = "Actualiza un simulacro existente en la base de datos.")
+	@PostMapping("/actualizarSimulacro")
+	public ResponseEntity<Object> actualizarSimulacro(@Valid @RequestBody SimulacroDTO simulacro, BindingResult bidBindingResult){
+		Map<String,Object> datos = new LinkedHashMap<>();
+		try {
+			if (bidBindingResult.hasErrors()) {
+				datos.put("error", bidBindingResult.getFieldError().getDefaultMessage());
+				datos.put("message", "Ha ocurrido un error con los datos ingresados, verifique e intente nuevamente.");
+				return new ResponseEntity<Object>(datos, HttpStatus.INTERNAL_SERVER_ERROR);
+			}else {
+				simulacroService.update(simulacro);
+				datos.put("error", null);
+				datos.put("message", "¡Proceso Exitoso!");
+				return new ResponseEntity<Object>(datos, HttpStatus.CREATED);
+			}
+		} catch (Exception e) {
+			datos.put("error", e.getMessage());
+			datos.put("message", "Ha ocurrido un error interno con los datos.");
+			return new ResponseEntity<Object>(datos, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 }

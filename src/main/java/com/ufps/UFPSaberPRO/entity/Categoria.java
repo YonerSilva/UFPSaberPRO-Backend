@@ -41,8 +41,8 @@ public class Categoria implements Serializable {
 	private Long usu_creacion;
 
 	@CreationTimestamp
-	@Column(name = "cate_fechaCreacion")
-	private LocalDateTime cate_fechaCreacion;
+	@Column(name = "cate_fecha_creacion")
+	private LocalDateTime cate_fecha_creacion;
 
 	public Categoria() {
 		

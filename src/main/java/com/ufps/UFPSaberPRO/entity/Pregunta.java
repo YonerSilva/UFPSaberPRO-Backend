@@ -41,8 +41,8 @@ public class Pregunta implements Serializable {
 	private Subcategoria subcategoria;
 
 	@CreationTimestamp
-	@Column(name = "preg_fechaCreacion")
-	private LocalDateTime preg_fechaCreacion;
+	@Column(name = "preg_fecha_creacion")
+	private LocalDateTime preg_fecha_creacion;
 
 	@Column(name = "usu_creacion")
 	private Long usu_creacion;

@@ -12,6 +12,8 @@ public interface ProgramaService {
 	
 	public void guardar(ProgramaDTO programa);
 	
+	public void update(ProgramaDTO programa);
+	
 	public void eliminar(Long id_programa);
 	
 	public List<ProgramaDTO> getProgramas();

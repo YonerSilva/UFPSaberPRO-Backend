@@ -42,4 +42,7 @@ private static final long serialVersionUID = 1L;
     	
     }
     
+    public Opcion(Long id_opcion) {
+    	this.id_opcion=id_opcion;
+    }
 }
