@@ -2,7 +2,9 @@ package com.ufps.UFPSaberPRO.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,10 +13,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+
+import com.ufps.UFPSaberPRO.security.entity.Usuario;
 
 import lombok.Data;
 
@@ -50,7 +56,7 @@ public class Convocatoria implements Serializable {
 
 	@JoinColumn(name = "id_simulacro", referencedColumnName = "id_simulacro")
 	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Simulacro.class)
-	private Long simulacro;
+	private Simulacro simulacro;
 
 	@Column(name = "usu_creacion")
 	private Long usu_creacion;
@@ -58,9 +64,9 @@ public class Convocatoria implements Serializable {
 	@CreationTimestamp
 	@Column(name = "convo_fecha_creacion")
 	private LocalDateTime convo_fecha_creacion;
-
-	public Convocatoria() {
-
-	}
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name="convo_usu", joinColumns = @JoinColumn(name="id_convocatoria"),inverseJoinColumns=@JoinColumn(name="id_usuario"))
+    private List<Usuario> usuarios = new ArrayList<>();
 
 }

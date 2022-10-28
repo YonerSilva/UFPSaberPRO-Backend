@@ -1,5 +1,9 @@
 package com.ufps.UFPSaberPRO.converter;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Component;
@@ -8,6 +12,9 @@ import com.ufps.UFPSaberPRO.dto.ConvocatoriaDTO;
 import com.ufps.UFPSaberPRO.entity.Convocatoria;
 import com.ufps.UFPSaberPRO.entity.Programa;
 import com.ufps.UFPSaberPRO.entity.Simulacro;
+import com.ufps.UFPSaberPRO.security.converter.UsuarioConverter;
+import com.ufps.UFPSaberPRO.security.dto.UsuarioDTO;
+import com.ufps.UFPSaberPRO.security.entity.Usuario;
 
 
 @Component
@@ -22,7 +29,12 @@ public class ConvocatoriaConverter {
 		convocatoria.setConvo_fecha_final(entity.getConvo_fecha_final());
 		convocatoria.setConvo_estado(entity.getConvo_estado());
 		convocatoria.setPrograma(entity.getPrograma().getId_programa());
-		convocatoria.setSimulacro(entity.getSimulacro());
+		convocatoria.setSimulacro(entity.getSimulacro()!=null?entity.getSimulacro().getId_simulacro():null);
+		List<UsuarioDTO> usuarios = new ArrayList<>();
+		for (Usuario user : entity.getUsuarios()) {
+			usuarios.add(new UsuarioConverter().converterToDTO(user));
+		}
+		convocatoria.setUsuarios(usuarios);
 		convocatoria.setUsu_creacion(entity.getUsu_creacion());
 		return convocatoria;
 	}
@@ -36,7 +48,7 @@ public class ConvocatoriaConverter {
 		convocatoria.setConvo_fecha_final(dto.getConvo_fecha_final());
 		convocatoria.setConvo_estado(dto.getConvo_estado());
 		convocatoria.setPrograma(new Programa(dto.getPrograma()));
-		convocatoria.setSimulacro(dto.getSimulacro());
+		convocatoria.setSimulacro(new Simulacro(dto.getSimulacro()));
 		convocatoria.setUsu_creacion(dto.getUsu_creacion());
 		return convocatoria;
 	}

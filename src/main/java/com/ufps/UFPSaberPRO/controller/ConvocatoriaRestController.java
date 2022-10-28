@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ufps.UFPSaberPRO.dto.ConvocatoriaDTO;
+import com.ufps.UFPSaberPRO.dto.DatogeneralDTO;
 import com.ufps.UFPSaberPRO.dto.ProgramaDTO;
 import com.ufps.UFPSaberPRO.serviceImpl.ConvocatoriaServiceImpl;
 
@@ -31,12 +32,38 @@ public class ConvocatoriaRestController {
 	@Autowired
 	private ConvocatoriaServiceImpl convocatoriaService;
 	
-	@Operation(summary = "Obtiene una lista de convocatorias.")
+	private DatogeneralDTO datoGeneral;
+	
+	public ConvocatoriaRestController() {
+		datoGeneral = new DatogeneralDTO();
+	}
+	
+	@Operation(summary = "Obtiene los datos generales de convocatoria para el usuario.")
+	@GetMapping("/general")
+	public ResponseEntity<Object> general(@RequestParam String id_usuario,@RequestParam String prg_codigo){
+		Map<String,Object> datos = new LinkedHashMap<>();
+		Long id_user = Long.parseLong(id_usuario);
+		try {
+			List<ConvocatoriaDTO> convocatorias_programa = convocatoriaService.getConvocatoriasByUsuPrg(id_user,prg_codigo);
+			datoGeneral.setConvocatorias_programa(convocatorias_programa);
+			datos.put("error", null);
+			datos.put("message", "¡Proceso Exitoso!");
+			datos.put("general", datoGeneral);
+			return new ResponseEntity<Object>(datos, HttpStatus.OK);
+		} catch (Exception e) {
+			datos.put("error", e.getMessage());
+			datos.put("message", "No se encontraron convocatorias.");
+			datos.put("general", datoGeneral);
+			return new ResponseEntity<Object>(datos, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	/*@Operation(summary = "Obtiene una lista de convocatorias por el programa.")
 	@GetMapping("/getConvocatorias")
-	public ResponseEntity<Object> getConvocatorias(){
+	public ResponseEntity<Object> getConvocatorias(@Valid @RequestParam String prg_codigo){
 		Map<String,Object> datos = new LinkedHashMap<>();
 		try {
-			List<ConvocatoriaDTO> convocatorias = convocatoriaService.getConvocatorias();
+			List<ConvocatoriaDTO> convocatorias = convocatoriaService.getConvocatoriasByPrograma(prg_codigo);
 			if(convocatorias.size()>0) {
 				datos.put("error", null);
 				datos.put("message", "¡Proceso Exitoso!");
@@ -54,9 +81,9 @@ public class ConvocatoriaRestController {
 			datos.put("convocatorias", null);
 			return new ResponseEntity<Object>(datos, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-	}
+	}*/
 	
-	@Operation(summary = "Obtiene un convocatoria en especifico por el id.")
+	@Operation(summary = "Obtiene una convocatoria en especifico por el id.")
 	@GetMapping("/getConvocatoria")
 	public ResponseEntity<Object> getConvocatoria(@Valid @RequestParam String id_convocatoria){
 		Map<String,Object> datos = new LinkedHashMap<>();
@@ -82,7 +109,7 @@ public class ConvocatoriaRestController {
 		return new ResponseEntity<Object>(datos, HttpStatus.OK);
 	}
 	
-	@Operation(summary = "Registra un nuevo convocatoria en la base de datos.")
+	@Operation(summary = "Registra una nuevo convocatoria en la base de datos.")
 	@PostMapping("/guardarConvocatoria")
 	public ResponseEntity<Object> guardarConvocatoria(@Valid @RequestBody ConvocatoriaDTO nuevoConvocatoria, BindingResult bidBindingResult){
 		Map<String,Object> datos = new LinkedHashMap<>();
@@ -93,6 +120,28 @@ public class ConvocatoriaRestController {
 				return new ResponseEntity<Object>(datos, HttpStatus.INTERNAL_SERVER_ERROR);
 			}else {
 				convocatoriaService.guardar(nuevoConvocatoria);
+				datos.put("error", null);
+				datos.put("message", "¡Proceso Exitoso!");
+				return new ResponseEntity<Object>(datos, HttpStatus.CREATED);
+			}
+		} catch (Exception e) {
+			datos.put("error", e.getMessage());
+			datos.put("message", "Ha ocurrido un error interno con los datos.");
+			return new ResponseEntity<Object>(datos, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@Operation(summary = "Actualiza una convocatoria existente en la base de datos.")
+	@PostMapping("/actualizarConvocatoria")
+	public ResponseEntity<Object> actualizarConvocatoria(@Valid @RequestBody ConvocatoriaDTO convocatoria, BindingResult bidBindingResult){
+		Map<String,Object> datos = new LinkedHashMap<>();
+		try {
+			if (bidBindingResult.hasErrors()) {
+				datos.put("error", bidBindingResult.getFieldError().getDefaultMessage());
+				datos.put("message", "Ha ocurrido un error con los datos ingresados, verifique e intente nuevamente.");
+				return new ResponseEntity<Object>(datos, HttpStatus.INTERNAL_SERVER_ERROR);
+			}else {
+				convocatoriaService.update(convocatoria);
 				datos.put("error", null);
 				datos.put("message", "¡Proceso Exitoso!");
 				return new ResponseEntity<Object>(datos, HttpStatus.CREATED);

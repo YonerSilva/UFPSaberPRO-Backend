@@ -4,7 +4,11 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.ufps.UFPSaberPRO.security.dto.UsuarioDTO;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -37,4 +41,6 @@ public class ConvocatoriaDTO {
     	
     @NotNull
 	private Long usu_creacion;	
+    
+    private List<UsuarioDTO> usuarios = new ArrayList<>();
 }

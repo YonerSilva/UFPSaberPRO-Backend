@@ -34,6 +34,14 @@ public class ConvocatoriaServiceImpl implements ConvocatoriaService{
 		Convocatoria convo = new ConvocatoriaConverter().converterToEntity(convocatoria);
 		convocatoriaDao.save(convo);
 	}
+	
+	@Override
+	@Transactional
+	public void update(ConvocatoriaDTO convocatoria) {
+		Convocatoria convo = new ConvocatoriaConverter().converterToEntity(convocatoria);
+		convocatoriaDao.update(convo.getId_convocatoria(), convo.getConvo_nombre(), convo.getConvo_descripcion(),
+				convo.getConvo_fecha_inicial(), convo.getConvo_fecha_final(), convo.getConvo_estado(), convo.getPrograma().getId_programa(), convo.getSimulacro().getId_simulacro());
+	}
 
 	@Override
 	@Transactional
@@ -53,4 +61,14 @@ public class ConvocatoriaServiceImpl implements ConvocatoriaService{
 		return convocatorias;
 	}
 	
+	@Override
+	@Transactional
+	public List<ConvocatoriaDTO> getConvocatoriasByUsuPrg(Long id_usuario,String codigo) {
+		List<ConvocatoriaDTO> convocatorias = new ArrayList<>();
+		ConvocatoriaConverter converter = new ConvocatoriaConverter();
+		for (Convocatoria convo : convocatoriaDao.findAllByUsuPrg(id_usuario,codigo)) {
+			convocatorias.add(converter.converterToDTO(convo));
+		}
+		return convocatorias;
+	}
 }
