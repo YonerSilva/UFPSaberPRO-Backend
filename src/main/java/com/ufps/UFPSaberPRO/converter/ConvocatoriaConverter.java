@@ -48,7 +48,9 @@ public class ConvocatoriaConverter {
 		convocatoria.setConvo_fecha_final(dto.getConvo_fecha_final());
 		convocatoria.setConvo_estado(dto.getConvo_estado());
 		convocatoria.setPrograma(new Programa(dto.getPrograma()));
-		convocatoria.setSimulacro(new Simulacro(dto.getSimulacro()));
+		if(dto.getSimulacro()!=null) {
+			convocatoria.setSimulacro(new Simulacro(dto.getSimulacro()));
+		}
 		convocatoria.setUsu_creacion(dto.getUsu_creacion());
 		return convocatoria;
 	}
