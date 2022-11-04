@@ -39,7 +39,7 @@ public class SimulacroServiceImpl implements SimulacroService{
 		Simulacro s = new SimulacroConverter().converterToEntity(simulacro);
 		simulacroDao.update(s.getId_simulacro(), s.getSimu_nombre(), s.getSimu_descripcion(),
 				s.getSimu_puntaje_maximo(), s.getSimu_fecha_inicial(), s.getSimu_fecha_final(), 
-				s.getSimu_duracion(), s.getSimu_estado());
+				s.getSimu_duracion(), s.getSimu_estado(), s.getPrograma());
 	}
 
 	@Transactional
@@ -59,5 +59,14 @@ public class SimulacroServiceImpl implements SimulacroService{
 		return simulacros;
 	}
 	
-	
+	@Transactional
+	@Override
+	public List<SimulacroDTO> getSimulacrosUsuPrg(Long id_usuario, Long id_programa) {
+		List<SimulacroDTO> simulacros = new ArrayList<>();
+		SimulacroConverter converter = new SimulacroConverter();
+		for (Simulacro simu : simulacroDao.findAllByUsuPrg(id_usuario, id_programa)) {
+			simulacros.add(converter.converterToDTO(simu));
+		}
+		return simulacros;
+	}
 }

@@ -15,4 +15,6 @@ public interface SimulacroService {
 	public void eliminar(Long id_simulacro);
 
 	public List<SimulacroDTO> getSimulacros();
+	
+	public List<SimulacroDTO> getSimulacrosUsuPrg(Long id_usuario, Long id_programa);
 }

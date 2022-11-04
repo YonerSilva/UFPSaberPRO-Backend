@@ -37,4 +37,6 @@ public class SimulacroDTO {
 	@NotEmpty
     private String simu_estado;
 
+	@NotNull
+	private Long programa;
 }

@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -46,6 +47,9 @@ public class Simulacro implements Serializable {
 
 	@Column(name = "simu_estado", length = 5)
 	private String simu_estado;
+	
+	@JoinColumn(name = "id_programa")
+	private Long programa;
 
 	@CreationTimestamp
 	@Column(name = "simu_fecha_creacion")

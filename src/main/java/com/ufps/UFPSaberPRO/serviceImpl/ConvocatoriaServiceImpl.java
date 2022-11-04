@@ -63,10 +63,10 @@ public class ConvocatoriaServiceImpl implements ConvocatoriaService{
 	
 	@Override
 	@Transactional
-	public List<ConvocatoriaDTO> getConvocatoriasByUsuPrg(Long id_usuario,String codigo) {
+	public List<ConvocatoriaDTO> getConvocatoriasByUsuPrg(Long id_usuario,Long id_programa) {
 		List<ConvocatoriaDTO> convocatorias = new ArrayList<>();
 		ConvocatoriaConverter converter = new ConvocatoriaConverter();
-		for (Convocatoria convo : convocatoriaDao.findAllByUsuPrg(id_usuario,codigo)) {
+		for (Convocatoria convo : convocatoriaDao.findAllByUsuPrg(id_usuario,id_programa)) {
 			convocatorias.add(converter.converterToDTO(convo));
 		}
 		return convocatorias;

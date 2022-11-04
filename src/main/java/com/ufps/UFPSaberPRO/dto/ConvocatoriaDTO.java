@@ -30,8 +30,6 @@ public class ConvocatoriaDTO {
 	@NotNull
     private Date convo_fecha_final;
 	
-	@NotBlank
-	@NotEmpty
     private String convo_estado;
 	
 	@NotNull

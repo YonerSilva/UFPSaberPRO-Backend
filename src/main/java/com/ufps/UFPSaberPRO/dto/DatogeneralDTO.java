@@ -19,4 +19,9 @@ public class DatogeneralDTO {
 	 * Datos de las convocatorias por programa (ADMINISTRADOR) de la aplicación.
 	 */
 	private List<ConvocatoriaDTO> convocatorias_programa;
+	
+	/**
+	 * Datos de los simulacros por programa (ADMINISTRADOR) de la aplicación.
+	 */
+	private List<SimulacroDTO> simulacros_programa;
 }

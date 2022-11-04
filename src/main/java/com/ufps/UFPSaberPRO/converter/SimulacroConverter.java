@@ -21,6 +21,7 @@ public class SimulacroConverter {
 		simulacro.setSimu_fecha_final(entity.getSimu_fecha_final());
 		simulacro.setSimu_duracion(entity.getSimu_duracion());
 		simulacro.setSimu_estado(entity.getSimu_estado());
+		simulacro.setPrograma(entity.getPrograma());
 		return simulacro;
 	}
 	
@@ -34,6 +35,7 @@ public class SimulacroConverter {
 		simulacro.setSimu_fecha_final(dto.getSimu_fecha_final());
 		simulacro.setSimu_duracion(dto.getSimu_duracion());
 		simulacro.setSimu_estado(dto.getSimu_estado());
+		simulacro.setPrograma(dto.getPrograma());
 		return simulacro;
 	}
 }

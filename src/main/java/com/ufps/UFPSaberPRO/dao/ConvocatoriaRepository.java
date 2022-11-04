@@ -27,7 +27,7 @@ public interface ConvocatoriaRepository extends CrudRepository<Convocatoria, Lon
 	@Modifying
 	@Query(value = "SELECT c.* FROM public.programa p \r\n"
 			+ "INNER JOIN public.convocatoria c on c.id_programa = p.id_programa \r\n"
-			+ "WHERE p.prg_codigo = :codigo and EXISTS (SELECT u.* FROM usuario u WHERE u.id_usuario = :id_usuario and u.id_rol = 1)", nativeQuery = true)
-	public List<Convocatoria> findAllByUsuPrg(@Param("id_usuario") Long usuario,@Param("codigo") String codigo);
+			+ "WHERE p.id_programa = :id_programa and EXISTS (SELECT u.* FROM usuario u WHERE u.id_usuario = :id_usuario and u.id_rol = 1)", nativeQuery = true)
+	public List<Convocatoria> findAllByUsuPrg(@Param("id_usuario") Long usuario,@Param("id_programa") Long programa);
 	
 }

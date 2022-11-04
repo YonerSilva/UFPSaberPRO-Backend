@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ufps.UFPSaberPRO.dto.ConvocatoriaDTO;
 import com.ufps.UFPSaberPRO.dto.DatogeneralDTO;
 import com.ufps.UFPSaberPRO.dto.ProgramaDTO;
+import com.ufps.UFPSaberPRO.dto.SimulacroDTO;
 import com.ufps.UFPSaberPRO.serviceImpl.ConvocatoriaServiceImpl;
+import com.ufps.UFPSaberPRO.serviceImpl.SimulacroServiceImpl;
 
 import io.swagger.v3.oas.annotations.Operation;
 
@@ -32,6 +34,9 @@ public class ConvocatoriaRestController {
 	@Autowired
 	private ConvocatoriaServiceImpl convocatoriaService;
 	
+	@Autowired
+	private SimulacroServiceImpl simulacroService;
+	
 	private DatogeneralDTO datoGeneral;
 	
 	public ConvocatoriaRestController() {
@@ -40,12 +45,16 @@ public class ConvocatoriaRestController {
 	
 	@Operation(summary = "Obtiene los datos generales de convocatoria para el usuario.")
 	@GetMapping("/general")
-	public ResponseEntity<Object> general(@RequestParam String id_usuario,@RequestParam String prg_codigo){
+	public ResponseEntity<Object> general(@RequestParam String id_usuario,@RequestParam String id_programa){
 		Map<String,Object> datos = new LinkedHashMap<>();
 		Long id_user = Long.parseLong(id_usuario);
+		Long id_prg = Long.parseLong(id_programa);
 		try {
-			List<ConvocatoriaDTO> convocatorias_programa = convocatoriaService.getConvocatoriasByUsuPrg(id_user,prg_codigo);
+			List<ConvocatoriaDTO> convocatorias_programa = convocatoriaService.getConvocatoriasByUsuPrg(id_user,id_prg);
 			datoGeneral.setConvocatorias_programa(convocatorias_programa);
+			
+			List<SimulacroDTO> simulacros_programa = simulacroService.getSimulacrosUsuPrg(id_user,id_prg);
+			datoGeneral.setSimulacros_programa(simulacros_programa);
 			datos.put("error", null);
 			datos.put("message", "¡Proceso Exitoso!");
 			datos.put("general", datoGeneral);
@@ -119,6 +128,11 @@ public class ConvocatoriaRestController {
 				datos.put("message", "Ha ocurrido un error con los datos ingresados, verifique e intente nuevamente.");
 				return new ResponseEntity<Object>(datos, HttpStatus.INTERNAL_SERVER_ERROR);
 			}else {
+				if(nuevoConvocatoria.getSimulacro()==null) {
+					nuevoConvocatoria.setConvo_estado("I");
+				}else {
+					nuevoConvocatoria.setConvo_estado("A");
+				}
 				convocatoriaService.guardar(nuevoConvocatoria);
 				datos.put("error", null);
 				datos.put("message", "¡Proceso Exitoso!");

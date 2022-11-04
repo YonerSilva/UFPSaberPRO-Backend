@@ -1,6 +1,7 @@
 package com.ufps.UFPSaberPRO.dao;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -16,9 +17,14 @@ public interface SimulacroRepository extends CrudRepository<Simulacro, Long>{
 	@Modifying
 	@Query(value = "UPDATE public.simulacro\r\n"
 			+ "SET simu_descripcion=:descripcion, simu_duracion=:duracion, simu_estado=:estado, simu_fecha_final=:fecha_final, \r\n"
-			+ "simu_fecha_inicial=:fecha_inicial, simu_nombre=:nombre, simu_puntaje_maximo=:puntaje \r\n"
+			+ "simu_fecha_inicial=:fecha_inicial, simu_nombre=:nombre, simu_puntaje_maximo=:puntaje, id_programa=:programa \r\n"
 			+ "WHERE id_simulacro=:id", nativeQuery = true)
 	public void update(@Param("id") Long id,@Param("nombre") String nombre,@Param("descripcion") String descripcion,
 			@Param("puntaje") Integer puntaje,@Param("fecha_inicial") Date fecha_inicial,@Param("fecha_final") Date fecha_final, 
-			@Param("duracion") String duracion,@Param("estado") String estado);
+			@Param("duracion") String duracion,@Param("estado") String estado, @Param("programa") Long programa);
+	
+	@Modifying
+	@Query(value = "SELECT s.* from public.simulacro s\r\n"
+			+ "WHERE s.programa = :id_programa and EXISTS(SELECT u.* from public.usuario u WHERE u.id_usuario = :id_usuario and u.id_rol = 1)", nativeQuery = true)
+	public List<Simulacro> findAllByUsuPrg(@Param("id_usuario") Long usuario, @Param("id_programa") Long programa);
 }
