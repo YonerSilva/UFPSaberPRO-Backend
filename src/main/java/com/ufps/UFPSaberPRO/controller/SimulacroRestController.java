@@ -17,11 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ufps.UFPSaberPRO.dto.ConvocatoriaDTO;
 import com.ufps.UFPSaberPRO.dto.DatogeneralDTO;
-import com.ufps.UFPSaberPRO.dto.ProgramaDTO;
 import com.ufps.UFPSaberPRO.dto.SimulacroDTO;
-import com.ufps.UFPSaberPRO.serviceImpl.ProgramaServiceImpl;
 import com.ufps.UFPSaberPRO.serviceImpl.SimulacroServiceImpl;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -38,28 +35,6 @@ public class SimulacroRestController {
 
 	public SimulacroRestController() {
 		datoGeneral = new DatogeneralDTO();
-	}
-
-	@Operation(summary = "Obtiene los datos generales de simulacros para el usuario.")
-	@GetMapping("/general")
-	public ResponseEntity<Object> general(@RequestParam String id_usuario, @RequestParam String id_programa) {
-		Map<String, Object> datos = new LinkedHashMap<>();
-		Long id_user = Long.parseLong(id_usuario);
-		Long id_prg = Long.parseLong(id_programa);
-		try {
-			List<SimulacroDTO> simulacros_programa = simulacroService.getSimulacrosUsuPrg(id_user,
-					id_prg);
-			datoGeneral.setSimulacros_programa(simulacros_programa);
-			datos.put("error", null);
-			datos.put("message", "¡Proceso Exitoso!");
-			datos.put("general", datoGeneral);
-			return new ResponseEntity<Object>(datos, HttpStatus.OK);
-		} catch (Exception e) {
-			datos.put("error", e.getMessage());
-			datos.put("message", "No se encontraron simulacros.");
-			datos.put("general", datoGeneral);
-			return new ResponseEntity<Object>(datos, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
 	}
 
 	@Operation(summary = "Obtiene una lista de simulacros.")

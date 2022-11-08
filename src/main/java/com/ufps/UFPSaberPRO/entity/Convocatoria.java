@@ -20,6 +20,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 import com.ufps.UFPSaberPRO.security.entity.Usuario;
 
 import lombok.Data;
@@ -41,9 +43,11 @@ public class Convocatoria implements Serializable {
 	@Column(name = "convo_descripcion", length = 256)
 	private String convo_descripcion;
 
+	@JsonFormat(pattern = "yyyy-MM-dd'T'hh:mm", shape = Shape.STRING)
 	@Column(name = "convo_fecha_inicial")
 	private Date convo_fecha_inicial;
 
+	@JsonFormat(pattern = "yyyy-MM-dd'T'hh:mm", shape = Shape.STRING)
 	@Column(name = "convo_fecha_final")
 	private Date convo_fecha_final;
 

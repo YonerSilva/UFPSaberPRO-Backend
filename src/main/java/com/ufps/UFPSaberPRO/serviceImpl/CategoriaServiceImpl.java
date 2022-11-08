@@ -1,7 +1,6 @@
 package com.ufps.UFPSaberPRO.serviceImpl;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,26 +20,42 @@ public class CategoriaServiceImpl implements CategoriaService{
 	private CategoriaRepository categoriaDao;
 
 	@Override
+	@Transactional
 	public CategoriaDTO buscar(Long id_categoria) {
-		// TODO Auto-generated method stub
-		return null;
+		Categoria cate = categoriaDao.findById(id_categoria).get();
+		CategoriaDTO categoria = new CategoriaConverter().converterToDTO(cate);
+		return categoria;
 	}
 
 	@Override
+	@Transactional
 	public void guardar(CategoriaDTO categoria) {
-		// TODO Auto-generated method stub
-		
+		Categoria cate = new CategoriaConverter().converterToEntity(categoria);
+		categoriaDao.save(cate);
 	}
 
 	@Override
+	@Transactional
 	public void eliminar(Long id_categoria) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
+	@Transactional
 	public List<CategoriaDTO> getCategorias() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	@Transactional
+	public List<CategoriaDTO> getCategoriasByUsuPrg(Long id_usuario,Long id_programa) {
+		List<CategoriaDTO> categorias = new ArrayList<>();
+		CategoriaConverter converter = new CategoriaConverter();
+		for (Categoria cate : categoriaDao.findAllByUsuPrg(id_usuario,id_programa)) {
+			categorias.add(converter.converterToDTO(cate));
+		}
+		return categorias;
 	}
 }

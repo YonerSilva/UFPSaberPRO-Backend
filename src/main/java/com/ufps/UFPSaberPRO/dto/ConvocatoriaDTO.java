@@ -4,6 +4,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 import com.ufps.UFPSaberPRO.security.dto.UsuarioDTO;
 
 import java.util.ArrayList;
@@ -24,9 +26,11 @@ public class ConvocatoriaDTO {
 	@NotEmpty
     private String convo_descripcion;
 	
+	@JsonFormat(pattern = "yyyy-MM-dd'T'hh:mm", shape = Shape.STRING)
 	@NotNull
     private Date convo_fecha_inicial;
 	
+	@JsonFormat(pattern = "yyyy-MM-dd'T'hh:mm", shape = Shape.STRING)
 	@NotNull
     private Date convo_fecha_final;
 	

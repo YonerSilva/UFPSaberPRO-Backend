@@ -34,7 +34,7 @@ public class Categoria implements Serializable {
 	private String cate_descripcion;
 
 	@JoinColumn(name = "id_programa", referencedColumnName = "id_programa")
-	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Programa.class)
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Programa.class)
 	private Programa programa;
 
 	@Column(name = "usu_creacion")
@@ -43,17 +43,12 @@ public class Categoria implements Serializable {
 	@CreationTimestamp
 	@Column(name = "cate_fecha_creacion")
 	private LocalDateTime cate_fecha_creacion;
-
+	
 	public Categoria() {
 		
 	}
-
+	
 	public Categoria(Long id_categoria) {
-		this.id_categoria = id_categoria;
+		this.id_categoria=id_categoria;
 	}
-
-	
-
-	
-
 }

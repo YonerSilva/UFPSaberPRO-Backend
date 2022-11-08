@@ -13,4 +13,6 @@ public interface CategoriaService {
 	public void eliminar(Long id_categoria);
 
 	public List<CategoriaDTO> getCategorias();
+	
+	public List<CategoriaDTO> getCategoriasByUsuPrg(Long id_usuario,Long id_programa);
 }

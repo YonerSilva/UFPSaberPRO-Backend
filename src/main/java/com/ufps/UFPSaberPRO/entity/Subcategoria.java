@@ -32,20 +32,20 @@ public class Subcategoria implements Serializable {
 	private String sub_descripcion;
 
 	@JoinColumn(name = "id_categoria", referencedColumnName = "id_categoria")
-	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Categoria.class)
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Categoria.class)
 	private Categoria categoria;
+	
+	@JoinColumn(name = "id_programa")
+	private Long programa;
 
 	@Column(name = "usu_creacion")
 	private Long usu_creacion;
-
+	
 	public Subcategoria() {
-
+		
 	}
-
+	
 	public Subcategoria(Long id_subcategoria) {
-		this.id_subcategoria = id_subcategoria;
+		this.id_subcategoria=id_subcategoria;
 	}
-	
-	
-
 }

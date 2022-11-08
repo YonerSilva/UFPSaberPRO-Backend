@@ -27,4 +27,7 @@ public class SubcatergoriaDTO {
 	
 	@NotNull
 	private Long usu_creacion;
+	
+	@NotNull
+	private Long programa;
 }

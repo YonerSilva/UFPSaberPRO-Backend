@@ -6,6 +6,7 @@ import com.ufps.UFPSaberPRO.security.service.*;
 import com.ufps.UFPSaberPRO.serviceImpl.ProgramaServiceImpl;
 import com.ufps.UFPSaberPRO.security.jwt.*;
 import com.ufps.UFPSaberPRO.converter.ProgramaConverter;
+import com.ufps.UFPSaberPRO.dto.DatogeneralDTO;
 import com.ufps.UFPSaberPRO.dto.ProgramaDTO;
 import com.ufps.UFPSaberPRO.security.dto.*;
 import com.ufps.UFPSaberPRO.security.entity.*;
@@ -14,6 +15,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,6 +45,11 @@ public class AuthController {
     
     @Autowired
 	private ProgramaServiceImpl programaService;
+    
+	@Autowired
+	private RoleService roleService;
+	
+	private DatogeneralDTO datogeneral;
 
     @Autowired
     public AuthController(AuthenticationManagerBuilder authenticationManagerBuilder, PasswordEncoder passwordEncoder,
@@ -50,6 +58,31 @@ public class AuthController {
         this.passwordEncoder = passwordEncoder;
         this.userService = userService;
         this.jwtProvider = jwtProvider;
+		this.datogeneral = new DatogeneralDTO();
+    }
+    
+    @Operation(summary = "Obtiene los datos generales para el funcionamiento de registrarse de la aplicacion.")
+    @GetMapping("/getDatos")
+    public ResponseEntity<Object> getGeneral() {
+		Map<String,Object> datos = new LinkedHashMap<>();
+        try {
+        	List<Rol> roles = roleService.getRoles();
+        	List<ProgramaDTO> programas = programaService.getProgramas();
+        	
+        	datogeneral.setRoles(roles);
+        	datogeneral.setProgramas(programas);
+        	datos.put("error", null);
+        	datos.put("message", "¡Proceso Exitoso!");
+        	datos.put("general", datogeneral);
+        	
+        	return new ResponseEntity<Object>(datos, HttpStatus.OK);	
+        	
+        } catch (Exception e) {
+        	datos.put("error", e.getMessage());
+        	datos.put("message", "¡Oops!, Ha ocurrido un error al traer los datos generales.");
+        	datos.put("general", null);
+        	return new ResponseEntity<Object>(datos	, HttpStatus.INTERNAL_SERVER_ERROR);	
+        }
     }
 
     @Operation(summary = "Se autentica al usuario, devolviendo una credencial.")

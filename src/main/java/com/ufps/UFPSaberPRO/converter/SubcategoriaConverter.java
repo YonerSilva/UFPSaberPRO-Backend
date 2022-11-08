@@ -19,6 +19,7 @@ public class SubcategoriaConverter {
 		subcategoria.setSub_descripcion(entity.getSub_descripcion());
 		subcategoria.setCategoria(entity.getCategoria().getId_categoria());
 		subcategoria.setUsu_creacion(entity.getUsu_creacion());
+		subcategoria.setPrograma(entity.getPrograma());
 		return subcategoria;
 	}
 	
@@ -29,6 +30,7 @@ public class SubcategoriaConverter {
 		subcategoria.setSub_descripcion(dto.getSub_descripcion());
 		subcategoria.setCategoria(new Categoria(dto.getCategoria()));
 		subcategoria.setUsu_creacion(dto.getUsu_creacion());
+		subcategoria.setPrograma(dto.getPrograma());
 		return subcategoria;
 	}
 

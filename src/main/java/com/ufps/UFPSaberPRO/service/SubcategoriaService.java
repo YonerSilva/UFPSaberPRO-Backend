@@ -13,4 +13,8 @@ public interface SubcategoriaService {
 	public void eliminar(Long id_subcategoria);
 
 	public List<SubcatergoriaDTO> getSubcategorias();
+	
+	public List<SubcatergoriaDTO> getSubcategoriasByUsuCate(Long id_usuario,Long id_categoria);
+
+	public List<SubcatergoriaDTO> getSubcategoriasByUsuPrg(Long id_usuario,Long id_programa);
 }

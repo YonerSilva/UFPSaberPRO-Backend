@@ -24,4 +24,14 @@ public class DatogeneralDTO {
 	 * Datos de los simulacros por programa (ADMINISTRADOR) de la aplicación.
 	 */
 	private List<SimulacroDTO> simulacros_programa;
+	
+	/**
+	 * Datos de las categorias por programa (ADMINISTRADOR) de la aplicación.
+	 */
+	private List<CategoriaDTO> categorias_programa;
+	
+	/**
+	 * Datos de las subcategorias por programa (ADMINISTRADOR) de la aplicación.
+	 */
+	private List<SubcatergoriaDTO> subcategorias_programa;
 }
