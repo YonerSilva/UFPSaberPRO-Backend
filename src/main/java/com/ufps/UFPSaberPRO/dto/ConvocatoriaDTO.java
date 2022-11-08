@@ -41,7 +41,6 @@ public class ConvocatoriaDTO {
 		
     private Long simulacro;
     	
-    @NotNull
 	private Long usu_creacion;	
     
     private List<UsuarioDTO> usuarios = new ArrayList<>();

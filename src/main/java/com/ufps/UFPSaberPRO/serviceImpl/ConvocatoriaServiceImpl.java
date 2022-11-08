@@ -40,14 +40,13 @@ public class ConvocatoriaServiceImpl implements ConvocatoriaService{
 	public void update(ConvocatoriaDTO convocatoria) {
 		Convocatoria convo = new ConvocatoriaConverter().converterToEntity(convocatoria);
 		convocatoriaDao.update(convo.getId_convocatoria(), convo.getConvo_nombre(), convo.getConvo_descripcion(),
-				convo.getConvo_fecha_inicial(), convo.getConvo_fecha_final(), convo.getConvo_estado(), convo.getPrograma().getId_programa(), convo.getSimulacro().getId_simulacro());
+				convo.getConvo_fecha_inicial(), convo.getConvo_fecha_final(), convo.getConvo_estado(), convo.getPrograma().getId_programa(), convocatoria.getSimulacro());
 	}
 
 	@Override
 	@Transactional
 	public void eliminar(Long id_convocatoria) {
-		// TODO Auto-generated method stub
-		
+		convocatoriaDao.delete(id_convocatoria);
 	}
 
 	@Override

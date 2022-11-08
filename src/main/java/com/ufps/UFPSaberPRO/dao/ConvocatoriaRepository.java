@@ -30,4 +30,10 @@ public interface ConvocatoriaRepository extends CrudRepository<Convocatoria, Lon
 			+ "WHERE p.id_programa = :id_programa and EXISTS (SELECT u.* FROM usuario u WHERE u.id_usuario = :id_usuario and u.id_rol = 1)", nativeQuery = true)
 	public List<Convocatoria> findAllByUsuPrg(@Param("id_usuario") Long usuario,@Param("id_programa") Long programa);
 	
+	@Transactional
+	@Modifying
+	@Query(value = "DELETE FROM public.convocatoria\r\n"
+			+ "WHERE id_convocatoria=:id_convocatoria and convo_estado='I'", nativeQuery = true)
+	public void delete(@Param("id_convocatoria") Long convocatoria);
+	
 }
