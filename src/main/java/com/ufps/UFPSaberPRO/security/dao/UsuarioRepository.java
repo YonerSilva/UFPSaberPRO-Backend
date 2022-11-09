@@ -31,8 +31,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     @Transactional
 	@Modifying
 	@Query(value = "SELECT u.* FROM public.programa p \r\n"
-			+ "INNER JOIN public.usuario u on u.id_programa = p.id_programa \r\n"
-			+ "WHERE p.id_programa = :id_programa and EXISTS (SELECT user.* FROM usuario user WHERE user.id_usuario = :id_usuario and u.id_rol = 1)", nativeQuery = true)
+			+ "INNER JOIN public.usuario u on u.id_programa = p.id_programa  \r\n"
+			+ "WHERE p.id_programa = :id_programa and EXISTS (SELECT usu.* FROM usuario usu WHERE usu.id_usuario = :id_usuario and usu.id_rol = 1)", nativeQuery = true)
 	public List<Usuario> findAllByUsuPrg(@Param("id_usuario") Long usuario,@Param("id_programa") Long programa);
     
 }
