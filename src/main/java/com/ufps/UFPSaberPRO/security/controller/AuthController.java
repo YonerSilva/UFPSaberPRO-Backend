@@ -40,7 +40,7 @@ public class AuthController {
 
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final PasswordEncoder passwordEncoder;
-    private final UserService userService;
+    private final UsuarioService usuarioService;
     private final JwtProvider jwtProvider;
     
     @Autowired
@@ -53,10 +53,10 @@ public class AuthController {
 
     @Autowired
     public AuthController(AuthenticationManagerBuilder authenticationManagerBuilder, PasswordEncoder passwordEncoder,
-            UserService userService, RoleService roleService, JwtProvider jwtProvider) {
+            UsuarioService usuarioService, RoleService roleService, JwtProvider jwtProvider) {
         this.authenticationManagerBuilder = authenticationManagerBuilder;
         this.passwordEncoder = passwordEncoder;
-        this.userService = userService;
+        this.usuarioService = usuarioService;
         this.jwtProvider = jwtProvider;
 		this.datogeneral = new DatogeneralDTO();
     }
@@ -97,7 +97,7 @@ public class AuthController {
             return new ResponseEntity<>(rtn, HttpStatus.BAD_REQUEST);
         }
         try {
-            Usuario usuario = userService.getByCodigo_Email(loginUser.getCodigo(),loginUser.getEmail());
+            Usuario usuario = usuarioService.getByCodigo_Email(loginUser.getCodigo(),loginUser.getEmail());
             if(usuario!=null) {
             	UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginUser.getEmail(), loginUser.getPassword());
                 Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
@@ -145,7 +145,7 @@ public class AuthController {
             ProgramaDTO prg = programaService.buscarPorCodigo(nuevoUsuario.getCod_programa());
             user.setPrograma(new ProgramaConverter().converterToEntity(prg));
             user.setRol(new Rol(nuevoUsuario.getRol()));
-            userService.save(user);
+            usuarioService.save(user);
             rtn.put("error", null);
         	rtn.put("message", "¡Éxito!, se ha registrado correctamente.");
             return new ResponseEntity<>(rtn,HttpStatus.CREATED);

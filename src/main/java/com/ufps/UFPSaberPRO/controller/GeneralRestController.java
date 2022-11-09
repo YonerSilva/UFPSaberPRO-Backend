@@ -19,8 +19,10 @@ import com.ufps.UFPSaberPRO.dto.DatogeneralDTO;
 import com.ufps.UFPSaberPRO.dto.ProgramaDTO;
 import com.ufps.UFPSaberPRO.dto.SimulacroDTO;
 import com.ufps.UFPSaberPRO.dto.SubcatergoriaDTO;
+import com.ufps.UFPSaberPRO.security.dto.UsuarioDTO;
 import com.ufps.UFPSaberPRO.security.entity.Rol;
 import com.ufps.UFPSaberPRO.security.service.RoleService;
+import com.ufps.UFPSaberPRO.security.service.UsuarioService;
 import com.ufps.UFPSaberPRO.serviceImpl.CategoriaServiceImpl;
 import com.ufps.UFPSaberPRO.serviceImpl.ConvocatoriaServiceImpl;
 import com.ufps.UFPSaberPRO.serviceImpl.ProgramaServiceImpl;
@@ -45,6 +47,9 @@ public class GeneralRestController {
 	
 	@Autowired
 	private SimulacroServiceImpl simulacroService;
+	
+	@Autowired
+	private UsuarioService usuarioService;
 		
 	private DatogeneralDTO datogeneral;
 	
@@ -63,11 +68,13 @@ public class GeneralRestController {
         	List<SimulacroDTO> simulacros = simulacroService.getSimulacrosUsuPrg(id_user, id_prg);
         	List<CategoriaDTO> categorias = categoriaService.getCategoriasByUsuPrg(id_user, id_prg);
         	List<SubcatergoriaDTO> subconvocatorias = subcategoriaService.getSubcategoriasByUsuPrg(id_user, id_prg);
+        	List<UsuarioDTO> usuarios_programa = usuarioService.getAllByUsuPrg(id_user, id_prg);
 
         	datogeneral.setConvocatorias_programa(convocatorias);
         	datogeneral.setSimulacros_programa(simulacros);
         	datogeneral.setCategorias_programa(categorias);
         	datogeneral.setSubcategorias_programa(subconvocatorias);
+        	datogeneral.setUsuarios_programa(usuarios_programa);
         	datos.put("error", null);
         	datos.put("message", "¡Proceso Exitoso!");
         	datos.put("general", datogeneral);

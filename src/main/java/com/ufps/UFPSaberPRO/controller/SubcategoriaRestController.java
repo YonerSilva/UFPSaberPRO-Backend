@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -83,7 +84,7 @@ public class SubcategoriaRestController {
 	}
 
 	@Operation(summary = "Actualiza una subcategoria existente en la base de datos.")
-	@PostMapping("/actualizarSubcategoria")
+	@PutMapping("/actualizarSubcategoria")
 	public ResponseEntity<Object> actualizarSubcategoria(@Valid @RequestBody SubcatergoriaDTO subcategoria,
 			BindingResult bidBindingResult) {
 		Map<String, Object> datos = new LinkedHashMap<>();
@@ -93,7 +94,7 @@ public class SubcategoriaRestController {
 				datos.put("message", "Ha ocurrido un error con los datos ingresados, verifique e intente nuevamente.");
 				return new ResponseEntity<Object>(datos, HttpStatus.INTERNAL_SERVER_ERROR);
 			} else {
-				// subcategoria.update(subcategoria);
+				subcategoriaService.update(subcategoria);
 				datos.put("error", null);
 				datos.put("message", "¡Proceso Exitoso!");
 				return new ResponseEntity<Object>(datos, HttpStatus.CREATED);

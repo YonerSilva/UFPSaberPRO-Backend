@@ -28,4 +28,11 @@ public interface SubcategoriaRepository extends CrudRepository<Subcategoria, Lon
 			+ "INNER JOIN public.subcategoria s on s.programa = p.id_programa \r\n"
 			+ "WHERE p.id_programa = :id_programa and EXISTS (SELECT u.* FROM usuario u WHERE u.id_usuario = :id_usuario and u.id_rol = 1)", nativeQuery = true)
 	public List<Subcategoria> findAllByUsuPrg(@Param("id_usuario") Long usuario,@Param("id_programa") Long programa);
+	
+	@Transactional
+	@Modifying
+	@Query(value = "UPDATE public.subcategoria\r\n"
+			+ "SET sub_descripcion=:descripcion, sub_nombre=:nombre\r\n"
+			+ "WHERE id_categoria=:id", nativeQuery = true)
+	public void update(@Param("id") Long id, @Param("nombre") String nombre, @Param("descripcion") String descripcion);
 }

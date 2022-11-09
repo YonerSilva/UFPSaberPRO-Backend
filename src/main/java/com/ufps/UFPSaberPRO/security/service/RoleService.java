@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import com.ufps.UFPSaberPRO.security.dao.RoleRepository;
+import com.ufps.UFPSaberPRO.security.dao.RolRepository;
 import com.ufps.UFPSaberPRO.security.entity.Rol;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +15,13 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class RoleService {
     @Autowired
-    private final RoleRepository roleRepository;
+    private final RolRepository rolRepository;
 
-    public RoleService(RoleRepository roleRepository) {
-        this.roleRepository = roleRepository;
+    public RoleService(RolRepository rolRepository) {
+        this.rolRepository = rolRepository;
     }
     
     public List<Rol> getRoles(){
-    	return roleRepository.findAll();
+    	return rolRepository.findAll();
     }
 }

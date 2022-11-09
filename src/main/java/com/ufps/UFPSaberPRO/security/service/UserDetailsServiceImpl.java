@@ -11,15 +11,15 @@ import com.ufps.UFPSaberPRO.security.entity.*;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService{
-    private final UserService userService;
+    private final UsuarioService usuarioService;
 
     @Autowired
-    public UserDetailsServiceImpl(UserService userService) {
-        this.userService = userService;
+    public UserDetailsServiceImpl(UsuarioService usuarioService) {
+        this.usuarioService = usuarioService;
     }
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException{
-        Usuario user = userService.getByEmail(email);
+        Usuario user = usuarioService.getByEmail(email);
         return MainUser.build(user);
     }
     

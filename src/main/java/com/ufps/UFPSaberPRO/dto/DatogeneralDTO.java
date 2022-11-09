@@ -2,6 +2,7 @@ package com.ufps.UFPSaberPRO.dto;
 
 import java.util.List;
 
+import com.ufps.UFPSaberPRO.security.dto.UsuarioDTO;
 import com.ufps.UFPSaberPRO.security.entity.Rol;
 
 import lombok.Data;
@@ -34,4 +35,9 @@ public class DatogeneralDTO {
 	 * Datos de las subcategorias por programa (ADMINISTRADOR) de la aplicación.
 	 */
 	private List<SubcatergoriaDTO> subcategorias_programa;
+	
+	/**
+	 * Datos de los usuarios por programa (ADMINISTRADOR) de la aplicación.
+	 */
+	private List<UsuarioDTO> usuarios_programa;
 }

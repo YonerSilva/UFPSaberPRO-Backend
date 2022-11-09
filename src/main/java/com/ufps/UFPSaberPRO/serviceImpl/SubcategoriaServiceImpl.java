@@ -37,6 +37,13 @@ public class SubcategoriaServiceImpl implements SubcategoriaService{
 		Subcategoria sub = new SubcategoriaConverter().converterToEntity(subcategoria);
 		subcategoriaDao.save(sub);
 	}
+	
+	@Override
+	@Transactional
+	public void update(SubcatergoriaDTO subcategoria) {
+		Subcategoria sub = new SubcategoriaConverter().converterToEntity(subcategoria);
+		subcategoriaDao.update(sub.getId_subcategoria(), sub.getSub_nombre(), sub.getSub_descripcion());
+	}
 
 	@Override
 	@Transactional

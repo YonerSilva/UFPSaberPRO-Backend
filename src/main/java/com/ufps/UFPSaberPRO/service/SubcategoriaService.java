@@ -10,6 +10,8 @@ public interface SubcategoriaService {
 
 	public void guardar(SubcatergoriaDTO subcategoria);
 
+	public void update(SubcatergoriaDTO subcategoria);
+
 	public void eliminar(Long id_subcategoria);
 
 	public List<SubcatergoriaDTO> getSubcategorias();

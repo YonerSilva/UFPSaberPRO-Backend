@@ -25,7 +25,6 @@ public class SubcatergoriaDTO {
 	@NotNull
 	private Long categoria;
 	
-	@NotNull
 	private Long usu_creacion;
 	
 	@NotNull

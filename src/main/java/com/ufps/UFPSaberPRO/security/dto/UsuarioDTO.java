@@ -28,8 +28,7 @@ public class UsuarioDTO {
     @Email
     private String usu_email;
     
-    @NotEmpty
-    @NotBlank
+
     private String usu_password;
     
     @NotEmpty
