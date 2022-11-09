@@ -21,6 +21,7 @@ public class UsuarioConverter {
 		usuario.setUsu_nombre(entity.getUsu_nombre());
 		usuario.setUsu_apellido(entity.getUsu_apellido());
 		usuario.setUsu_email(entity.getUsu_email());
+		usuario.setRol(entity.getRol().getId_rol());
 		return usuario;
 	}
 	
