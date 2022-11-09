@@ -25,7 +25,7 @@ public interface CategoriaRepository extends CrudRepository<Categoria, Long>{
 	@Transactional
 	@Modifying
 	@Query(value = "UPDATE public.categoria\r\n"
-			+ "SET cate_descripcion=:descripcion, convo_nombre=:nombre\r\n"
+			+ "SET cate_descripcion=:descripcion, cate_nombre=:nombre\r\n"
 			+ "WHERE id_categoria=:id", nativeQuery = true)
 	public void update(@Param("id") Long id, @Param("nombre") String nombre, @Param("descripcion") String descripcion);
 }

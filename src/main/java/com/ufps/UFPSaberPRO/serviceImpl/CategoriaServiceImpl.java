@@ -38,7 +38,7 @@ public class CategoriaServiceImpl implements CategoriaService{
 	@Transactional
 	public void update(CategoriaDTO categoria) {
 		Categoria cate = new CategoriaConverter().converterToEntity(categoria);
-		categoriaDao.save(cate);
+		categoriaDao.update(cate.getId_categoria(), cate.getCate_nombre(), cate.getCate_descripcion());
 	}
 
 	@Override

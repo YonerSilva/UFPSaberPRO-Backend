@@ -23,7 +23,6 @@ public class CategoriaDTO {
 	@NotNull
 	private Long programa;
 	
-	@NotNull
 	private Long usu_creacion;
 	
 }
