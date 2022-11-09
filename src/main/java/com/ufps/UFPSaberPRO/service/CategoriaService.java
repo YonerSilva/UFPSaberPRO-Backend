@@ -9,6 +9,8 @@ public interface CategoriaService {
 	public CategoriaDTO buscar(Long id_categoria);
 
 	public void guardar(CategoriaDTO categoria);
+	
+	public void update(CategoriaDTO categoria);
 
 	public void eliminar(Long id_categoria);
 
