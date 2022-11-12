@@ -17,11 +17,12 @@ public interface ConvocatoriaRepository extends CrudRepository<Convocatoria, Lon
 	@Transactional
 	@Modifying
 	@Query(value = "UPDATE public.convocatoria\r\n"
-			+ "SET convo_descripcion=:descripcion, convo_estado=:estado, convo_fecha_final=:fecha_final, convo_fecha_inicial=:fecha_inicial, convo_nombre=:nombre, id_programa=:programa, id_simulacro=:simulacro\r\n"
+			+ "SET convo_descripcion=:descripcion, convo_estado=:estado, convo_fecha_final=:fecha_final, \r\n"
+			+ "convo_fecha_inicial=:fecha_inicial, convo_nombre=:nombre, id_programa=:programa, id_simulacro=:simulacro, simu_fecha_inicial=:simu_fecha_inicial, simu_duracion=:simu_duracion\r\n"
 			+ "WHERE id_convocatoria=:id", nativeQuery = true)
 	public void update(@Param("id") Long id, @Param("nombre") String nombre, @Param("descripcion") String descripcion,
 			@Param("fecha_inicial") Date fecha_inicial, @Param("fecha_final") Date fecha_final, @Param("estado") String estado,
-			@Param("programa") Long programa, @Param("simulacro") Long simulacro);
+			@Param("programa") Long programa, @Param("simulacro") Long simulacro, @Param("simu_fecha_inicial") Date simu_fecha_inicial, @Param("simu_duracion") Date simu_duracion);
 	
 	@Transactional
 	@Modifying

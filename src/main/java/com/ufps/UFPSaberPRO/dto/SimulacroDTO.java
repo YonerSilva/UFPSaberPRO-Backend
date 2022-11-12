@@ -22,17 +22,7 @@ public class SimulacroDTO {
 	
 	@NotNull
 	private Integer simu_puntaje_maximo;
-    
-	@NotNull
-    private Date simu_fecha_inicial;
-	
-	@NotNull
-    private Date simu_fecha_final;
-	
-	@NotBlank
-	@NotEmpty
-    private String simu_duracion;
-	
+		
 	@NotBlank
 	@NotEmpty
     private String simu_estado;

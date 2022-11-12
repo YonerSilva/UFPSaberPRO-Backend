@@ -27,6 +27,8 @@ public class ConvocatoriaConverter {
 		convocatoria.setConvo_descripcion(entity.getConvo_descripcion());
 		convocatoria.setConvo_fecha_inicial(entity.getConvo_fecha_inicial());
 		convocatoria.setConvo_fecha_final(entity.getConvo_fecha_final());
+		convocatoria.setSimu_fecha_inicial(entity.getSimu_fecha_inicial());
+		convocatoria.setSimu_duracion(entity.getSimu_duracion());
 		convocatoria.setConvo_estado(entity.getConvo_estado());
 		convocatoria.setPrograma(entity.getPrograma().getId_programa());
 		convocatoria.setSimulacro(entity.getSimulacro()!=null?entity.getSimulacro().getId_simulacro():null);
@@ -46,6 +48,8 @@ public class ConvocatoriaConverter {
 		convocatoria.setConvo_descripcion(dto.getConvo_descripcion());
 		convocatoria.setConvo_fecha_inicial(dto.getConvo_fecha_inicial());
 		convocatoria.setConvo_fecha_final(dto.getConvo_fecha_final());
+		convocatoria.setSimu_fecha_inicial(dto.getSimu_fecha_inicial());
+		convocatoria.setSimu_duracion(dto.getSimu_duracion());
 		convocatoria.setConvo_estado(dto.getConvo_estado());
 		convocatoria.setPrograma(new Programa(dto.getPrograma()));
 		if(dto.getSimulacro()!=null) {

@@ -38,8 +38,7 @@ public class SimulacroServiceImpl implements SimulacroService{
 	public void update(SimulacroDTO simulacro) {
 		Simulacro s = new SimulacroConverter().converterToEntity(simulacro);
 		simulacroDao.update(s.getId_simulacro(), s.getSimu_nombre(), s.getSimu_descripcion(),
-				s.getSimu_puntaje_maximo(), s.getSimu_fecha_inicial(), s.getSimu_fecha_final(), 
-				s.getSimu_duracion(), s.getSimu_estado(), s.getPrograma());
+				s.getSimu_puntaje_maximo(), s.getSimu_estado(), s.getPrograma());
 	}
 
 	@Transactional

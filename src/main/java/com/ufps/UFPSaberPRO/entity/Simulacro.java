@@ -36,15 +36,6 @@ public class Simulacro implements Serializable {
 	@Column(name = "simu_puntaje_maximo")
 	private Integer simu_puntaje_maximo;
 
-	@Column(name = "simu_fecha_inicial")
-	private Date simu_fecha_inicial;
-
-	@Column(name = "simu_fecha_final")
-	private Date simu_fecha_final;
-
-	@Column(name = "simu_duracion", length = 10)
-	private String simu_duracion;
-
 	@Column(name = "simu_estado", length = 5)
 	private String simu_estado;
 	
