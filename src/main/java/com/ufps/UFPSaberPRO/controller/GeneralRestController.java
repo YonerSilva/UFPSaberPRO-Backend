@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ufps.UFPSaberPRO.dto.CategoriaDTO;
 import com.ufps.UFPSaberPRO.dto.ConvocatoriaDTO;
 import com.ufps.UFPSaberPRO.dto.DatogeneralDTO;
+import com.ufps.UFPSaberPRO.dto.PreguntaDTO;
 import com.ufps.UFPSaberPRO.dto.ProgramaDTO;
 import com.ufps.UFPSaberPRO.dto.SimulacroDTO;
 import com.ufps.UFPSaberPRO.dto.SubcatergoriaDTO;
@@ -25,6 +26,7 @@ import com.ufps.UFPSaberPRO.security.service.RoleService;
 import com.ufps.UFPSaberPRO.security.service.UsuarioService;
 import com.ufps.UFPSaberPRO.serviceImpl.CategoriaServiceImpl;
 import com.ufps.UFPSaberPRO.serviceImpl.ConvocatoriaServiceImpl;
+import com.ufps.UFPSaberPRO.serviceImpl.PreguntaServiceImpl;
 import com.ufps.UFPSaberPRO.serviceImpl.ProgramaServiceImpl;
 import com.ufps.UFPSaberPRO.serviceImpl.SimulacroServiceImpl;
 import com.ufps.UFPSaberPRO.serviceImpl.SubcategoriaServiceImpl;
@@ -50,6 +52,9 @@ public class GeneralRestController {
 	
 	@Autowired
 	private UsuarioService usuarioService;
+	
+	@Autowired
+	private PreguntaServiceImpl preguntaService;
 		
 	private DatogeneralDTO datogeneral;
 	
@@ -69,12 +74,14 @@ public class GeneralRestController {
         	List<CategoriaDTO> categorias = categoriaService.getCategoriasByUsuPrg(id_user, id_prg);
         	List<SubcatergoriaDTO> subconvocatorias = subcategoriaService.getSubcategoriasByUsuPrg(id_user, id_prg);
         	List<UsuarioDTO> usuarios_programa = usuarioService.getAllByUsuPrg(id_user, id_prg);
+        	List<PreguntaDTO> preguntas_programa = preguntaService.getPreguntasByUsuPrg(id_user, id_prg);
 
         	datogeneral.setConvocatorias_programa(convocatorias);
         	datogeneral.setSimulacros_programa(simulacros);
         	datogeneral.setCategorias_programa(categorias);
         	datogeneral.setSubcategorias_programa(subconvocatorias);
         	datogeneral.setUsuarios_programa(usuarios_programa);
+        	datogeneral.setPreguntas_programa(preguntas_programa);
         	datos.put("error", null);
         	datos.put("message", "¡Proceso Exitoso!");
         	datos.put("general", datogeneral);

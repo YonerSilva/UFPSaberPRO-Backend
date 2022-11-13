@@ -8,9 +8,13 @@ public interface PreguntaService {
 	
 	public PreguntaDTO buscar(Long id_pregunta);
 
-	public void guardar(PreguntaDTO pregunta);
+	public PreguntaDTO guardar(PreguntaDTO pregunta);
+	
+	public void actualizar(PreguntaDTO pregunta);
 
 	public void eliminar(Long id_pregunta);
 
 	public List<PreguntaDTO> getPreguntas();
+	
+	public List<PreguntaDTO> getPreguntasByUsuPrg(Long id_usuario, Long id_programa);
 }

@@ -37,6 +37,11 @@ public class DatogeneralDTO {
 	private List<SubcatergoriaDTO> subcategorias_programa;
 	
 	/**
+	 * Datos de las preguntas por programa (ADMINISTRADOR) de la aplicación.
+	 */
+	private List<PreguntaDTO> preguntas_programa;
+	
+	/**
 	 * Datos de los usuarios por programa (ADMINISTRADOR) de la aplicación.
 	 */
 	private List<UsuarioDTO> usuarios_programa;

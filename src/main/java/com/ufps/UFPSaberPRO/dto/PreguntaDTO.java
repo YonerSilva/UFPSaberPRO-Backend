@@ -18,13 +18,12 @@ public class PreguntaDTO {
 	@NotEmpty
 	private String preg_descripcion;
 	
-	@NotBlank
-	@NotEmpty
     private String preg_estado;
 	
 	@NotNull
-    private Long subcategoria;
+    private Long id_subcategoria;
 	
-	@NotNull
+	private SubcatergoriaDTO subcategoria;
+	
 	private Long usu_creacion;
 }
