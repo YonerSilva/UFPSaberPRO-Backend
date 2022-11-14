@@ -8,10 +8,14 @@ public interface OpcionService {
 	
 	public OpcionDTO buscar(Long id_opcion);
 
-	public void guardar(OpcionDTO opcion);
+	public OpcionDTO guardar(OpcionDTO opcion);
+	
+	public void actualizar(OpcionDTO opcion);
 
 	public void eliminar(Long id_opcion);
 
 	public List<OpcionDTO> getOpciones();
+	
+	public List<OpcionDTO> getOpcionesByPregunta(Long id_pregunta);
 	
 }
