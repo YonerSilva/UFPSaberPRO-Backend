@@ -18,7 +18,7 @@ public class OpcionDTO {
 	@NotEmpty
     private String opc_descripcion;
 	
-	@NotEmpty
+	@NotNull
     private Boolean opc_respuesta;
 	
 	@NotNull
