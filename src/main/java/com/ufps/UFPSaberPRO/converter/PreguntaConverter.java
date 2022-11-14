@@ -18,7 +18,10 @@ public class PreguntaConverter {
 		pregunta.setPreg_imagen(entity.getPreg_imagen());
 		pregunta.setPreg_descripcion(entity.getPreg_descripcion());
 		pregunta.setPreg_estado(entity.getPreg_estado());
-		pregunta.setSubcategoria(new SubcategoriaConverter().converterToDTO(entity.getSubcategoria()));
+		pregunta.setId_subcategoria(entity.getSubcategoria().getId_subcategoria());
+		if(entity.getSubcategoria().getSub_nombre()!=null && entity.getSubcategoria().getId_subcategoria()!=null) {
+			pregunta.setSubcategoria(new SubcategoriaConverter().converterToDTO(entity.getSubcategoria()));
+		}
 		pregunta.setUsu_creacion(entity.getUsu_creacion());
 		return pregunta;
 	}
