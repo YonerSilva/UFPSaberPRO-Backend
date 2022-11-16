@@ -28,7 +28,7 @@ public class OpcionConverter {
 		opcion.setOpc_imagen(dto.getOpc_imagen());
 		opcion.setOpc_descripcion(dto.getOpc_descripcion());
 		opcion.setOpc_respuesta(dto.getOpc_respuesta());
-		opcion.setPregunta(new Pregunta(dto.getId_opcion()));
+		opcion.setPregunta(new Pregunta(dto.getPregunta()));
 		return opcion;
 	}
 
