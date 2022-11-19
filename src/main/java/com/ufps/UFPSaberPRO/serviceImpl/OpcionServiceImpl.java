@@ -24,6 +24,7 @@ public class OpcionServiceImpl implements OpcionService{
 	private OpcionRepository opcionDao;
 
 	@Override
+	@Transactional
 	public OpcionDTO buscar(Long id_opcion) {
 		Opcion opc = opcionDao.findById(id_opcion).get();
 		OpcionDTO opcion = new OpcionConverter().converterToDTO(opc);
@@ -31,6 +32,7 @@ public class OpcionServiceImpl implements OpcionService{
 	}
 
 	@Override
+	@Transactional
 	public OpcionDTO guardar(OpcionDTO opcion) {
 		OpcionConverter converter = new OpcionConverter();
 		Opcion opc = converter.converterToEntity(opcion);
@@ -38,6 +40,7 @@ public class OpcionServiceImpl implements OpcionService{
 	}
 	
 	@Override
+	@Transactional
 	public void actualizar(OpcionDTO opcion) {
 		Opcion opc = new OpcionConverter().converterToEntity(opcion);
 		opcionDao.update(opc.getId_opcion(), opc.getOpc_imagen(), opc.getOpc_descripcion(),
@@ -45,18 +48,21 @@ public class OpcionServiceImpl implements OpcionService{
 	}
 
 	@Override
+	@Transactional
 	public void eliminar(Long id_opcion) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
+	@Transactional
 	public List<OpcionDTO> getOpciones() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	
 	@Override
+	@Transactional
 	public List<OpcionDTO> getOpcionesByPregunta(Long id_pregunta) {
 		List<OpcionDTO> opciones = new ArrayList<>();
 		OpcionConverter converter = new OpcionConverter();
