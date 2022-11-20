@@ -26,4 +26,6 @@ public class PreguntaDTO {
 	private SubcatergoriaDTO subcategoria;
 	
 	private Long usu_creacion;
+	
+	private Integer simu_preg_puntaje;
 }

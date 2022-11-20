@@ -23,8 +23,6 @@ public class SimulacroDTO {
 	@NotNull
 	private Integer simu_puntaje_maximo;
 		
-	@NotBlank
-	@NotEmpty
     private String simu_estado;
 
 	@NotNull

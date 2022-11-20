@@ -121,6 +121,7 @@ public class SimulacroRestController {
 				datos.put("message", "Ha ocurrido un error con los datos ingresados, verifique e intente nuevamente.");
 				return new ResponseEntity<Object>(datos, HttpStatus.INTERNAL_SERVER_ERROR);
 			} else {
+				nuevoSimulacro.setSimu_estado("I");
 				simulacroService.guardar(nuevoSimulacro);
 				datos.put("error", null);
 				datos.put("message", "¡Proceso Exitoso!");

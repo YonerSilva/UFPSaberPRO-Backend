@@ -23,7 +23,7 @@ public class Simu_PregConverter {
 		simu_preg.setId_simu_preg(dto.getId_simu_preg());
 		simu_preg.setSimu_usu_puntaje(dto.getSimu_usu_puntaje());
 		simu_preg.setSimulacro(new Simulacro(dto.getSimulacro()));
-		simu_preg.setPregunta(new Pregunta(dto.getId_simu_preg()));
+		simu_preg.setPregunta(new Pregunta(dto.getPregunta()));
 		return simu_preg;
 	}
 }
