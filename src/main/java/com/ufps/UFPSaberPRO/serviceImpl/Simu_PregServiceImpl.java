@@ -22,4 +22,11 @@ public class Simu_PregServiceImpl implements Simu_PregService{
 		List<PreguntaDTO> preguntas = simu_pregDao.findAllBySimulacro(id_simulacro);
 		return preguntas;
 	}
+	
+	@Override
+	@Transactional
+	public List<PreguntaDTO> getPreguntasByDifferentSimu(Long id_simulacro) {
+		List<PreguntaDTO> preguntas = simu_pregDao.findAllByDifferentSimu(id_simulacro);
+		return preguntas;
+	}
 }

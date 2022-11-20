@@ -19,4 +19,11 @@ public interface Simu_PregRepository extends CrudRepository<Simu_Preg, Long> {
 			+ "INNER JOIN public.pregunta p on p.id_pregunta = sp.pregunta \r\n"
 			+ "WHERE sp.id_simulacro = :id_simulacro and p.preg_estado='A'", nativeQuery = true)
 	public List<PreguntaDTO> findAllBySimulacro(@Param("id_simulacro") Long simulacro);
+	
+	@Transactional
+	@Modifying
+	@Query(value = "SELECT p.*,sp.simu_preg_puntaje FROM public.simu_preg sp \r\n"
+			+ "INNER JOIN public.pregunta p on p.id_pregunta = sp.pregunta \r\n"
+			+ "WHERE sp.id_simulacro != :id_simulacro and p.preg_estado='A'", nativeQuery = true)
+	public List<PreguntaDTO> findAllByDifferentSimu(@Param("id_simulacro") Long simulacro);
 }

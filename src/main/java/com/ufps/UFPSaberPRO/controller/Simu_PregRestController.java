@@ -59,4 +59,30 @@ public class Simu_PregRestController {
 			return new ResponseEntity<Object>(datos, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	@Operation(summary = "Obtiene una lista de preguntas que no estan relacionadas a un simulacro en especifico.")
+	@GetMapping("/getPreguntasDiferentes")
+	public ResponseEntity<Object> getPreguntasDiferentes(@RequestParam String id_simulacro){
+		Long id_simu = Long.parseLong(id_simulacro);
+		Map<String,Object> datos = new LinkedHashMap<>();
+		try {
+			List<PreguntaDTO> preguntas = simu_pregService.getPreguntasByDifferentSimu(id_simu);
+			if(preguntas.size()>0) {
+				datos.put("error", null);
+				datos.put("message", "¡Proceso Exitoso!");
+				datos.put("preguntas", preguntas);
+				return new ResponseEntity<Object>(datos, HttpStatus.OK);
+			}else {
+				datos.put("error", null);
+				datos.put("message", "No se encontraron preguntas.");
+				datos.put("preguntas", null);
+				return new ResponseEntity<Object>(datos, HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			datos.put("error", e.getMessage());
+			datos.put("message", "No se encontraron preguntas.");
+			datos.put("preguntas", null);
+			return new ResponseEntity<Object>(datos, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 }
