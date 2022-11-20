@@ -49,7 +49,7 @@ public class Simu_PregRestController {
 			}else {
 				datos.put("error", null);
 				datos.put("message", "No se encontraron preguntas.");
-				datos.put("preguntas", null);
+				datos.put("preguntas", preguntas);
 				return new ResponseEntity<Object>(datos, HttpStatus.OK);
 			}
 		} catch (Exception e) {
@@ -75,7 +75,7 @@ public class Simu_PregRestController {
 			}else {
 				datos.put("error", null);
 				datos.put("message", "No se encontraron preguntas.");
-				datos.put("preguntas", null);
+				datos.put("preguntas", preguntas);
 				return new ResponseEntity<Object>(datos, HttpStatus.OK);
 			}
 		} catch (Exception e) {
