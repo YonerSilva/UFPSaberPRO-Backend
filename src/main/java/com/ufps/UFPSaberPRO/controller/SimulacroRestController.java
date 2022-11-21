@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ufps.UFPSaberPRO.dto.DatogeneralDTO;
+import com.ufps.UFPSaberPRO.dto.PreguntaDTO;
 import com.ufps.UFPSaberPRO.dto.SimulacroDTO;
+import com.ufps.UFPSaberPRO.serviceImpl.PreguntaServiceImpl;
 import com.ufps.UFPSaberPRO.serviceImpl.SimulacroServiceImpl;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -30,6 +32,9 @@ public class SimulacroRestController {
 
 	@Autowired
 	private SimulacroServiceImpl simulacroService;
+	
+	@Autowired
+	private PreguntaServiceImpl preguntaService;
 
 	private DatogeneralDTO datoGeneral;
 
@@ -153,6 +158,58 @@ public class SimulacroRestController {
 		} catch (Exception e) {
 			datos.put("error", e.getMessage());
 			datos.put("message", "Ha ocurrido un error interno con los datos.");
+			return new ResponseEntity<Object>(datos, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@Operation(summary = "Obtiene una lista de preguntas de un simulacro en especifico.")
+	@GetMapping("/getPreguntas")
+	public ResponseEntity<Object> getPreguntas(@RequestParam String id_simulacro){
+		Long id_simu = Long.parseLong(id_simulacro);
+		Map<String,Object> datos = new LinkedHashMap<>();
+		try {
+			List<PreguntaDTO> preguntas = preguntaService.getPreguntasBySimulacro(id_simu);
+			if(preguntas.size()>0) {
+				datos.put("error", null);
+				datos.put("message", "¡Proceso Exitoso!");
+				datos.put("preguntas", preguntas);
+				return new ResponseEntity<Object>(datos, HttpStatus.OK);
+			}else {
+				datos.put("error", "No se encontraron preguntas");
+				datos.put("message", "No se encontraron preguntas registradas.");
+				datos.put("preguntas", preguntas);
+				return new ResponseEntity<Object>(datos, HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			datos.put("error", e.getMessage());
+			datos.put("message", "No se encontraron preguntas.");
+			datos.put("preguntas", null);
+			return new ResponseEntity<Object>(datos, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@Operation(summary = "Obtiene una lista de preguntas que no estan relacionadas a un simulacro en especifico.")
+	@GetMapping("/getPreguntasDiferentes")
+	public ResponseEntity<Object> getPreguntasDiferentes(@RequestParam String id_simulacro){
+		Long id_simu = Long.parseLong(id_simulacro);
+		Map<String,Object> datos = new LinkedHashMap<>();
+		try {
+			List<PreguntaDTO> preguntas = preguntaService.getPreguntasByDifferentSimu(id_simu);
+			if(preguntas.size()>0) {
+				datos.put("error", null);
+				datos.put("message", "¡Proceso Exitoso!");
+				datos.put("preguntas", preguntas);
+				return new ResponseEntity<Object>(datos, HttpStatus.OK);
+			}else {
+				datos.put("error", "No se encontraron preguntas");
+				datos.put("message", "No se encontraron preguntas.");
+				datos.put("preguntas", preguntas);
+				return new ResponseEntity<Object>(datos, HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			datos.put("error", e.getMessage());
+			datos.put("message", "No se encontraron preguntas.");
+			datos.put("preguntas", null);
 			return new ResponseEntity<Object>(datos, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}

@@ -17,4 +17,8 @@ public interface PreguntaService {
 	public List<PreguntaDTO> getPreguntas();
 	
 	public List<PreguntaDTO> getPreguntasByUsuPrg(Long id_usuario, Long id_programa);
+	
+	public List<PreguntaDTO> getPreguntasBySimulacro(Long id_simulacro);
+	
+	public List<PreguntaDTO> getPreguntasByDifferentSimu(Long id_simulacro);
 }

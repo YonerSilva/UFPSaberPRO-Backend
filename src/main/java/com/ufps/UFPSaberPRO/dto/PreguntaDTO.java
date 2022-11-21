@@ -28,4 +28,18 @@ public class PreguntaDTO {
 	private Long usu_creacion;
 	
 	private Integer simu_preg_puntaje;
+
+	public PreguntaDTO() {
+	}
+
+	public PreguntaDTO(Long id_pregunta, String preg_imagen, String preg_descripcion,
+			String preg_estado, Long id_subcategoria,
+			Integer simu_preg_puntaje) {
+		this.id_pregunta = id_pregunta;
+		this.preg_imagen = preg_imagen;
+		this.preg_descripcion = preg_descripcion;
+		this.preg_estado = preg_estado;
+		this.id_subcategoria = id_subcategoria;
+		this.simu_preg_puntaje = simu_preg_puntaje;
+	} 
 }

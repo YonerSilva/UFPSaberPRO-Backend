@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -46,6 +47,9 @@ public class Pregunta implements Serializable {
 
 	@Column(name = "usu_creacion")
 	private Long usu_creacion;
+	
+	@Transient
+	private Integer simu_preg_puntaje;
 
 	public Pregunta() {
 

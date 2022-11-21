@@ -25,7 +25,7 @@ public class Simu_Preg implements Serializable {
 	private Long id_simu_preg;
 
 	@Column(name = "simu_preg_puntaje")
-	private Integer simu_usu_puntaje;
+	private Integer simu_preg_puntaje;
 
 	@JoinColumn(name = "id_simulacro", referencedColumnName = "id_simulacro")
 	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Simulacro.class)
