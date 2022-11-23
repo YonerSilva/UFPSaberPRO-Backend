@@ -104,7 +104,6 @@ public class PreguntaServiceImpl implements PreguntaService{
 			if(preg.getSubcategoria().getSub_nombre()!=null && preg.getSubcategoria().getId_subcategoria()!=null) {
 				pregunta.setSubcategoria(new SubcategoriaConverter().converterToDTO(preg.getSubcategoria()));
 			}
-			pregunta.setSimu_preg_puntaje(preg.getSimu_preg_puntaje());
 			preguntas.add(pregunta);
 		}		
 		return preguntas;

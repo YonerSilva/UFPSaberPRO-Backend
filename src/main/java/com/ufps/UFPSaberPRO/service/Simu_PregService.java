@@ -1,5 +1,8 @@
 package com.ufps.UFPSaberPRO.service;
 
-public interface Simu_PregService {
+import com.ufps.UFPSaberPRO.dto.Simu_PregDTO;
 
+public interface Simu_PregService {
+	
+	public void guardar(Simu_PregDTO simu_preg);
 }

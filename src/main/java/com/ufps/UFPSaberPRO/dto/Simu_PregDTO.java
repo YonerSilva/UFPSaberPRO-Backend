@@ -8,13 +8,14 @@ import lombok.Data;
 public class Simu_PregDTO {
 	private Long id_simu_preg;
 	
-	@NotNull
 	private Integer simu_usu_puntaje;
 	
 	@NotNull
 	private Long simulacro;
 	
-	@NotNull
 	private Long pregunta;
+	
+	@NotNull
+	private PreguntaDTO[] preguntas;
 
 }

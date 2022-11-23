@@ -47,9 +47,6 @@ public class Pregunta implements Serializable {
 
 	@Column(name = "usu_creacion")
 	private Long usu_creacion;
-	
-	@Transient
-	private Integer simu_preg_puntaje;
 
 	public Pregunta() {
 
