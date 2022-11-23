@@ -61,12 +61,13 @@ public class ConvocatoriaRestController {
 		}
 	}
 	
-	/*@Operation(summary = "Obtiene una lista de convocatorias por el programa.")
-	@GetMapping("/getConvocatorias")
-	public ResponseEntity<Object> getConvocatorias(@Valid @RequestParam String prg_codigo){
+	@Operation(summary = "Obtiene una lista de convocatorias por el usuario.")
+	@GetMapping("/getConvocatoriasUsuario")
+	public ResponseEntity<Object> getConvocatoriasUsuario(@Valid @RequestParam String id_usuario){
 		Map<String,Object> datos = new LinkedHashMap<>();
+		Long id_usu = Long.parseLong(id_usuario);
 		try {
-			List<ConvocatoriaDTO> convocatorias = convocatoriaService.getConvocatoriasByPrograma(prg_codigo);
+			List<ConvocatoriaDTO> convocatorias = convocatoriaService.getConvocatoriasByUsu(id_usu);
 			if(convocatorias.size()>0) {
 				datos.put("error", null);
 				datos.put("message", "¡Proceso Exitoso!");
@@ -74,8 +75,8 @@ public class ConvocatoriaRestController {
 				return new ResponseEntity<Object>(datos, HttpStatus.OK);
 			}else {
 				datos.put("error", null);
-				datos.put("message", "No se encontraron convocatorias.");
-				datos.put("convocatorias", null);
+				datos.put("message", "El usuario actualmente no tiene convocatorias registradas.");
+				datos.put("convocatorias", convocatorias);
 				return new ResponseEntity<Object>(datos, HttpStatus.OK);
 			}
 		} catch (Exception e) {
@@ -84,7 +85,33 @@ public class ConvocatoriaRestController {
 			datos.put("convocatorias", null);
 			return new ResponseEntity<Object>(datos, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-	}*/
+	}
+	
+	@Operation(summary = "Obtiene una lista de convocatorias activas.")
+	@GetMapping("/getConvocatoriasActivas")
+	public ResponseEntity<Object> getConvocatoriasActivas(@Valid @RequestParam String id_programa){
+		Map<String,Object> datos = new LinkedHashMap<>();
+		Long id_prg = Long.parseLong(id_programa);
+		try {
+			List<ConvocatoriaDTO> convocatorias = convocatoriaService.getConvocatoriasByPrgEst(id_prg,"A");
+			if(convocatorias.size()>0) {
+				datos.put("error", null);
+				datos.put("message", "¡Proceso Exitoso!");
+				datos.put("convocatorias", convocatorias);
+				return new ResponseEntity<Object>(datos, HttpStatus.OK);
+			}else {
+				datos.put("error", null);
+				datos.put("message", "No se encontraron convocatorias.");
+				datos.put("convocatorias", convocatorias);
+				return new ResponseEntity<Object>(datos, HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			datos.put("error", e.getMessage());
+			datos.put("message", "No se encontraron convocatorias.");
+			datos.put("convocatorias", null);
+			return new ResponseEntity<Object>(datos, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 	
 	@Operation(summary = "Obtiene una convocatoria en especifico por el id.")
 	@GetMapping("/getConvocatoria")

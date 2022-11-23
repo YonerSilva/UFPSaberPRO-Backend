@@ -19,6 +19,8 @@ public class PreguntaDTO {
 	private String preg_descripcion;
 	
     private String preg_estado;
+    
+    private Long preg_tipo;
 	
 	@NotNull
     private Long id_subcategoria;
@@ -33,12 +35,13 @@ public class PreguntaDTO {
 	}
 
 	public PreguntaDTO(Long id_pregunta, String preg_imagen, String preg_descripcion,
-			String preg_estado, Long id_subcategoria,
+			String preg_estado,Long preg_tipo, Long id_subcategoria,
 			Integer simu_preg_puntaje) {
 		this.id_pregunta = id_pregunta;
 		this.preg_imagen = preg_imagen;
 		this.preg_descripcion = preg_descripcion;
 		this.preg_estado = preg_estado;
+		this.preg_tipo = preg_tipo;
 		this.id_subcategoria = id_subcategoria;
 		this.simu_preg_puntaje = simu_preg_puntaje;
 	} 

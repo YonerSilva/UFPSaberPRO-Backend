@@ -1,6 +1,5 @@
 package com.ufps.UFPSaberPRO.dao;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Modifying;
@@ -17,7 +16,7 @@ public interface SimulacroRepository extends CrudRepository<Simulacro, Long>{
 	@Modifying
 	@Query(value = "UPDATE public.simulacro\r\n"
 			+ "SET simu_descripcion=:descripcion, simu_estado=:estado, \r\n"
-			+ "simu_nombre=:nombre, simu_puntaje_maximo=:puntaje, id_programa=:programa \r\n"
+			+ "simu_nombre=:nombre, simu_puntaje_maximo=:puntaje, programa=:programa \r\n"
 			+ "WHERE id_simulacro=:id", nativeQuery = true)
 	public void update(@Param("id") Long id,@Param("nombre") String nombre,@Param("descripcion") String descripcion,
 			@Param("puntaje") Integer puntaje,@Param("estado") String estado, @Param("programa") Long programa);

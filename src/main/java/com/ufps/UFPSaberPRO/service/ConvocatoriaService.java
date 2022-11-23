@@ -17,4 +17,8 @@ public interface ConvocatoriaService {
 	public List<ConvocatoriaDTO> getConvocatorias();
 	
 	public List<ConvocatoriaDTO> getConvocatoriasByUsuPrg(Long id_usuario,Long id_programa);
+	
+	public List<ConvocatoriaDTO> getConvocatoriasByUsu(Long id_usuario);
+	
+	public List<ConvocatoriaDTO> getConvocatoriasByPrgEst(Long programa, String estado);
 }

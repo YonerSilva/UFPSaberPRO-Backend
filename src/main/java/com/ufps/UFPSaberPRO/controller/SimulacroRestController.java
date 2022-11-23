@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -140,7 +141,7 @@ public class SimulacroRestController {
 	}
 
 	@Operation(summary = "Actualiza un simulacro existente en la base de datos.")
-	@PostMapping("/actualizarSimulacro")
+	@PutMapping("/actualizarSimulacro")
 	public ResponseEntity<Object> actualizarSimulacro(@Valid @RequestBody SimulacroDTO simulacro,
 			BindingResult bidBindingResult) {
 		Map<String, Object> datos = new LinkedHashMap<>();

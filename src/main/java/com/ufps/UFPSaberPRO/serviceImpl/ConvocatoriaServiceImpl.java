@@ -71,4 +71,26 @@ public class ConvocatoriaServiceImpl implements ConvocatoriaService{
 		}
 		return convocatorias;
 	}
+	
+	@Override
+	@Transactional
+	public List<ConvocatoriaDTO> getConvocatoriasByUsu(Long id_usuario) {
+		List<ConvocatoriaDTO> convocatorias = new ArrayList<>();
+		ConvocatoriaConverter converter = new ConvocatoriaConverter();
+		for (Convocatoria convo : convocatoriaDao.findAllByUsuario(id_usuario)) {
+			convocatorias.add(converter.converterToDTO(convo));
+		}
+		return convocatorias;
+	}
+	
+	@Override
+	@Transactional
+	public List<ConvocatoriaDTO> getConvocatoriasByPrgEst(Long programa, String estado) {
+		List<ConvocatoriaDTO> convocatorias = new ArrayList<>();
+		ConvocatoriaConverter converter = new ConvocatoriaConverter();
+		for (Convocatoria convo : convocatoriaDao.findAllByPrgEst(programa, estado)) {
+			convocatorias.add(converter.converterToDTO(convo));
+		}
+		return convocatorias;
+	}
 }

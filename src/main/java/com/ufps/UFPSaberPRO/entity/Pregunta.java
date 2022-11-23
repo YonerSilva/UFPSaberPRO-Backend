@@ -36,6 +36,9 @@ public class Pregunta implements Serializable {
 
 	@Column(name = "preg_estado", length = 5)
 	private String preg_estado;
+	
+	@Column(name = "preg_tipo")
+	private Long preg_tipo;
 
 	@JoinColumn(name = "id_subcategoria", referencedColumnName = "id_subcategoria")
 	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Subcategoria.class)

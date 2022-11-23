@@ -41,7 +41,7 @@ public class PreguntaServiceImpl implements PreguntaService{
 	public void actualizar(PreguntaDTO pregunta) {
 		Pregunta preg = new PreguntaConverter().converterToEntity(pregunta);
 		preguntaDao.update(preg.getId_pregunta(), preg.getPreg_imagen(), preg.getPreg_descripcion(),
-				preg.getPreg_estado(), pregunta.getId_subcategoria());
+				preg.getPreg_estado(),preg.getPreg_tipo(), pregunta.getId_subcategoria());
 	}
 
 	@Override
@@ -73,19 +73,6 @@ public class PreguntaServiceImpl implements PreguntaService{
 	@Transactional
 	public List<PreguntaDTO> getPreguntasBySimulacro(Long id_simulacro) {
 		List<PreguntaDTO> preguntas = preguntaDao.findAllBySimulacro(id_simulacro);
-		/*PreguntaDTO pregunta;
-		for (Pregunta preg : preguntaDao.findAllBySimulacro(id_simulacro)) {
-			pregunta = new PreguntaDTO();
-			pregunta.setId_pregunta(preg.getId_pregunta());
-			pregunta.setPreg_imagen(preg.getPreg_imagen());
-			pregunta.setPreg_descripcion(preg.getPreg_descripcion());
-			pregunta.setPreg_estado(preg.getPreg_estado());
-			pregunta.setId_subcategoria(preg.getSubcategoria().getId_subcategoria());
-			if(preg.getSubcategoria().getSub_nombre()!=null && preg.getSubcategoria().getId_subcategoria()!=null) {
-				pregunta.setSubcategoria(new SubcategoriaConverter().converterToDTO(preg.getSubcategoria()));
-			}
-			preguntas.add(pregunta);
-		}	*/
 		return preguntas;
 	}
 	
@@ -100,6 +87,7 @@ public class PreguntaServiceImpl implements PreguntaService{
 			pregunta.setPreg_imagen(preg.getPreg_imagen());
 			pregunta.setPreg_descripcion(preg.getPreg_descripcion());
 			pregunta.setPreg_estado(preg.getPreg_estado());
+			pregunta.setPreg_tipo(preg.getPreg_tipo());
 			pregunta.setId_subcategoria(preg.getSubcategoria().getId_subcategoria());
 			if(preg.getSubcategoria().getSub_nombre()!=null && preg.getSubcategoria().getId_subcategoria()!=null) {
 				pregunta.setSubcategoria(new SubcategoriaConverter().converterToDTO(preg.getSubcategoria()));

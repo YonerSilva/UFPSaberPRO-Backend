@@ -28,14 +28,14 @@ public interface PreguntaRepository extends CrudRepository<Pregunta, Long>{
 	@Modifying
 	@Query(value = "UPDATE public.pregunta\r\n"
 			+ "SET preg_descripcion=:descripcion, preg_imagen = :imagen, \r\n"
-			+ "preg_estado=:estado, id_subcategoria=:subcategoria \r\n"
+			+ "preg_estado=:estado, preg_tipo=:tipo, id_subcategoria=:subcategoria \r\n"
 			+ "WHERE id_pregunta=:id", nativeQuery = true)
 	public void update(@Param("id") Long id, @Param("imagen") String imagen, @Param("descripcion") String descripcion,
-			@Param("estado") String estado, @Param("subcategoria") Long subcategoria);
+			@Param("estado") String estado, @Param("tipo") Long tipo, @Param("subcategoria") Long subcategoria);
 	
 	@Transactional
 	@Modifying
-	@Query("SELECT new com.ufps.UFPSaberPRO.dto.PreguntaDTO(p.id_pregunta, p.preg_imagen, p.preg_descripcion, p.preg_estado, p.subcategoria.id_subcategoria, sp.simu_preg_puntaje) FROM Pregunta p \r\n"
+	@Query("SELECT new com.ufps.UFPSaberPRO.dto.PreguntaDTO(p.id_pregunta, p.preg_imagen, p.preg_descripcion, p.preg_estado, p.preg_tipo, p.subcategoria.id_subcategoria, sp.simu_preg_puntaje) FROM Pregunta p \r\n"
 			+ "INNER JOIN Simu_Preg sp on sp.pregunta = p.id_pregunta \r\n"
 			+ "WHERE sp.simulacro.id_simulacro = :simulacro and p.preg_estado='A'")
 	public List<PreguntaDTO> findAllBySimulacro(Long simulacro);

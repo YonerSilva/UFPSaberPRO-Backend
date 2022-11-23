@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Date;
 import java.util.List;
 
+import com.ufps.UFPSaberPRO.dto.PreguntaDTO;
 import com.ufps.UFPSaberPRO.entity.Convocatoria;
 
 @Repository
@@ -36,5 +37,18 @@ public interface ConvocatoriaRepository extends CrudRepository<Convocatoria, Lon
 	@Query(value = "DELETE FROM public.convocatoria\r\n"
 			+ "WHERE id_convocatoria=:id_convocatoria and convo_estado='I'", nativeQuery = true)
 	public void delete(@Param("id_convocatoria") Long convocatoria);
+	
+	@Transactional
+	@Modifying
+	@Query(value = "SELECT c.* FROM public.convocatoria c \r\n"
+			+ "INNER JOIN public.convo_usu cu on cu.id_convocatoria = c.id_convocatoria \r\n"
+			+ "WHERE cu.id_usuario = :usuario and c.convo_estado='A'", nativeQuery = true)
+	public List<Convocatoria> findAllByUsuario(@Param("usuario") Long usuario);
+	
+	@Transactional
+	@Modifying
+	@Query(value = "SELECT c.* FROM public.convocatoria c \r\n"
+			+ "WHERE c.id_programa = :programa and c.convo_estado=:estado", nativeQuery = true)
+	public List<Convocatoria> findAllByPrgEst(@Param("programa") Long programa,@Param("estado") String convo_estado);
 	
 }
