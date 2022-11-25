@@ -42,7 +42,7 @@ public interface ConvocatoriaRepository extends CrudRepository<Convocatoria, Lon
 	@Modifying
 	@Query(value = "SELECT c.* FROM public.convocatoria c \r\n"
 			+ "INNER JOIN public.convo_usu cu on cu.id_convocatoria = c.id_convocatoria \r\n"
-			+ "WHERE cu.id_usuario = :usuario and c.convo_estado='A'", nativeQuery = true)
+			+ "WHERE cu.id_usuario = :usuario and c.convo_estado='B'", nativeQuery = true)
 	public List<Convocatoria> findAllByUsuario(@Param("usuario") Long usuario);
 	
 	@Transactional
