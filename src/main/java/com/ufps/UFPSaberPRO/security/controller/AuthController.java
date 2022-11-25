@@ -29,6 +29,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -151,7 +152,36 @@ public class AuthController {
             return new ResponseEntity<>(rtn,HttpStatus.CREATED);
         } catch (Exception e) {
             rtn.put("error", e.getMessage());
-        	rtn.put("message", "¡Éxito!, usted se ha registrado correctamente.");
+        	rtn.put("message", "¡Error!, no se pudo crear el usuario.");
+            return new ResponseEntity<>(rtn,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
+    @Operation(summary = "Se registra un nuevo usuario.")
+    @PutMapping("/actualizarUsuario")
+    public ResponseEntity<Object> actualizarUsuario(@Valid @RequestBody UsuarioDTO nuevoUsuario, BindingResult bindingResult) {
+        Map<String, Object> rtn = new LinkedHashMap<>();
+    	try {
+            if (bindingResult.hasErrors()) {
+            	rtn.put("error", bindingResult.getFieldError().getDefaultMessage());
+            	rtn.put("message", "¡Oops! Ha ocurrido un error con los datos ingresados.");
+                return new ResponseEntity<>(rtn,HttpStatus.BAD_REQUEST);
+            }
+            Usuario user = usuarioService.findUserById(nuevoUsuario.getId_usuario());
+            user.setUsu_nombre(nuevoUsuario.getUsu_nombre());
+            user.setUsu_apellido(nuevoUsuario.getUsu_apellido());
+            user.setUsu_codigo(nuevoUsuario.getUsu_codigo());
+            user.setUsu_email(nuevoUsuario.getUsu_email());
+            if(nuevoUsuario.getUsu_password()!="" && nuevoUsuario.getUsu_password()!=null) {
+                user.setUsu_password(passwordEncoder.encode(nuevoUsuario.getUsu_password()));
+            }
+            usuarioService.save(user);
+            rtn.put("error", null);
+        	rtn.put("message", "¡Éxito!, se ha actualizado correctamente.");
+            return new ResponseEntity<>(rtn,HttpStatus.OK);
+        } catch (Exception e) {
+            rtn.put("error", e.getMessage());
+        	rtn.put("message", "¡Error!, no se pudo actualizar el usuario.");
             return new ResponseEntity<>(rtn,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

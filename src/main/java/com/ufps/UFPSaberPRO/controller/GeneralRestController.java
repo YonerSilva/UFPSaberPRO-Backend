@@ -95,5 +95,27 @@ public class GeneralRestController {
         	return new ResponseEntity<Object>(datos	, HttpStatus.INTERNAL_SERVER_ERROR);	
         }
     }
+	
+	@Operation(summary = "Obtiene los usuarios de un programa en especifico.")
+    @GetMapping("/getUsuariosPrograma")
+    public ResponseEntity<Object> getUsuariosPrograma(@RequestParam String id_usuario, @RequestParam String id_programa) {
+		Map<String,Object> datos = new LinkedHashMap<>();
+		Long id_user = Long.parseLong(id_usuario);
+		Long id_prg = Long.parseLong(id_programa);
+        try {
+        	List<UsuarioDTO> usuarios_programa = usuarioService.getAllByUsuPrg(id_user, id_prg);
+        	datos.put("error", null);
+        	datos.put("message", "¡Proceso Exitoso!");
+        	datos.put("usuarios", usuarios_programa);
+        	
+        	return new ResponseEntity<Object>(datos, HttpStatus.OK);	
+        	
+        } catch (Exception e) {
+        	datos.put("error", e.getMessage());
+        	datos.put("message", "¡Oops!, Ha ocurrido un error al traer los usuarios del programa.");
+        	datos.put("usuarios", null);
+        	return new ResponseEntity<Object>(datos	, HttpStatus.INTERNAL_SERVER_ERROR);	
+        }
+    }
      
 }
