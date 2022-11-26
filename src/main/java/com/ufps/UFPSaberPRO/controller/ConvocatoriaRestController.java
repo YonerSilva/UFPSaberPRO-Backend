@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ufps.UFPSaberPRO.dto.Convo_UsuDTO;
 import com.ufps.UFPSaberPRO.dto.ConvocatoriaDTO;
 import com.ufps.UFPSaberPRO.dto.DatogeneralDTO;
 import com.ufps.UFPSaberPRO.serviceImpl.ConvocatoriaServiceImpl;
@@ -89,11 +90,12 @@ public class ConvocatoriaRestController {
 	
 	@Operation(summary = "Obtiene una lista de convocatorias activas.")
 	@GetMapping("/getConvocatoriasActivas")
-	public ResponseEntity<Object> getConvocatoriasActivas(@Valid @RequestParam String id_programa){
+	public ResponseEntity<Object> getConvocatoriasActivas(@Valid @RequestParam String id_programa, @RequestParam String id_usuario){
 		Map<String,Object> datos = new LinkedHashMap<>();
 		Long id_prg = Long.parseLong(id_programa);
+		Long id_usu = Long.parseLong(id_usuario);
 		try {
-			List<ConvocatoriaDTO> convocatorias = convocatoriaService.getConvocatoriasByPrgEst(id_prg,"A");
+			List<ConvocatoriaDTO> convocatorias = convocatoriaService.getConvocatoriasByPrgEstUsu(id_usu,id_prg,"A");
 			if(convocatorias.size()>0) {
 				datos.put("error", null);
 				datos.put("message", "¡Proceso Exitoso!");
@@ -206,6 +208,28 @@ public class ConvocatoriaRestController {
 		} catch (Exception e) {
 			datos.put("error", e.getMessage());
 			datos.put("message", "Ha ocurrido un error al eliminar la convocatoria.");
+			return new ResponseEntity<Object>(datos, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@Operation(summary = "Registra una usuario en una convocatoria en la base de datos.")
+	@PostMapping("/guardarUsuario")
+	public ResponseEntity<Object> guardarUsuario(@Valid @RequestBody Convo_UsuDTO convo_usu, BindingResult bidBindingResult){
+		Map<String,Object> datos = new LinkedHashMap<>();
+		try {
+			if (bidBindingResult.hasErrors()) {
+				datos.put("error", bidBindingResult.getFieldError().getDefaultMessage());
+				datos.put("message", "Ha ocurrido un error con los datos ingresados, verifique e intente nuevamente.");
+				return new ResponseEntity<Object>(datos, HttpStatus.INTERNAL_SERVER_ERROR);
+			}else {				
+				convocatoriaService.guardarUsuario(convo_usu);
+				datos.put("error", null);
+				datos.put("message", "¡Proceso Exitoso!");
+				return new ResponseEntity<Object>(datos, HttpStatus.CREATED);
+			}
+		} catch (Exception e) {
+			datos.put("error", e.getMessage());
+			datos.put("message", "Ha ocurrido un error interno con los datos.");
 			return new ResponseEntity<Object>(datos, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}

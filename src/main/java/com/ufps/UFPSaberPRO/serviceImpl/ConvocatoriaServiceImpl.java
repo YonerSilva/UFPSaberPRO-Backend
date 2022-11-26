@@ -10,8 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ufps.UFPSaberPRO.converter.ConvocatoriaConverter;
 import com.ufps.UFPSaberPRO.dao.ConvocatoriaRepository;
+import com.ufps.UFPSaberPRO.dto.Convo_UsuDTO;
 import com.ufps.UFPSaberPRO.dto.ConvocatoriaDTO;
 import com.ufps.UFPSaberPRO.entity.Convocatoria;
+import com.ufps.UFPSaberPRO.security.entity.Usuario;
 import com.ufps.UFPSaberPRO.service.ConvocatoriaService;
 
 @Service
@@ -33,6 +35,12 @@ public class ConvocatoriaServiceImpl implements ConvocatoriaService{
 	public void guardar(ConvocatoriaDTO convocatoria) {
 		Convocatoria convo = new ConvocatoriaConverter().converterToEntity(convocatoria);
 		convocatoriaDao.save(convo);
+	}
+	
+	@Override
+	@Transactional
+	public void guardarUsuario(Convo_UsuDTO convo_usu) {
+		convocatoriaDao.guardarUsuario(convo_usu.getId_convocatoria(), convo_usu.getId_usuario());
 	}
 	
 	@Override
@@ -85,10 +93,10 @@ public class ConvocatoriaServiceImpl implements ConvocatoriaService{
 	
 	@Override
 	@Transactional
-	public List<ConvocatoriaDTO> getConvocatoriasByPrgEst(Long programa, String estado) {
+	public List<ConvocatoriaDTO> getConvocatoriasByPrgEstUsu(Long usuario,Long programa, String estado) {
 		List<ConvocatoriaDTO> convocatorias = new ArrayList<>();
 		ConvocatoriaConverter converter = new ConvocatoriaConverter();
-		for (Convocatoria convo : convocatoriaDao.findAllByPrgEst(programa, estado)) {
+		for (Convocatoria convo : convocatoriaDao.findAllByPrgEstUsu(usuario,programa, estado)) {
 			convocatorias.add(converter.converterToDTO(convo));
 		}
 		return convocatorias;

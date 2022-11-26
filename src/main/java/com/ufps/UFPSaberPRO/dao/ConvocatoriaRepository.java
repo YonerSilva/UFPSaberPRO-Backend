@@ -40,15 +40,22 @@ public interface ConvocatoriaRepository extends CrudRepository<Convocatoria, Lon
 	
 	@Transactional
 	@Modifying
-	@Query(value = "SELECT c.* FROM public.convocatoria c \r\n"
-			+ "INNER JOIN public.convo_usu cu on cu.id_convocatoria = c.id_convocatoria \r\n"
+	@Query(value = "SELECT c.* FROM public.convo_usu cu \r\n"
+			+ "INNER JOIN public.convocatoria c on c.id_convocatoria = cu.id_convocatoria \r\n"
 			+ "WHERE cu.id_usuario = :usuario and c.convo_estado='B'", nativeQuery = true)
 	public List<Convocatoria> findAllByUsuario(@Param("usuario") Long usuario);
 	
 	@Transactional
 	@Modifying
 	@Query(value = "SELECT c.* FROM public.convocatoria c \r\n"
-			+ "WHERE c.id_programa = :programa and c.convo_estado=:estado", nativeQuery = true)
-	public List<Convocatoria> findAllByPrgEst(@Param("programa") Long programa,@Param("estado") String convo_estado);
+			+ "WHERE c.id_programa = :programa and c.convo_estado=:estado \r\n"
+			+ "and not exists (select cu.* from public.convo_usu cu where cu.id_convocatoria=c.id_convocatoria and cu.id_usuario=:usuario);", nativeQuery = true)
+	public List<Convocatoria> findAllByPrgEstUsu(@Param("usuario") Long usuario,@Param("programa") Long programa,@Param("estado") String convo_estado);
 	
+	@Transactional
+	@Modifying
+	@Query(value = "INSERT INTO public.convo_usu\r\n"
+			+ "(id_convocatoria, id_usuario)\r\n"
+			+ "VALUES(:id_convocatoria,:id_usuario)", nativeQuery = true)
+	public void guardarUsuario(@Param("id_convocatoria") Long convocatoria, @Param("id_usuario") Long usuario);
 }
