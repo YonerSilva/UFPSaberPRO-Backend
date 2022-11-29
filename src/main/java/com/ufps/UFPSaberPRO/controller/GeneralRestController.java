@@ -66,7 +66,7 @@ public class GeneralRestController {
 	@Operation(summary = "Obtiene los datos generales para el funcionamiento de la aplicación.")
     @GetMapping("/getDatos")
     public ResponseEntity<Object> getGeneral(@RequestParam String id_usuario, @RequestParam String id_programa) {
-		Map<String,Object> datos = new LinkedHashMap<>();
+ 		Map<String,Object> datos = new LinkedHashMap<>();
 		Long id_user = Long.parseLong(id_usuario);
 		Long id_prg = Long.parseLong(id_programa);
         try {
