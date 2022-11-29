@@ -23,4 +23,17 @@ public class OpcionDTO {
 	
 	@NotNull
 	private Long pregunta;
+	
+	public OpcionDTO(){
+		
+	}
+
+	public OpcionDTO(Long id_opcion, String opc_imagen, String opc_descripcion,Long pregunta) {
+		this.id_opcion = id_opcion;
+		this.opc_imagen = opc_imagen;
+		this.opc_descripcion = opc_descripcion;
+		this.pregunta = pregunta;
+	}
+	
+	
 }

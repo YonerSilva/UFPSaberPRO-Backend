@@ -35,9 +35,18 @@ public interface SimulacroRepository extends CrudRepository<Simulacro, Long>{
 	@Modifying
 	@Query("SELECT new com.ufps.UFPSaberPRO.dto.SimulacroDTO(s.id_simulacro,s.simu_nombre,\r\n"
 			+ "s.simu_descripcion,s.simu_puntaje_maximo,s.simu_estado,\r\n"
-			+ "s.programa, c.simu_fecha_inicial, c.simu_duracion) FROM Convo_Usu cu \r\n"
+			+ "s.programa, c.simu_fecha_inicial, c.simu_fecha_final) FROM Convo_Usu cu \r\n"
 			+ "INNER JOIN Convocatoria c on c.id_convocatoria = cu.convocatoria \r\n"
 			+ "INNER JOIN Simulacro s on s.id_simulacro = c.simulacro \r\n"
 			+ "WHERE cu.usuario=:usuario and s.simu_estado=:estado")
 	public List<SimulacroDTO> findAllByConvoUsuEst(Usuario usuario,String estado);
+	
+	/*@Transactional
+	@Modifying
+	@Query("SELECT new com.ufps.UFPSaberPRO.dto.PreguntaDTO(p.id_pregunta, p.preg_imagen, p.preg_descripcion, p.preg_tipo, p.subcategoria.id_subcategoria, sp.simu_preg_puntaje,"
+			+ "SELECT new com.ufps.UFPSaberPRO.dto.OpcionDTO(o.id_opcion, o.opc_imagen, o.opc_descripcion, o.pregunta) FROM Opcion o "
+			+ "WHERE o.pregunta = p.id_pregunta) FROM Pregunta p \r\n"
+			+ "INNER JOIN Simu_Preg sp on sp.pregunta = p.id_pregunta \r\n"
+			+ "WHERE sp.simulacro.id_simulacro = :simulacro and p.preg_estado='A'")
+	public List<PreguntaDTO> findAllPregSimulacro(Long simulacro);*/
 }

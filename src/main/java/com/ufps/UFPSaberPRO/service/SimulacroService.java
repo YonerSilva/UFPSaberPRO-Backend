@@ -2,6 +2,7 @@ package com.ufps.UFPSaberPRO.service;
 
 import java.util.List;
 
+import com.ufps.UFPSaberPRO.dto.PreguntaDTO;
 import com.ufps.UFPSaberPRO.dto.SimulacroDTO;
 
 public interface SimulacroService {
@@ -19,4 +20,7 @@ public interface SimulacroService {
 	public List<SimulacroDTO> getSimulacrosUsuPrg(Long id_usuario, Long id_programa);
 	
 	public List<SimulacroDTO> getSimulacrosConvo(Long usuario, String estado);
+	
+	public List<PreguntaDTO> getAllPregSimu(Long simulacro);
+
 }

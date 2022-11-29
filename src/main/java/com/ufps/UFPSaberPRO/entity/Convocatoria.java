@@ -43,11 +43,9 @@ public class Convocatoria implements Serializable {
 	@Column(name = "convo_descripcion", length = 256)
 	private String convo_descripcion;
 
-	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm", shape = Shape.STRING)
 	@Column(name = "convo_fecha_inicial")
 	private Date convo_fecha_inicial;
 
-	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm", shape = Shape.STRING)
 	@Column(name = "convo_fecha_final")
 	private Date convo_fecha_final;
 
@@ -62,13 +60,11 @@ public class Convocatoria implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Simulacro.class)
 	private Simulacro simulacro;
 	
-	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm", shape = Shape.STRING)
 	@Column(name = "simu_fecha_inicial")
 	private Date simu_fecha_inicial;
 
-	@JsonFormat(pattern = "hh:mm", shape = Shape.STRING)
-	@Column(name = "simu_duracion")
-	private Date simu_duracion;
+	@Column(name = "simu_fecha_final")
+	private Date simu_fecha_final;
 
 	@Column(name = "usu_creacion")
 	private Long usu_creacion;

@@ -178,11 +178,6 @@ public class ConvocatoriaRestController {
 				datos.put("message", "Ha ocurrido un error con los datos ingresados, verifique e intente nuevamente.");
 				return new ResponseEntity<Object>(datos, HttpStatus.INTERNAL_SERVER_ERROR);
 			}else {
-				if(convocatoria.getSimulacro()==null) {
-					convocatoria.setConvo_estado("I");
-				}else {
-					convocatoria.setConvo_estado("A");
-				}
 				convocatoriaService.update(convocatoria);
 				datos.put("error", null);
 				datos.put("message", "¡Proceso Exitoso!");

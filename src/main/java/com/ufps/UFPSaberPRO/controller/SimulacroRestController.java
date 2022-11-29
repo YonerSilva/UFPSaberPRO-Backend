@@ -241,4 +241,31 @@ public class SimulacroRestController {
 			return new ResponseEntity<Object>(datos, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	@Operation(summary = "Obtiene una lista de preguntas de un simulacro en especifico"
+			+ "que seran usadas para presentar e simulacro.")
+	@GetMapping("/getPreguntasSimulacro")
+	public ResponseEntity<Object> getPreguntasSimulacro(@RequestParam String id_simulacro){
+		Long id_simu = Long.parseLong(id_simulacro);
+		Map<String,Object> datos = new LinkedHashMap<>();
+		try {
+			List<PreguntaDTO> preguntas = simulacroService.getAllPregSimu(id_simu);
+			if(preguntas.size()>0) {
+				datos.put("error", null);
+				datos.put("message", "¡Proceso Exitoso!");
+				datos.put("preguntas", preguntas);
+				return new ResponseEntity<Object>(datos, HttpStatus.OK);
+			}else {
+				datos.put("error", "No se encontraron preguntas");
+				datos.put("message", "No se encontraron preguntas registradas.");
+				datos.put("preguntas", preguntas);
+				return new ResponseEntity<Object>(datos, HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			datos.put("error", e.getMessage());
+			datos.put("message", "No se encontraron preguntas.");
+			datos.put("preguntas", null);
+			return new ResponseEntity<Object>(datos, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 }

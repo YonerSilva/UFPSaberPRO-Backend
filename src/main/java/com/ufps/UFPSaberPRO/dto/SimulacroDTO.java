@@ -31,11 +31,9 @@ public class SimulacroDTO {
 	@NotNull
 	private Long programa;
 	
-	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm", shape = Shape.STRING)
     private Date simu_fecha_inicial;
 	
-	@JsonFormat(pattern = "hh:mm", shape = Shape.STRING)
-    private Date simu_duracion;
+    private Date simu_fecha_final;
 	
 	public SimulacroDTO() {
 		
@@ -43,7 +41,7 @@ public class SimulacroDTO {
 
 	public SimulacroDTO(Long id_simulacro,String simu_nombre,
 			String simu_descripcion,Integer simu_puntaje_maximo, String simu_estado,
-			Long programa, Date simu_fecha_inicial, Date simu_duracion) {
+			Long programa, Date simu_fecha_inicial, Date simu_fecha_final) {
 		this.id_simulacro = id_simulacro;
 		this.simu_nombre = simu_nombre;
 		this.simu_descripcion = simu_descripcion;
@@ -51,7 +49,7 @@ public class SimulacroDTO {
 		this.simu_estado = simu_estado;
 		this.programa = programa;
 		this.simu_fecha_inicial = simu_fecha_inicial;
-		this.simu_duracion = simu_duracion;
+		this.simu_fecha_final = simu_fecha_final;
 	}
 	
 	

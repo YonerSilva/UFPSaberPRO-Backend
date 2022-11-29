@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.ufps.UFPSaberPRO.converter.SimulacroConverter;
 import com.ufps.UFPSaberPRO.dao.SimulacroRepository;
+import com.ufps.UFPSaberPRO.dto.PreguntaDTO;
 import com.ufps.UFPSaberPRO.dto.SimulacroDTO;
 import com.ufps.UFPSaberPRO.entity.Simulacro;
 import com.ufps.UFPSaberPRO.security.entity.Usuario;
@@ -74,5 +75,11 @@ public class SimulacroServiceImpl implements SimulacroService{
 	@Override
 	public List<SimulacroDTO> getSimulacrosConvo(Long id_usuario, String estado) {
 		return simulacroDao.findAllByConvoUsuEst(new Usuario(id_usuario), estado);
+	}
+
+	@Override
+	public List<PreguntaDTO> getAllPregSimu(Long simulacro) {
+		//return simulacroDao.findAllPregSimulacro(simulacro);
+		return null;
 	}
 }
