@@ -17,4 +17,6 @@ public interface SimulacroService {
 	public List<SimulacroDTO> getSimulacros();
 	
 	public List<SimulacroDTO> getSimulacrosUsuPrg(Long id_usuario, Long id_programa);
+	
+	public List<SimulacroDTO> getSimulacrosConvo(Long usuario, String estado);
 }

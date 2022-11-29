@@ -10,6 +10,7 @@ import com.ufps.UFPSaberPRO.converter.SimulacroConverter;
 import com.ufps.UFPSaberPRO.dao.SimulacroRepository;
 import com.ufps.UFPSaberPRO.dto.SimulacroDTO;
 import com.ufps.UFPSaberPRO.entity.Simulacro;
+import com.ufps.UFPSaberPRO.security.entity.Usuario;
 import com.ufps.UFPSaberPRO.service.SimulacroService;
 
 @Service
@@ -67,5 +68,11 @@ public class SimulacroServiceImpl implements SimulacroService{
 			simulacros.add(converter.converterToDTO(simu));
 		}
 		return simulacros;
+	}
+	
+	@Transactional
+	@Override
+	public List<SimulacroDTO> getSimulacrosConvo(Long id_usuario, String estado) {
+		return simulacroDao.findAllByConvoUsuEst(new Usuario(id_usuario), estado);
 	}
 }

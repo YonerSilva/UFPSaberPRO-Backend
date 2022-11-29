@@ -22,6 +22,7 @@ import com.ufps.UFPSaberPRO.dto.SimulacroDTO;
 import com.ufps.UFPSaberPRO.dto.SubcatergoriaDTO;
 import com.ufps.UFPSaberPRO.security.dto.UsuarioDTO;
 import com.ufps.UFPSaberPRO.security.entity.Rol;
+import com.ufps.UFPSaberPRO.security.entity.Usuario;
 import com.ufps.UFPSaberPRO.security.service.RoleService;
 import com.ufps.UFPSaberPRO.security.service.UsuarioService;
 import com.ufps.UFPSaberPRO.serviceImpl.CategoriaServiceImpl;
@@ -69,19 +70,32 @@ public class GeneralRestController {
 		Long id_user = Long.parseLong(id_usuario);
 		Long id_prg = Long.parseLong(id_programa);
         try {
-        	List<ConvocatoriaDTO> convocatorias = convocatoriaService.getConvocatoriasByUsuPrg(id_user, id_prg);
-        	List<SimulacroDTO> simulacros = simulacroService.getSimulacrosUsuPrg(id_user, id_prg);
-        	List<CategoriaDTO> categorias = categoriaService.getCategoriasByUsuPrg(id_user, id_prg);
-        	List<SubcatergoriaDTO> subconvocatorias = subcategoriaService.getSubcategoriasByUsuPrg(id_user, id_prg);
-        	List<UsuarioDTO> usuarios_programa = usuarioService.getAllByUsuPrg(id_user, id_prg);
-        	List<PreguntaDTO> preguntas_programa = preguntaService.getPreguntasByUsuPrg(id_user, id_prg);
+        	Usuario usuario = usuarioService.findUserById(id_user);
+        	if(usuario.getRol().getRol_nombre().equals("ROLE_ADMINISTRADOR")) {
+            	List<ConvocatoriaDTO> convocatorias = convocatoriaService.getConvocatoriasByUsuPrg(id_user, id_prg);
+            	List<SimulacroDTO> simulacros = simulacroService.getSimulacrosUsuPrg(id_user, id_prg);
+            	List<CategoriaDTO> categorias = categoriaService.getCategoriasByUsuPrg(id_user, id_prg);
+            	List<SubcatergoriaDTO> subconvocatorias = subcategoriaService.getSubcategoriasByUsuPrg(id_user, id_prg);
+            	List<UsuarioDTO> usuarios_programa = usuarioService.getAllByUsuPrg(id_user, id_prg);
+            	List<PreguntaDTO> preguntas_programa = preguntaService.getPreguntasByUsuPrg(id_user, id_prg);
 
-        	datogeneral.setConvocatorias_programa(convocatorias);
-        	datogeneral.setSimulacros_programa(simulacros);
-        	datogeneral.setCategorias_programa(categorias);
-        	datogeneral.setSubcategorias_programa(subconvocatorias);
-        	datogeneral.setUsuarios_programa(usuarios_programa);
-        	datogeneral.setPreguntas_programa(preguntas_programa);
+            	datogeneral.setConvocatorias_programa(convocatorias);
+            	datogeneral.setSimulacros_programa(simulacros);
+            	datogeneral.setCategorias_programa(categorias);
+            	datogeneral.setSubcategorias_programa(subconvocatorias);
+            	datogeneral.setUsuarios_programa(usuarios_programa);
+            	datogeneral.setPreguntas_programa(preguntas_programa);
+        	}
+        	
+        	if(usuario.getRol().getRol_nombre().equals("ROLE_ESTUDIANTE")) {
+        		List<ConvocatoriaDTO> convocatorias_activa= convocatoriaService.getConvocatoriasByPrgEstUsu(id_user, id_prg, "A");
+        		List<ConvocatoriaDTO> convocatorias_usuario = convocatoriaService.getConvocatoriasByUsu(id_user);
+        		List<SimulacroDTO> simulacros_usuario = simulacroService.getSimulacrosConvo(id_user, id_programa);
+        		datogeneral.setConvocatorias_activa(convocatorias_activa);
+        		datogeneral.setConvocatorias_usuario(convocatorias_usuario);
+        		datogeneral.setSimulacros_usuario(simulacros_usuario);
+        	}
+
         	datos.put("error", null);
         	datos.put("message", "¡Proceso Exitoso!");
         	datos.put("general", datogeneral);

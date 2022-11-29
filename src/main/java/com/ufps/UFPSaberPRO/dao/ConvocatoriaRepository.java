@@ -49,7 +49,7 @@ public interface ConvocatoriaRepository extends CrudRepository<Convocatoria, Lon
 	@Modifying
 	@Query(value = "SELECT c.* FROM public.convocatoria c \r\n"
 			+ "WHERE c.id_programa = :programa and c.convo_estado=:estado \r\n"
-			+ "and not exists (select cu.* from public.convo_usu cu where cu.id_convocatoria=c.id_convocatoria and cu.id_usuario=:usuario);", nativeQuery = true)
+			+ "and not exists (select cu.* from public.convo_usu cu where cu.id_convocatoria=c.id_convocatoria and cu.id_usuario=:usuario)", nativeQuery = true)
 	public List<Convocatoria> findAllByPrgEstUsu(@Param("usuario") Long usuario,@Param("programa") Long programa,@Param("estado") String convo_estado);
 	
 	@Transactional

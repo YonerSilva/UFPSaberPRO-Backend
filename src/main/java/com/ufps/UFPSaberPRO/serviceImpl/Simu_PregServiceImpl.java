@@ -23,6 +23,7 @@ public class Simu_PregServiceImpl implements Simu_PregService{
 	@Autowired 
 	private Simu_PregRepository simu_pregDao;
 
+	@Transactional
 	@Override
 	public void guardar(Simu_PregDTO simu_preg) {
 		Long id_simulacro = simu_preg.getSimulacro();
@@ -34,5 +35,16 @@ public class Simu_PregServiceImpl implements Simu_PregService{
 			dato.setSimu_preg_puntaje(pregunta.getSimu_preg_puntaje());
 			simu_pregDao.save(dato);
 		}
+	}
+	
+	@Transactional
+	@Override
+	public void eliminar(Simu_PregDTO simu_preg) {
+		Long id_simulacro = simu_preg.getSimulacro();
+		List<Long> preguntas = new ArrayList<>();
+		for (PreguntaDTO pregunta : simu_preg.getPreguntas()) {
+			preguntas.add(pregunta.getId_pregunta());
+		}
+		simu_pregDao.eliminar(id_simulacro, preguntas);
 	}
 }
