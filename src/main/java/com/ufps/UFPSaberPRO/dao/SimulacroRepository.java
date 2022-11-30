@@ -41,12 +41,4 @@ public interface SimulacroRepository extends CrudRepository<Simulacro, Long>{
 			+ "WHERE cu.usuario=:usuario and s.simu_estado=:estado")
 	public List<SimulacroDTO> findAllByConvoUsuEst(Usuario usuario,String estado);
 	
-	/*@Transactional
-	@Modifying
-	@Query("SELECT new com.ufps.UFPSaberPRO.dto.PreguntaDTO(p.id_pregunta, p.preg_imagen, p.preg_descripcion, p.preg_tipo, p.subcategoria.id_subcategoria, sp.simu_preg_puntaje,"
-			+ "SELECT new com.ufps.UFPSaberPRO.dto.OpcionDTO(o.id_opcion, o.opc_imagen, o.opc_descripcion, o.pregunta) FROM Opcion o "
-			+ "WHERE o.pregunta = p.id_pregunta) FROM Pregunta p \r\n"
-			+ "INNER JOIN Simu_Preg sp on sp.pregunta = p.id_pregunta \r\n"
-			+ "WHERE sp.simulacro.id_simulacro = :simulacro and p.preg_estado='A'")
-	public List<PreguntaDTO> findAllPregSimulacro(Long simulacro);*/
 }

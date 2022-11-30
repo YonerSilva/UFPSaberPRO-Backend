@@ -9,6 +9,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ufps.UFPSaberPRO.dto.OpcionDTO;
+import com.ufps.UFPSaberPRO.dto.PreguntaDTO;
 import com.ufps.UFPSaberPRO.entity.Opcion;
 
 @Repository
@@ -29,4 +31,10 @@ public interface OpcionRepository extends CrudRepository<Opcion, Long> {
 			+ "WHERE id_opcion=:id", nativeQuery = true)
 	public void update(@Param("id") Long id, @Param("imagen") String imagen, @Param("descripcion") String descripcion,
 			@Param("respuesta") Boolean respuesta);
+	
+	@Transactional
+	@Modifying
+	@Query("SELECT new com.ufps.UFPSaberPRO.dto.OpcionDTO(o.id_opcion, o.opc_imagen, o.opc_descripcion, o.pregunta.id_pregunta) FROM Opcion o \r\n"
+			+ "WHERE o.pregunta.id_pregunta=:pregunta")
+	public List<OpcionDTO> findAllByPregDTO(Long pregunta);
 }

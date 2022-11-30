@@ -21,4 +21,6 @@ public interface PreguntaService {
 	public List<PreguntaDTO> getPreguntasBySimulacro(Long id_simulacro);
 	
 	public List<PreguntaDTO> getPreguntasByDifferentSimu(Long id_simulacro);
+	
+	public List<PreguntaDTO> getPreguntasOpcionesBySimulacro(Long id_simulacro);
 }

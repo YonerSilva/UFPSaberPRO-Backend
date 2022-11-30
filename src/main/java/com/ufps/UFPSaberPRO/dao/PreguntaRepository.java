@@ -37,7 +37,7 @@ public interface PreguntaRepository extends CrudRepository<Pregunta, Long>{
 	@Modifying
 	@Query("SELECT new com.ufps.UFPSaberPRO.dto.PreguntaDTO(p.id_pregunta, p.preg_imagen, p.preg_descripcion, p.preg_estado, p.preg_tipo, p.subcategoria.id_subcategoria, sp.simu_preg_puntaje) FROM Pregunta p \r\n"
 			+ "INNER JOIN Simu_Preg sp on sp.pregunta = p.id_pregunta \r\n"
-			+ "WHERE sp.simulacro.id_simulacro = :simulacro and p.preg_estado='A'")
+			+ "WHERE sp.simulacro.id_simulacro = :simulacro and p.preg_estado='A' order by p.preg_tipo")
 	public List<PreguntaDTO> findAllBySimulacro(Long simulacro);
 	
 	@Transactional

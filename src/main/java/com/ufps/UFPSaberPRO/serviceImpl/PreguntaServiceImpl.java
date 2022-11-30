@@ -9,7 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ufps.UFPSaberPRO.converter.PreguntaConverter;
 import com.ufps.UFPSaberPRO.converter.SubcategoriaConverter;
+import com.ufps.UFPSaberPRO.dao.OpcionRepository;
 import com.ufps.UFPSaberPRO.dao.PreguntaRepository;
+import com.ufps.UFPSaberPRO.dto.OpcionDTO;
 import com.ufps.UFPSaberPRO.dto.PreguntaDTO;
 import com.ufps.UFPSaberPRO.entity.Pregunta;
 import com.ufps.UFPSaberPRO.service.PreguntaService;
@@ -19,6 +21,9 @@ public class PreguntaServiceImpl implements PreguntaService{
 	
 	@Autowired
 	private PreguntaRepository preguntaDao;
+	
+	@Autowired
+	private OpcionRepository opcionDao;
 
 	@Override
 	@Transactional
@@ -93,6 +98,16 @@ public class PreguntaServiceImpl implements PreguntaService{
 				pregunta.setSubcategoria(new SubcategoriaConverter().converterToDTO(preg.getSubcategoria()));
 			}
 			preguntas.add(pregunta);
+		}		
+		return preguntas;
+	}
+	
+	@Override
+	@Transactional
+	public List<PreguntaDTO> getPreguntasOpcionesBySimulacro(Long id_simulacro) {
+		List<PreguntaDTO> preguntas = preguntaDao.findAllBySimulacro(id_simulacro);
+		for (PreguntaDTO preg : preguntas) {
+			preg.setOpciones(opcionDao.findAllByPregDTO(preg.getId_pregunta()));
 		}		
 		return preguntas;
 	}

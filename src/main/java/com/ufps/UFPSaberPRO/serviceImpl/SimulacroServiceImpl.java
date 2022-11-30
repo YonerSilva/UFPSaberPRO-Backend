@@ -77,9 +77,4 @@ public class SimulacroServiceImpl implements SimulacroService{
 		return simulacroDao.findAllByConvoUsuEst(new Usuario(id_usuario), estado);
 	}
 
-	@Override
-	public List<PreguntaDTO> getAllPregSimu(Long simulacro) {
-		//return simulacroDao.findAllPregSimulacro(simulacro);
-		return null;
-	}
 }

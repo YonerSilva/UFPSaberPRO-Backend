@@ -242,14 +242,13 @@ public class SimulacroRestController {
 		}
 	}
 	
-	@Operation(summary = "Obtiene una lista de preguntas de un simulacro en especifico"
-			+ "que seran usadas para presentar e simulacro.")
-	@GetMapping("/getPreguntasSimulacro")
-	public ResponseEntity<Object> getPreguntasSimulacro(@RequestParam String id_simulacro){
+	@Operation(summary = "Obtiene una lista de preguntas de un simulacro en especifico.")
+	@GetMapping("/getPregOpcSimu")
+	public ResponseEntity<Object> getPregOpcSimu(@RequestParam String id_simulacro){
 		Long id_simu = Long.parseLong(id_simulacro);
 		Map<String,Object> datos = new LinkedHashMap<>();
 		try {
-			List<PreguntaDTO> preguntas = simulacroService.getAllPregSimu(id_simu);
+			List<PreguntaDTO> preguntas = preguntaService.getPreguntasOpcionesBySimulacro(id_simu);
 			if(preguntas.size()>0) {
 				datos.put("error", null);
 				datos.put("message", "¡Proceso Exitoso!");
