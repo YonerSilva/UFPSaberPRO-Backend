@@ -21,7 +21,7 @@ public interface PreguntaRepository extends CrudRepository<Pregunta, Long>{
 			+ "INNER JOIN public.categoria c on c.id_programa = p.id_programa \r\n"
 			+ "INNER JOIN public.subcategoria sub on sub.id_categoria = c.id_categoria \r\n"
 			+ "INNER JOIN public.pregunta preg on preg.id_subcategoria = sub.id_subcategoria \r\n"
-			+ "WHERE p.id_programa = :id_programa and EXISTS (SELECT u.* FROM usuario u WHERE u.id_usuario = :id_usuario and u.id_rol = 1)", nativeQuery = true)
+			+ "WHERE p.id_programa = :id_programa and EXISTS (SELECT u.* FROM usuario u WHERE u.id_usuario = :id_usuario and u.id_rol = 1 or u.id_rol = 2)", nativeQuery = true)
 	public List<Pregunta> findAllByUsuPrg(@Param("id_usuario") Long usuario,@Param("id_programa") Long programa);
 	
 	@Transactional
