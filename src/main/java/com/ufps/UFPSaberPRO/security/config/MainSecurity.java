@@ -26,15 +26,14 @@ import com.ufps.UFPSaberPRO.security.jwt.*;
 @EnableWebSecurity
 public class MainSecurity extends WebSecurityConfigurerAdapter{
 	private static final String [] AUTH_WHITELIST = {
-			/*"/auth/**",
+			"/auth/**",
 			"/v3/api-docs",
 			"/swagger-resources",
 			"/swagger-resources/**",
 			"/configuration/ui",
 			"/configuration/security",
 			"/swagger",
-			"/webjars/**"*/
-			"/**"
+			"/webjars/**"
 	};
 	
     @Autowired
@@ -78,8 +77,8 @@ public class MainSecurity extends WebSecurityConfigurerAdapter{
     	return source;
     }
     
-    /*@Override 
+    @Override 
     public void configure(WebSecurity web) throws Exception{
     	web.ignoring().antMatchers(AUTH_WHITELIST);
-    }*/
+    }
 }

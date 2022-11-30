@@ -27,7 +27,7 @@ public class Simu_UsuConverter {
 		simu_usu.setSimu_usu_codigo(dto.getSimu_usu_codigo());
 		simu_usu.setSimu_usu_puntaje_total(dto.getSimu_usu_puntaje_total());
 		simu_usu.setSimulacro(new Simulacro(dto.getId_simu_usu()));
-		simu_usu.setUsuario(new Usuario(dto.getId_simu_usu()));
+		simu_usu.setUsuario(new Usuario(dto.getUsuario()));
 		return simu_usu;
 	}
 	

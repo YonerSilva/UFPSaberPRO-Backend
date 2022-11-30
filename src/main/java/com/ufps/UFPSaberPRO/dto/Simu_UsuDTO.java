@@ -1,6 +1,8 @@
 package com.ufps.UFPSaberPRO.dto;
 
 
+import java.util.List;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -18,7 +20,6 @@ public class Simu_UsuDTO {
 	@NotEmpty
 	private String simu_usu_codigo;
 	
-	@NotNull
 	private Integer simu_usu_puntaje_total;
 	
 	@NotNull
@@ -26,6 +27,8 @@ public class Simu_UsuDTO {
 	
 	@NotNull
 	private Long usuario;
+	
+	private List<PreguntaDTO> preguntas_respondidas;
 	
 }
 

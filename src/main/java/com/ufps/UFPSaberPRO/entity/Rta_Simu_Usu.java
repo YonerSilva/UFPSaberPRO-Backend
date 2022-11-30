@@ -1,7 +1,6 @@
 package com.ufps.UFPSaberPRO.entity;
 
 import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,35 +14,38 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "respuesta", schema = "public")
+@Table(name = "rta_simu_usu", schema = "public")
 @Data
-public class Respuesta implements Serializable{
+public class Rta_Simu_Usu implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_respuesta")
-	private Long id_respuesta;   
-	
+	@Column(name = "id_rta_simu_usu")
+	private Long id_rta_simu_usu;
+
+	@Column(name = "rta_puntaje")
+	private Integer rta_puntaje;
+
+	@JoinColumn(name = "id_simu_usu", referencedColumnName = "id_simu_usu")
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Simu_Usu.class)
+	private Simu_Usu simu_usu;
+
 	@JoinColumn(name = "id_pregunta", referencedColumnName = "id_pregunta")
 	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Pregunta.class)
 	private Pregunta pregunta;
+
+	public Rta_Simu_Usu() {
+
+	}
 	
-	@JoinColumn(name = "id_opcion", referencedColumnName = "id_opcion")
-	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Opcion.class)
-	private Opcion opcion;
-
-	public Respuesta() {
-		
+	public Rta_Simu_Usu(Long id_rta_simu_usu) {
+		this.id_rta_simu_usu=id_rta_simu_usu;
 	}
 
-	public Respuesta(Long id_respuesta) {
-		this.id_respuesta = id_respuesta;
-	}
-
-	public Respuesta(Pregunta pregunta, Opcion opcion) {
+	public Rta_Simu_Usu(Integer rta_puntaje, Simu_Usu simu_usu, Pregunta pregunta) {
+		this.rta_puntaje = rta_puntaje;
+		this.simu_usu = simu_usu;
 		this.pregunta = pregunta;
-		this.opcion = opcion;
 	}
-	
 }

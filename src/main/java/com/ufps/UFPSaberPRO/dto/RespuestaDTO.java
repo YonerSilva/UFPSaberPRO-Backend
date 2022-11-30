@@ -17,8 +17,7 @@ public class RespuestaDTO {
 
 	@NotBlank
 	@NotEmpty
-	private String opciones;
+	private Long opcion;
 
-	@NotNull
 	private Integer rta_puntaje_obtenido;
 }

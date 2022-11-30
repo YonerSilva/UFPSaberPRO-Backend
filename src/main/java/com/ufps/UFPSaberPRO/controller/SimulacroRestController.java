@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ufps.UFPSaberPRO.dto.DatogeneralDTO;
 import com.ufps.UFPSaberPRO.dto.PreguntaDTO;
+import com.ufps.UFPSaberPRO.dto.Simu_UsuDTO;
 import com.ufps.UFPSaberPRO.dto.SimulacroDTO;
 import com.ufps.UFPSaberPRO.serviceImpl.PreguntaServiceImpl;
+import com.ufps.UFPSaberPRO.serviceImpl.Simu_UsuServiceImpl;
 import com.ufps.UFPSaberPRO.serviceImpl.SimulacroServiceImpl;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -36,6 +38,9 @@ public class SimulacroRestController {
 	
 	@Autowired
 	private PreguntaServiceImpl preguntaService;
+	
+	@Autowired
+	private Simu_UsuServiceImpl simu_usuService;
 
 	private DatogeneralDTO datoGeneral;
 
@@ -264,6 +269,29 @@ public class SimulacroRestController {
 			datos.put("error", e.getMessage());
 			datos.put("message", "No se encontraron preguntas.");
 			datos.put("preguntas", null);
+			return new ResponseEntity<Object>(datos, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@Operation(summary = "Registra un nuevo simulacro en la base de datos.")
+	@PostMapping("/presentarSimulacro")
+	public ResponseEntity<Object> presentarSimulacro(@Valid @RequestBody Simu_UsuDTO simu_usu,
+			BindingResult bidBindingResult) {
+		Map<String, Object> datos = new LinkedHashMap<>();
+		try {
+			if (bidBindingResult.hasErrors()) {
+				datos.put("error", bidBindingResult.getFieldError().getDefaultMessage());
+				datos.put("message", "Ha ocurrido un error con los datos ingresados, verifique e intente nuevamente.");
+				return new ResponseEntity<Object>(datos, HttpStatus.INTERNAL_SERVER_ERROR);
+			} else {
+				simu_usuService.presentar_simulacro(simu_usu);
+				datos.put("error", null);
+				datos.put("message", "¡Proceso Exitoso!");
+				return new ResponseEntity<Object>(datos, HttpStatus.CREATED);
+			}
+		} catch (Exception e) {
+			datos.put("error", e.getMessage());
+			datos.put("message", "Ha ocurrido un error interno con los datos.");
 			return new ResponseEntity<Object>(datos, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
