@@ -87,6 +87,13 @@ public class GeneralRestController {
             	datogeneral.setPreguntas_programa(preguntas_programa);
         	}
         	
+        	if(usuario.getRol().getRol_nombre().equals("ROLE_DOCENTE")) {
+        		List<CategoriaDTO> categorias = categoriaService.getCategoriasByUsuPrg(id_user, id_prg);
+            	List<SubcatergoriaDTO> subconvocatorias = subcategoriaService.getSubcategoriasByUsuPrg(id_user, id_prg);
+            	datogeneral.setCategorias_programa(categorias);
+            	datogeneral.setSubcategorias_programa(subconvocatorias);
+        	}
+        	
         	if(usuario.getRol().getRol_nombre().equals("ROLE_ESTUDIANTE")) {
         		List<ConvocatoriaDTO> convocatorias_activa= convocatoriaService.getConvocatoriasByPrgEstUsu(id_user, id_prg, "A");
         		List<ConvocatoriaDTO> convocatorias_usuario = convocatoriaService.getConvocatoriasByUsu(id_user);
