@@ -54,5 +54,4 @@ public class UsuarioService {
 		}
 		return usuarios;
     }
-    
 }
