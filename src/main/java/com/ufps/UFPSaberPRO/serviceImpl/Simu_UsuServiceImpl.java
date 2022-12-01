@@ -32,13 +32,13 @@ public class Simu_UsuServiceImpl implements Simu_UsuService{
 	private Simu_UsuRepository simu_usuDao;
 	
 	@Autowired
-	private RespuestaRepository respuestaDao;
+	private RespuestaServiceImpl respuestaService;
 	
 	@Autowired
-	private OpcionRepository opcionDao;
+	private OpcionServiceImpl opcionService;
 	
 	@Autowired
-	private Rta_Simu_UsuRepository rta_simu_usuDao;
+	private Rta_Simu_UsuServiceImpl rta_simu_usuService;
 
 	@Transactional
 	@Override
@@ -56,14 +56,14 @@ public class Simu_UsuServiceImpl implements Simu_UsuService{
 	@Override
 	public void presentar_simulacro(Simu_UsuDTO simu_usu) {
 		Simu_Usu sm = this.guardar(simu_usu);
-		List<Opcion> opciones_preg;
+		List<OpcionDTO> opciones_preg;
 		if(sm!=null) {
 			Respuesta respuesta;
 			OpcionDTO opcion = new OpcionDTO();
 			Integer rta_puntaje = 0;
 			Integer puntaje_total = 0;
 			for (PreguntaDTO preg : simu_usu.getPreguntas_respondidas()) {
-				opciones_preg = opcionDao.findAllByPregunta(preg.getId_pregunta());
+				opciones_preg = opcionService.getOpcionesByPregunta(preg.getId_pregunta());
 				for (OpcionDTO opc : preg.getOpciones()) {
 					if(opc.getOpc_respuesta()) {
 						opcion = opc;
@@ -71,7 +71,7 @@ public class Simu_UsuServiceImpl implements Simu_UsuService{
 					}
 				}
 				
-				for (Opcion opc : opciones_preg) {
+				for (OpcionDTO opc : opciones_preg) {
 					if(opc.getId_opcion()==opcion.getId_opcion()) {
 						if(opc.getOpc_respuesta() && opcion.getOpc_respuesta()) {
 							rta_puntaje = preg.getSimu_preg_puntaje();
@@ -81,9 +81,9 @@ public class Simu_UsuServiceImpl implements Simu_UsuService{
 						}
 					}
 				}
-				respuesta = respuestaDao.save(new Respuesta(new Pregunta(preg.getId_pregunta()), new Opcion(opcion.getId_opcion())));
+				respuesta = respuestaService.guardar(new Respuesta(new Pregunta(preg.getId_pregunta()), new Opcion(opcion.getId_opcion())));
 				if(respuesta != null) {
-					rta_simu_usuDao.save(new Rta_Simu_Usu(rta_puntaje, sm, new Pregunta(preg.getId_pregunta())));
+					rta_simu_usuService.guardar(new Rta_Simu_Usu(rta_puntaje, sm, new Pregunta(preg.getId_pregunta())));
 					simu_usu.setSimu_usu_puntaje_total(puntaje_total);
 					this.actualizar(simu_usu);
 				}

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ufps.UFPSaberPRO.dao.RespuestaRepository;
 import com.ufps.UFPSaberPRO.dto.RespuestaDTO;
+import com.ufps.UFPSaberPRO.entity.Respuesta;
 import com.ufps.UFPSaberPRO.service.RespuestaService;
 
 @Service
@@ -22,9 +23,8 @@ public class RespuestaServiceImpl implements RespuestaService{
 	}
 
 	@Override
-	public void guardar(RespuestaDTO respuesta) {
-		// TODO Auto-generated method stub
-		
+	public Respuesta guardar(Respuesta respuesta) {
+		return respuestaDao.save(respuesta);
 	}
 
 	@Override

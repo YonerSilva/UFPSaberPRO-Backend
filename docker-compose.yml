@@ -1,0 +1,29 @@
+version: '2'
+
+services:
+  app-ufpsaberpro:
+    image: 'UFPSaberPRO:latest'
+    build:
+      context: .
+    container_name: app-ufpsaberpro
+    depends_on:
+      - ufpsaberpro
+    ports:
+      - 8080:8080
+  
+  UFPSaberPRO:
+    image: 'postgres:13.1-alpine'
+    container_name: db-ufpsaberpro
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
+      - POSTGRES_DB=UFPSaberPRO
+      - DB_HOST=UFPSaberPRO
+      - DB_PORT=5432
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=Roger123
+    volumes:
+      - db_data_ufpsaberpro:/var/lib/postgresql/data/pgdata
+
+volumes:
+  db_data_lanuan:
+    external: true
