@@ -36,7 +36,6 @@ import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
 @RequestMapping("/api/general")
-@CrossOrigin("*")
 public class GeneralRestController {
 	
 	@Autowired

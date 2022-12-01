@@ -11,6 +11,7 @@ import com.ufps.UFPSaberPRO.dao.SimulacroRepository;
 import com.ufps.UFPSaberPRO.dto.PreguntaDTO;
 import com.ufps.UFPSaberPRO.dto.SimulacroDTO;
 import com.ufps.UFPSaberPRO.entity.Simulacro;
+import com.ufps.UFPSaberPRO.security.dto.UsuarioDTO;
 import com.ufps.UFPSaberPRO.security.entity.Usuario;
 import com.ufps.UFPSaberPRO.service.SimulacroService;
 
@@ -76,5 +77,4 @@ public class SimulacroServiceImpl implements SimulacroService{
 	public List<SimulacroDTO> getSimulacrosConvo(Long id_usuario, String estado) {
 		return simulacroDao.findAllByConvoUsuEst(new Usuario(id_usuario), estado);
 	}
-
 }

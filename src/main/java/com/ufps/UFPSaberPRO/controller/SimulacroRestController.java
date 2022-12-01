@@ -30,7 +30,6 @@ import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
 @RequestMapping("/api/simulacros")
-@CrossOrigin("*")
 public class SimulacroRestController {
 
 	@Autowired
@@ -295,4 +294,5 @@ public class SimulacroRestController {
 			return new ResponseEntity<Object>(datos, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
 }

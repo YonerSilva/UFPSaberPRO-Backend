@@ -9,7 +9,6 @@ import com.ufps.UFPSaberPRO.serviceImpl.RespuestaServiceImpl;
 
 @RestController
 @RequestMapping("/api/respuestas")
-@CrossOrigin("*")
 public class RespuestaRestController {
 	
 	@Autowired

@@ -38,7 +38,8 @@ public interface SimulacroRepository extends CrudRepository<Simulacro, Long>{
 			+ "s.programa, c.simu_fecha_inicial, c.simu_fecha_final) FROM Convo_Usu cu \r\n"
 			+ "INNER JOIN Convocatoria c on c.id_convocatoria = cu.convocatoria \r\n"
 			+ "INNER JOIN Simulacro s on s.id_simulacro = c.simulacro \r\n"
-			+ "WHERE cu.usuario=:usuario and s.simu_estado=:estado")
+			+ "WHERE cu.usuario=:usuario and s.simu_estado=:estado \r\n"
+			+ "and not exists (select su from Simu_Usu su where su.simulacro.id_simulacro = s.id_simulacro and su.usuario.id_usuario=:usuario)")
 	public List<SimulacroDTO> findAllByConvoUsuEst(Usuario usuario,String estado);
 	
 }

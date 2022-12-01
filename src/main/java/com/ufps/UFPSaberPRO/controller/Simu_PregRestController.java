@@ -25,7 +25,6 @@ import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
 @RequestMapping("/api/simu_preg")
-@CrossOrigin("*")
 public class Simu_PregRestController {
 
 	@Autowired

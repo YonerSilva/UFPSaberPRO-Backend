@@ -1,5 +1,6 @@
 package com.ufps.UFPSaberPRO.serviceImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ import com.ufps.UFPSaberPRO.entity.Pregunta;
 import com.ufps.UFPSaberPRO.entity.Respuesta;
 import com.ufps.UFPSaberPRO.entity.Rta_Simu_Usu;
 import com.ufps.UFPSaberPRO.entity.Simu_Usu;
+import com.ufps.UFPSaberPRO.security.converter.UsuarioConverter;
+import com.ufps.UFPSaberPRO.security.dto.UsuarioDTO;
+import com.ufps.UFPSaberPRO.security.entity.Usuario;
 import com.ufps.UFPSaberPRO.service.Simu_UsuService;
 
 @Service
@@ -86,6 +90,16 @@ public class Simu_UsuServiceImpl implements Simu_UsuService{
 			}
 		}
 		
+	}
+
+	@Override
+	public List<UsuarioDTO> getUsuariosSimu(Long id_simulacro, Long id_usuario) {
+		List<UsuarioDTO> usuarios = new ArrayList<>();
+		UsuarioConverter converter = new UsuarioConverter();
+		for (Usuario user : simu_usuDao.getUsuariosSimu(id_simulacro,id_usuario)) {
+			usuarios.add(converter.converterToDTO(user));
+		}
+		return usuarios;
 	}
 	
 	

@@ -26,7 +26,6 @@ import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
 @RequestMapping("/api/subcategorias")
-@CrossOrigin("*")
 public class SubcategoriaRestController {
 
 	@Autowired
