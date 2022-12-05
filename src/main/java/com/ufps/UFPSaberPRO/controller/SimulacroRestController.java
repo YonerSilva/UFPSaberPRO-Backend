@@ -235,7 +235,7 @@ public class SimulacroRestController {
 			} else {
 				datos.put("error", null);
 				datos.put("message", "No se encontraron simulacros.");
-				datos.put("simulacros", null);
+				datos.put("simulacros", simulacros);
 				return new ResponseEntity<Object>(datos, HttpStatus.OK);
 			}
 		} catch (Exception e) {

@@ -48,10 +48,6 @@ public class Simu_Usu implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Usuario.class)
 	private Usuario usuario;
 
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "rta_simu_usu", joinColumns = @JoinColumn(name = "id_respuesta"), inverseJoinColumns = @JoinColumn(name = "id_simu_usu"))
-	private List<Respuesta> respuestas = new ArrayList<>();
-
 	public Simu_Usu() {
 
 	}

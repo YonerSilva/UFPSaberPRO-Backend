@@ -83,11 +83,12 @@ public class Simu_UsuServiceImpl implements Simu_UsuService{
 				}
 				respuesta = respuestaService.guardar(new Respuesta(new Pregunta(preg.getId_pregunta()), new Opcion(opcion.getId_opcion())));
 				if(respuesta != null) {
-					rta_simu_usuService.guardar(new Rta_Simu_Usu(rta_puntaje, sm, new Pregunta(preg.getId_pregunta())));
-					simu_usu.setSimu_usu_puntaje_total(puntaje_total);
-					this.actualizar(simu_usu);
+					rta_simu_usuService.guardar(new Rta_Simu_Usu(rta_puntaje, sm, respuesta));
+					
 				}
 			}
+			sm.setSimu_usu_puntaje_total(puntaje_total);
+			simu_usuDao.save(sm);
 		}
 		
 	}

@@ -31,9 +31,9 @@ public class Rta_Simu_Usu implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Simu_Usu.class)
 	private Simu_Usu simu_usu;
 
-	@JoinColumn(name = "id_pregunta", referencedColumnName = "id_pregunta")
-	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Pregunta.class)
-	private Pregunta pregunta;
+	@JoinColumn(name = "id_respuesta", referencedColumnName = "id_respuesta")
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Respuesta.class)
+	private Respuesta respuesta;
 
 	public Rta_Simu_Usu() {
 
@@ -43,9 +43,9 @@ public class Rta_Simu_Usu implements Serializable {
 		this.id_rta_simu_usu=id_rta_simu_usu;
 	}
 
-	public Rta_Simu_Usu(Integer rta_puntaje, Simu_Usu simu_usu, Pregunta pregunta) {
+	public Rta_Simu_Usu(Integer rta_puntaje, Simu_Usu simu_usu, Respuesta respuesta) {
 		this.rta_puntaje = rta_puntaje;
 		this.simu_usu = simu_usu;
-		this.pregunta = pregunta;
+		this.respuesta = respuesta;
 	}
 }
