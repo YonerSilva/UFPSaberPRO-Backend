@@ -43,7 +43,7 @@ public class Simu_UsuRestController {
 			} else {
 				datos.put("error", null);
 				datos.put("message", "No se encontraron usuarios.");
-				datos.put("usuarios", null);
+				datos.put("usuarios", usuarios);
 				return new ResponseEntity<Object>(datos, HttpStatus.OK);
 			}
 		} catch (Exception e) {
