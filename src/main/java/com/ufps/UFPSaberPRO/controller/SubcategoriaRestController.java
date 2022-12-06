@@ -36,6 +36,33 @@ public class SubcategoriaRestController {
 	public SubcategoriaRestController() {
 		datoGeneral = new DatogeneralDTO();
 	}
+	
+	@Operation(summary = "Obtiene una subcategoria por el id.")
+	@GetMapping("/getSubcategoria")
+	public ResponseEntity<Object> getSubcategoria(@RequestParam String id_subcategoria) {
+		Map<String, Object> datos = new LinkedHashMap<>();
+		Long id_sub = Long.parseLong(id_subcategoria);
+		try {
+			SubcatergoriaDTO subcategoria = subcategoriaService.buscar(id_sub);
+			if(subcategoria!=null) {
+				datos.put("error", null);
+				datos.put("message", "¡Proceso Exitoso!");
+				datos.put("subcategoria", subcategoria);
+				return new ResponseEntity<Object>(datos, HttpStatus.OK);
+			}else {
+				datos.put("error", "No se encontró la subcategoria.");
+				datos.put("message", "No se encontró la subcategoria.");
+				datos.put("subcategoria", null);
+				return new ResponseEntity<Object>(datos, HttpStatus.NOT_FOUND);
+			}
+			
+		} catch (Exception e) {
+			datos.put("error", e.getMessage());
+			datos.put("message", "Ha ocurrido un error interno.");
+			datos.put("subcategoria", null);
+			return new ResponseEntity<Object>(datos, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 
 	@Operation(summary = "Obtiene los datos generales de subcategoria para el usuario.")
 	@GetMapping("/general")

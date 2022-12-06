@@ -23,7 +23,7 @@ public class RespuestaConverter {
 	public Respuesta converterToEntity(@NotNull RespuestaDTO dto) {
 		Respuesta respuesta = new Respuesta();
 		respuesta.setId_respuesta(dto.getId_respuesta());
-		respuesta.setPregunta(new Pregunta(dto.getId_respuesta()));
+		respuesta.setPregunta(new Pregunta(dto.getPregunta()));
 		respuesta.setOpcion(new Opcion(dto.getOpcion()));
 		return respuesta;
 	}
