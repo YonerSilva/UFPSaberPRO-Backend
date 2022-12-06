@@ -58,11 +58,12 @@ public class Simu_UsuServiceImpl implements Simu_UsuService{
 		Simu_Usu sm = this.guardar(simu_usu);
 		List<OpcionDTO> opciones_preg;
 		if(sm!=null) {
-			Respuesta respuesta;
-			OpcionDTO opcion = new OpcionDTO();
-			Integer rta_puntaje = 0;
 			Integer puntaje_total = 0;
 			for (PreguntaDTO preg : simu_usu.getPreguntas_respondidas()) {
+				Respuesta respuesta;
+				OpcionDTO opcion = null;
+				Integer rta_puntaje = 0;
+				
 				opciones_preg = opcionService.getOpcionesByPregunta(preg.getId_pregunta());
 				for (OpcionDTO opc : preg.getOpciones()) {
 					if(opc.getOpc_respuesta()) {
@@ -71,20 +72,19 @@ public class Simu_UsuServiceImpl implements Simu_UsuService{
 					}
 				}
 				
-				for (OpcionDTO opc : opciones_preg) {
-					if(opc.getId_opcion()==opcion.getId_opcion()) {
-						if(opc.getOpc_respuesta() && opcion.getOpc_respuesta()) {
-							rta_puntaje = preg.getSimu_preg_puntaje();
-							puntaje_total += rta_puntaje;
-						}else {
-							rta_puntaje = 0;
+				if(opcion!=null) {
+					for (OpcionDTO opc : opciones_preg) {
+						if(opc.getId_opcion()==opcion.getId_opcion()) {
+							if(opc.getOpc_respuesta() && opcion.getOpc_respuesta()) {
+								rta_puntaje = preg.getSimu_preg_puntaje();
+								puntaje_total += rta_puntaje;
+							}
 						}
 					}
-				}
-				respuesta = respuestaService.guardar(new Respuesta(new Pregunta(preg.getId_pregunta()), new Opcion(opcion.getId_opcion())));
-				if(respuesta != null) {
-					rta_simu_usuService.guardar(new Rta_Simu_Usu(rta_puntaje, sm, respuesta));
-					
+					respuesta = respuestaService.guardar(new Respuesta(new Pregunta(preg.getId_pregunta()), new Opcion(opcion.getId_opcion())));
+					if(respuesta != null) {
+						rta_simu_usuService.guardar(new Rta_Simu_Usu(rta_puntaje, sm, respuesta));
+					}
 				}
 			}
 			sm.setSimu_usu_puntaje_total(puntaje_total);

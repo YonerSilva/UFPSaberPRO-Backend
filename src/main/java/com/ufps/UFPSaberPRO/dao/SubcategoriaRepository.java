@@ -26,7 +26,7 @@ public interface SubcategoriaRepository extends CrudRepository<Subcategoria, Lon
 	@Modifying
 	@Query(value = "SELECT s.* FROM public.programa p \r\n"
 			+ "INNER JOIN public.subcategoria s on s.programa = p.id_programa \r\n"
-			+ "WHERE p.id_programa = :id_programa and EXISTS (SELECT u.* FROM usuario u WHERE u.id_usuario = :id_usuario and u.id_rol = 1 or u.id_rol = 2)", nativeQuery = true)
+			+ "WHERE p.id_programa = :id_programa and EXISTS (SELECT u.* FROM usuario u WHERE u.id_usuario = :id_usuario and u.id_rol = 1 or u.id_rol = 2 or u.id_rol = 3)", nativeQuery = true)
 	public List<Subcategoria> findAllByUsuPrg(@Param("id_usuario") Long usuario,@Param("id_programa") Long programa);
 	
 	@Transactional

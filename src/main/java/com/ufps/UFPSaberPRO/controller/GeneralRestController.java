@@ -88,20 +88,16 @@ public class GeneralRestController {
         	
         	if(usuario.getRol().getRol_nombre().equals("ROLE_DOCENTE")) {
         		List<CategoriaDTO> categorias = categoriaService.getCategoriasByUsuPrg(id_user, id_prg);
-            	List<SubcatergoriaDTO> subconvocatorias = subcategoriaService.getSubcategoriasByUsuPrg(id_user, id_prg);
+            	List<SubcatergoriaDTO> subcategorias = subcategoriaService.getSubcategoriasByUsuPrg(id_user, id_prg);
             	List<PreguntaDTO> preguntas_programa = preguntaService.getPreguntasByUsuPrg(id_user, id_prg);
             	datogeneral.setCategorias_programa(categorias);
-            	datogeneral.setSubcategorias_programa(subconvocatorias);
+            	datogeneral.setSubcategorias_programa(subcategorias);
             	datogeneral.setPreguntas_programa(preguntas_programa);
         	}
         	
         	if(usuario.getRol().getRol_nombre().equals("ROLE_ESTUDIANTE")) {
-        		List<ConvocatoriaDTO> convocatorias_activa= convocatoriaService.getConvocatoriasByPrgEstUsu(id_user, id_prg, "A");
-        		List<ConvocatoriaDTO> convocatorias_usuario = convocatoriaService.getConvocatoriasByUsu(id_user);
-        		List<SimulacroDTO> simulacros_usuario = simulacroService.getSimulacrosConvo(id_user, id_programa);
-        		datogeneral.setConvocatorias_activa(convocatorias_activa);
-        		datogeneral.setConvocatorias_usuario(convocatorias_usuario);
-        		datogeneral.setSimulacros_usuario(simulacros_usuario);
+        		List<SubcatergoriaDTO> subcategorias = subcategoriaService.getSubcategoriasByUsuPrg(id_user, id_prg);
+            	datogeneral.setSubcategorias_programa(subcategorias);
         	}
 
         	datos.put("error", null);
