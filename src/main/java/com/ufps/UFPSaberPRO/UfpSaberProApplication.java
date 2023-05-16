@@ -18,7 +18,7 @@ public class UfpSaberProApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**").allowedOrigins("http://54.235.58.82:3000");
+				registry.addMapping("/**").allowedOrigins("http://18.205.18.135:3000");
 			}
 		};
 	}
