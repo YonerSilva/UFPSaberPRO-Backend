@@ -14,5 +14,5 @@ public interface Simu_UsuService {
 	
 	public void presentar_simulacro(Simu_UsuDTO simu_usu);
 	
-	public List<UsuarioDTO> getUsuariosSimu(Long id_simulacro, Long id_usuario);
+	public List<UsuarioDTO> getUsuariosSimu(Long id_simulacro);
 }
