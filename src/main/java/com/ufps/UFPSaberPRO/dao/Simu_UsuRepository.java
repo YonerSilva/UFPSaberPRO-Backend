@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ufps.UFPSaberPRO.entity.Simu_Usu;
-import com.ufps.UFPSaberPRO.security.entity.Usuario;
+import com.ufps.UFPSaberPRO.security.dto.UsuarioDTO;
 
 public interface Simu_UsuRepository extends CrudRepository<Simu_Usu, Long>{
 	
@@ -19,5 +19,5 @@ public interface Simu_UsuRepository extends CrudRepository<Simu_Usu, Long>{
 			+ "		 u.usu_codigo, u.usu_email,u.programa.id_programa, u.rol.id_rol) FROM Simu_Usu su \r\n"
 			+ "INNER JOIN Usuario u on u.id_usuario = su.usuario.id_usuario \r\n"
 			+ "WHERE su.simulacro.id_simulacro=:id_simulacro")
-	public List<Usuario> getUsuariosSimu(@Param("id_simulacro") Long simulacro);
+	public List<UsuarioDTO> getUsuariosSimu(@Param("id_simulacro") Long simulacro);
 }
