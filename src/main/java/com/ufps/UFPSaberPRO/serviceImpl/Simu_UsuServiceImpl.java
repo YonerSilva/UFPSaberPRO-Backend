@@ -94,10 +94,10 @@ public class Simu_UsuServiceImpl implements Simu_UsuService{
 	}
 
 	@Override
-	public List<UsuarioDTO> getUsuariosSimu(Long id_simulacro, Long id_usuario) {
+	public List<UsuarioDTO> getUsuariosSimu(Long id_simulacro) {
 		List<UsuarioDTO> usuarios = new ArrayList<>();
 		UsuarioConverter converter = new UsuarioConverter();
-		for (Usuario user : simu_usuDao.getUsuariosSimu(id_simulacro,id_usuario)) {
+		for (Usuario user : simu_usuDao.getUsuariosSimu(id_simulacro)) {
 			usuarios.add(converter.converterToDTO(user));
 		}
 		return usuarios;

@@ -17,6 +17,6 @@ public interface Simu_UsuRepository extends CrudRepository<Simu_Usu, Long>{
 	@Modifying
 	@Query(value = "SELECT u.* FROM public.simu_usu su \r\n"
 			+ "INNER JOIN public.usuario u on u.id_usuario = su.id_usuario \r\n"
-			+ "WHERE su.id_simulacro=:id_simulacro and u.id_usuario=:id_usuario", nativeQuery = true)
-	public List<Usuario> getUsuariosSimu(@Param("id_simulacro") Long simulacro, @Param("id_usuario") Long usuario);
+			+ "WHERE su.id_simulacro=:id_simulacro", nativeQuery = true)
+	public List<Usuario> getUsuariosSimu(@Param("id_simulacro") Long simulacro);
 }

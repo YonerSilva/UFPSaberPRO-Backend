@@ -29,12 +29,11 @@ public class Simu_UsuRestController {
 	@Operation(summary = "Obtiene una lista de usuarios que se encuentren"
 			+ "relacionadas a un simulacro.")
 	@GetMapping("/getUsuariosSimu")
-	public ResponseEntity<Object> getUsuariosSimu(@RequestParam String id_simulacro, @RequestParam String id_usuario) {
+	public ResponseEntity<Object> getUsuariosSimu(@RequestParam String id_simulacro) {
 		Map<String, Object> datos = new LinkedHashMap<>();
 		Long id_simu = Long.parseLong(id_simulacro);
-		Long id_usu = Long.parseLong(id_usuario);
 		try {
-			List<UsuarioDTO> usuarios = simu_usuService.getUsuariosSimu(id_simu, id_usu);
+			List<UsuarioDTO> usuarios = simu_usuService.getUsuariosSimu(id_simu);
 			if (usuarios.size() > 0) {
 				datos.put("error", null);
 				datos.put("message", "¡Proceso Exitoso!");
