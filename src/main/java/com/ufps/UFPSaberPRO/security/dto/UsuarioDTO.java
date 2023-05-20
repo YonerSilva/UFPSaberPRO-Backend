@@ -37,5 +37,24 @@ public class UsuarioDTO {
     
     @NotNull
     private Long rol;
+    
+    public UsuarioDTO() {
+    	
+    }
+
+	public UsuarioDTO(Long id_usuario,String usu_nombre, String usu_apellido,
+		 String usu_codigo, String usu_email,
+		 String cod_programa, Long rol) {
+		super();
+		this.id_usuario = id_usuario;
+		this.usu_nombre = usu_nombre;
+		this.usu_apellido = usu_apellido;
+		this.usu_codigo = usu_codigo;
+		this.usu_email = usu_email;
+		this.cod_programa = cod_programa;
+		this.rol = rol;
+	}
+    
+    
         
 }
