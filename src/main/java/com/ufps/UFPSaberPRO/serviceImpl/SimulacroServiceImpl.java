@@ -77,4 +77,10 @@ public class SimulacroServiceImpl implements SimulacroService{
 	public List<SimulacroDTO> getSimulacrosConvo(Long id_usuario, String estado) {
 		return simulacroDao.findAllByConvoUsuEst(new Usuario(id_usuario), estado);
 	}
+	
+	@Transactional
+	@Override
+	public List<SimulacroDTO> getSimulacrosUsu(Long id_usuario) {
+		return simulacroDao.findAllByUsuario(new Usuario(id_usuario));
+	}
 }

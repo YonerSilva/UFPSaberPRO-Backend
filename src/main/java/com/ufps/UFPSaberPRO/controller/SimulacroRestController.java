@@ -246,6 +246,33 @@ public class SimulacroRestController {
 		}
 	}
 	
+	@Operation(summary = "Obtiene una lista de simulacros"
+			+ "relacionadas a un usuario y que no esten activas.")
+	@GetMapping("/getSimulacrosUsu")
+	public ResponseEntity<Object> getSimulacrosUsu(@RequestParam String id_usuario) {
+		Map<String, Object> datos = new LinkedHashMap<>();
+		Long id_usu = Long.parseLong(id_usuario);
+		try {
+			List<SimulacroDTO> simulacros = simulacroService.getSimulacrosUsu(id_usu);
+			if (simulacros.size() > 0) {
+				datos.put("error", null);
+				datos.put("message", "¡Proceso Exitoso!");
+				datos.put("simulacros", simulacros);
+				return new ResponseEntity<Object>(datos, HttpStatus.OK);
+			} else {
+				datos.put("error", null);
+				datos.put("message", "No se encontraron simulacros.");
+				datos.put("simulacros", simulacros);
+				return new ResponseEntity<Object>(datos, HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			datos.put("error", e.getMessage());
+			datos.put("message", "No se encontraron simulacros.");
+			datos.put("simulacros", null);
+			return new ResponseEntity<Object>(datos, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
 	@Operation(summary = "Obtiene una lista de preguntas de un simulacro en especifico.")
 	@GetMapping("/getPregOpcSimu")
 	public ResponseEntity<Object> getPregOpcSimu(@RequestParam String id_simulacro){

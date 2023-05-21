@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ufps.UFPSaberPRO.dto.PreguntaDTO;
 import com.ufps.UFPSaberPRO.dto.SimulacroDTO;
+import com.ufps.UFPSaberPRO.entity.Convocatoria;
 import com.ufps.UFPSaberPRO.entity.Simulacro;
 import com.ufps.UFPSaberPRO.security.entity.Usuario;
 
@@ -41,5 +42,18 @@ public interface SimulacroRepository extends CrudRepository<Simulacro, Long>{
 			+ "WHERE cu.usuario=:usuario and s.simu_estado=:estado \r\n"
 			+ "and not exists (select su from Simu_Usu su where su.simulacro.id_simulacro = s.id_simulacro and su.usuario.id_usuario=:usuario)")
 	public List<SimulacroDTO> findAllByConvoUsuEst(Usuario usuario,String estado);
+	
+	//Todos los simulacros que ha presentado el usuario.
+	@Transactional
+	@Modifying
+	@Query(value = "SELECT new com.ufps.UFPSaberPRO.dto.SimulacroDTO(s.id_simulacro,s.simu_nombre,\r\n"
+			+ "s.simu_descripcion,s.simu_puntaje_maximo,s.simu_estado,\r\n"
+			+ "s.programa, c.simu_fecha_inicial, c.simu_fecha_final) FROM Simu_Usu su \r\n"
+			+ "INNER JOIN Simulacro s on s = su.simulacro \r\n"
+			+ "INNER JOIN Usuario u on u = su.usuario \r\n"
+			+ "INNER JOIN Convo_Usu cu on cu.usuario = u \r\n"
+			+ "INNER JOIN Convocatoria c on c.simulacro = s \r\n"
+			+ "WHERE u = :usuario and su.simu_usu_presentado = true and s.simu_estado!='A'")
+	public List<SimulacroDTO> findAllByUsuario(Usuario usuario);
 	
 }
