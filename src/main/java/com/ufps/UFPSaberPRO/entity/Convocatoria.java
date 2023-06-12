@@ -77,4 +77,12 @@ public class Convocatoria implements Serializable {
     @JoinTable(name="convo_usu", joinColumns = @JoinColumn(name="id_convocatoria"),inverseJoinColumns=@JoinColumn(name="id_usuario"))
     private List<Usuario> usuarios = new ArrayList<>();
 
+	public Convocatoria() {
+	}
+
+	public Convocatoria(Long id_convocatoria) {
+		this.id_convocatoria = id_convocatoria;
+	}
+
+	
 }

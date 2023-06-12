@@ -3,11 +3,17 @@ package com.ufps.UFPSaberPRO.serviceImpl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
+import javax.persistence.Query;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.ufps.UFPSaberPRO.converter.SimulacroConverter;
 import com.ufps.UFPSaberPRO.dao.SimulacroRepository;
+import com.ufps.UFPSaberPRO.dto.EstadisticaDTO;
 import com.ufps.UFPSaberPRO.dto.PreguntaDTO;
 import com.ufps.UFPSaberPRO.dto.SimulacroDTO;
 import com.ufps.UFPSaberPRO.entity.Simulacro;
@@ -20,6 +26,9 @@ public class SimulacroServiceImpl implements SimulacroService{
 	
 	@Autowired
 	private SimulacroRepository simulacroDao;
+	
+	@PersistenceUnit
+	EntityManagerFactory emf;
 
 	@Transactional
 	@Override
@@ -82,5 +91,31 @@ public class SimulacroServiceImpl implements SimulacroService{
 	@Override
 	public List<SimulacroDTO> getSimulacrosUsu(Long id_usuario) {
 		return simulacroDao.findAllByUsuario(new Usuario(id_usuario));
+	}
+	
+	public List<EstadisticaDTO> getEstadisticasSimuUsu(Long id_simulacro, Long id_usuario, Long id_convocatoria){
+		EntityManager em = emf.createEntityManager();
+		String sql = "select p.id_pregunta, p.preg_tipo, sub.id_subcategoria, cate.id_categoria, rsu.rta_puntaje puntaje_obtenido\r\n"
+				+ "from simu_usu su \r\n"
+				+ "inner join rta_simu_usu rsu on rsu.id_simu_usu = su.id_simu_usu\r\n"
+				+ "inner join respuesta r on r.id_respuesta = rsu.id_respuesta\r\n"
+				+ "inner join pregunta p on p.id_pregunta = r.id_pregunta \r\n"
+				+ "inner join subcategoria sub on sub.id_subcategoria = p.id_subcategoria \r\n"
+				+ "inner join categoria cate on cate.id_categoria = sub.id_categoria \r\n"
+				+ "inner join simu_preg sp on sp.id_simulacro = su.id_simulacro and sp.id_pregunta = p.id_pregunta \r\n"
+				+ "where su.id_simulacro = :id_simulacro and su.id_usuario = :id_usuario and su.id_convocatoria = :id_convocatoria ";
+		Query q = em.createNativeQuery(sql).setParameter("id_simulacro", id_simulacro).setParameter("id_usuario", id_usuario).setParameter("id_convocatoria", id_convocatoria);
+		List<Object[]> respuestas = q.getResultList();
+		List<EstadisticaDTO> estadisticas = new ArrayList<>();
+		for (Object[] item : respuestas) {
+			EstadisticaDTO itemDto = new EstadisticaDTO();
+			itemDto.setId_pregunta(Long.parseLong(item[0].toString()));
+			itemDto.setPreg_tipo(Integer.parseInt(item[1].toString()));
+			itemDto.setId_subcategoria(Long.parseLong(item[2].toString()));
+			itemDto.setId_categoria(Long.parseLong(item[3].toString()));
+			itemDto.setPuntaje_obtenido(Integer.parseInt(item[4].toString()));
+			estadisticas.add(itemDto);
+		}
+		return estadisticas;
 	}
 }

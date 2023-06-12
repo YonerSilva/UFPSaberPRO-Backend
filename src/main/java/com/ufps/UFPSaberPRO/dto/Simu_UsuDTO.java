@@ -28,6 +28,9 @@ public class Simu_UsuDTO {
 	@NotNull
 	private Long usuario;
 	
+	@NotNull
+	private Long convocatoria;
+	
 	private List<PreguntaDTO> preguntas_respondidas;
 	
 }

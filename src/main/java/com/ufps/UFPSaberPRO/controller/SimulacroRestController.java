@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ufps.UFPSaberPRO.dto.DatogeneralDTO;
+import com.ufps.UFPSaberPRO.dto.EstadisticaDTO;
 import com.ufps.UFPSaberPRO.dto.PreguntaDTO;
 import com.ufps.UFPSaberPRO.dto.Simu_UsuDTO;
 import com.ufps.UFPSaberPRO.dto.SimulacroDTO;
@@ -322,4 +323,32 @@ public class SimulacroRestController {
 		}
 	}
 	
+	@Operation(summary = "Obtiene las estadisticas del simulacro de un usuario y una convocatoria en especifico.")
+	@GetMapping("/getEstadisticasSimuUsu")
+	public ResponseEntity<Object> getEstadisticasSimuUsu(@RequestParam String id_simulacro, @RequestParam String id_usuario, @RequestParam String id_convocatoria){
+		Long id_usu = Long.parseLong(id_usuario);
+		Long id_simu = Long.parseLong(id_simulacro);
+		Long id_convo = Long.parseLong(id_convocatoria);
+
+		Map<String,Object> datos = new LinkedHashMap<>();
+		try {
+			List<EstadisticaDTO> estadisticas = simulacroService.getEstadisticasSimuUsu(id_simu, id_usu, id_convo);
+			if(estadisticas.size()>0) {
+				datos.put("error", null);
+				datos.put("message", "¡Proceso Exitoso!");
+				datos.put("estadisticas", estadisticas);
+				return new ResponseEntity<Object>(datos, HttpStatus.OK);
+			}else {
+				datos.put("error", "No se encontraron estadisticas");
+				datos.put("message", "No se encontraron estadisticas registradas.");
+				datos.put("estadisticas", estadisticas);
+				return new ResponseEntity<Object>(datos, HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			datos.put("error", e.getMessage());
+			datos.put("message", "No se encontraron estadisticas.");
+			datos.put("estadisticas", null);
+			return new ResponseEntity<Object>(datos, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 }

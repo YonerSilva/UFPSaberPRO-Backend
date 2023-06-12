@@ -34,25 +34,24 @@ public interface SimulacroRepository extends CrudRepository<Simulacro, Long>{
 	
 	@Transactional
 	@Modifying
-	@Query("SELECT new com.ufps.UFPSaberPRO.dto.SimulacroDTO(s.id_simulacro,s.simu_nombre,\r\n"
+	@Query("SELECT distinct new com.ufps.UFPSaberPRO.dto.SimulacroDTO(s.id_simulacro,s.simu_nombre,\r\n"
 			+ "s.simu_descripcion,s.simu_puntaje_maximo,s.simu_estado,\r\n"
-			+ "s.programa, c.simu_fecha_inicial, c.simu_fecha_final) FROM Convo_Usu cu \r\n"
-			+ "INNER JOIN Convocatoria c on c.id_convocatoria = cu.convocatoria \r\n"
-			+ "INNER JOIN Simulacro s on s.id_simulacro = c.simulacro \r\n"
+			+ "s.programa, c.simu_fecha_inicial, c.simu_fecha_final,c.id_convocatoria) FROM Convo_Usu cu \r\n"
+			+ "INNER JOIN Convocatoria c on c = cu.convocatoria \r\n"
+			+ "INNER JOIN Simulacro s on s = c.simulacro \r\n"
 			+ "WHERE cu.usuario=:usuario and s.simu_estado=:estado \r\n"
-			+ "and not exists (select su from Simu_Usu su where su.simulacro.id_simulacro = s.id_simulacro and su.usuario.id_usuario=:usuario)")
+			+ "and not exists (select su from Simu_Usu su where su.simulacro = s and su.usuario=:usuario and su.convocatoria=c)")
 	public List<SimulacroDTO> findAllByConvoUsuEst(Usuario usuario,String estado);
 	
 	//Todos los simulacros que ha presentado el usuario.
 	@Transactional
 	@Modifying
 	@Query(value = "SELECT new com.ufps.UFPSaberPRO.dto.SimulacroDTO(s.id_simulacro,s.simu_nombre,\r\n"
-			+ "s.simu_descripcion,s.simu_puntaje_maximo,s.simu_estado,\r\n"
-			+ "s.programa, c.simu_fecha_inicial, c.simu_fecha_final) FROM Simu_Usu su \r\n"
+			+ "s.simu_descripcion,su.simu_usu_puntaje_total,s.simu_puntaje_maximo,s.simu_estado,\r\n"
+			+ "s.programa, c.simu_fecha_inicial, c.simu_fecha_final,c.id_convocatoria,su.simu_usu_codigo) FROM Simu_Usu su \r\n"
 			+ "INNER JOIN Simulacro s on s = su.simulacro \r\n"
 			+ "INNER JOIN Usuario u on u = su.usuario \r\n"
-			+ "INNER JOIN Convo_Usu cu on cu.usuario = u \r\n"
-			+ "INNER JOIN Convocatoria c on c.simulacro = s \r\n"
+			+ "INNER JOIN Convocatoria c on c = su.convocatoria \r\n"
 			+ "WHERE u = :usuario and su.simu_usu_presentado = true and s.simu_estado!='A'")
 	public List<SimulacroDTO> findAllByUsuario(Usuario usuario);
 	

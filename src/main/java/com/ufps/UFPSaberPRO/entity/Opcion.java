@@ -34,6 +34,9 @@ private static final long serialVersionUID = 1L;
     @Column(name = "opc_respuesta")
     private Boolean opc_respuesta;
     
+    @Column(name = "opc_orden")
+    private Integer opc_orden;
+    
     @JoinColumn(name = "id_pregunta",referencedColumnName = "id_pregunta")
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Pregunta.class)
     private Pregunta pregunta;

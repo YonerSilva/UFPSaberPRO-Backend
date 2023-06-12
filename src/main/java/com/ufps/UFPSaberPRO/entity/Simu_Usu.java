@@ -47,6 +47,10 @@ public class Simu_Usu implements Serializable {
 	@JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
 	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Usuario.class)
 	private Usuario usuario;
+	
+	@JoinColumn(name = "id_convocatoria", referencedColumnName = "id_convocatoria")
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Convocatoria.class)
+	private Convocatoria convocatoria;
 
 	public Simu_Usu() {
 

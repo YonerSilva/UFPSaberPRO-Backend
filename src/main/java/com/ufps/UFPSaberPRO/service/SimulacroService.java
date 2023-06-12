@@ -2,6 +2,7 @@ package com.ufps.UFPSaberPRO.service;
 
 import java.util.List;
 
+import com.ufps.UFPSaberPRO.dto.EstadisticaDTO;
 import com.ufps.UFPSaberPRO.dto.PreguntaDTO;
 import com.ufps.UFPSaberPRO.dto.SimulacroDTO;
 
@@ -22,4 +23,7 @@ public interface SimulacroService {
 	public List<SimulacroDTO> getSimulacrosConvo(Long usuario, String estado);
 	
 	public List<SimulacroDTO> getSimulacrosUsu(Long id_usuario);
+	
+	public List<EstadisticaDTO> getEstadisticasSimuUsu(Long id_simulacro, Long id_usuario, Long id_convocatoria);
+	
 }

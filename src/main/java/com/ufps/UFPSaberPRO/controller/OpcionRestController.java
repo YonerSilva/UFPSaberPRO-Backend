@@ -62,6 +62,8 @@ public class OpcionRestController {
 				datos.put("message", "Ha ocurrido un error con los datos ingresados, verifique e intente nuevamente.");
 				return new ResponseEntity<Object>(datos, HttpStatus.INTERNAL_SERVER_ERROR);
 			} else {
+				List<OpcionDTO> opciones_pregunta = opcionService.getOpcionesByPregunta(opcion.getPregunta());
+				opcion.setOpc_orden(opciones_pregunta.get(opciones_pregunta.size()-1).getOpc_orden()+1);
 				OpcionDTO opc = opcionService.guardar(opcion);
 				datos.put("opcion", opc);
 				datos.put("error", null);

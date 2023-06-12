@@ -3,6 +3,7 @@ package com.ufps.UFPSaberPRO.converter;
 import javax.validation.constraints.NotNull;
 
 import com.ufps.UFPSaberPRO.dto.Simu_UsuDTO;
+import com.ufps.UFPSaberPRO.entity.Convocatoria;
 import com.ufps.UFPSaberPRO.entity.Simu_Usu;
 import com.ufps.UFPSaberPRO.entity.Simulacro;
 import com.ufps.UFPSaberPRO.security.entity.Usuario;
@@ -28,6 +29,7 @@ public class Simu_UsuConverter {
 		simu_usu.setSimu_usu_puntaje_total(dto.getSimu_usu_puntaje_total());
 		simu_usu.setSimulacro(new Simulacro(dto.getSimulacro()));
 		simu_usu.setUsuario(new Usuario(dto.getUsuario()));
+		simu_usu.setConvocatoria(new Convocatoria(dto.getConvocatoria()));
 		return simu_usu;
 	}
 	

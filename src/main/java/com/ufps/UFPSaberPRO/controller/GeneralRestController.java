@@ -96,7 +96,9 @@ public class GeneralRestController {
         	}
         	
         	if(usuario.getRol().getRol_nombre().equals("ROLE_ESTUDIANTE")) {
+        		List<CategoriaDTO> categorias = categoriaService.getCategoriasByUsuPrg(id_user, id_prg);
         		List<SubcatergoriaDTO> subcategorias = subcategoriaService.getSubcategoriasByUsuPrg(id_user, id_prg);
+            	datogeneral.setCategorias_programa(categorias);
             	datogeneral.setSubcategorias_programa(subcategorias);
         	}
 
