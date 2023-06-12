@@ -21,6 +21,8 @@ public class OpcionDTO {
 	@NotNull
     private Boolean opc_respuesta;
 	
+	private Integer opc_orden;
+	
 	@NotNull
 	private Long pregunta;
 	

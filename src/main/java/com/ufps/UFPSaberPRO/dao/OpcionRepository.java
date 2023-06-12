@@ -20,7 +20,7 @@ public interface OpcionRepository extends CrudRepository<Opcion, Long> {
 	@Modifying
 	@Query(value = "SELECT o.* FROM public.pregunta p \r\n"
 			+ "INNER JOIN public.opcion o on o.id_pregunta = p.id_pregunta \r\n"
-			+ "WHERE p.id_pregunta = :id_pregunta", nativeQuery = true)
+			+ "WHERE p.id_pregunta = :id_pregunta order by o.opc_orden asc", nativeQuery = true)
 	public List<Opcion> findAllByPregunta(@Param("id_pregunta") Long pregunta);
 	
 	@Transactional
@@ -35,6 +35,6 @@ public interface OpcionRepository extends CrudRepository<Opcion, Long> {
 	@Transactional
 	@Modifying
 	@Query("SELECT new com.ufps.UFPSaberPRO.dto.OpcionDTO(o.id_opcion, o.opc_imagen, o.opc_descripcion, o.pregunta.id_pregunta) FROM Opcion o \r\n"
-			+ "WHERE o.pregunta.id_pregunta=:pregunta")
+			+ "WHERE o.pregunta.id_pregunta=:pregunta order by o.opc_orden asc")
 	public List<OpcionDTO> findAllByPregDTO(Long pregunta);
 }

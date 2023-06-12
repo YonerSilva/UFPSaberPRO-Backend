@@ -34,6 +34,12 @@ public class SimulacroDTO {
     private Date simu_fecha_inicial;
 	
     private Date simu_fecha_final;
+    
+    private Long convocatoria;
+    
+    private String simu_codigo;
+    
+    private Integer simu_puntaje_obtenido;
 	
 	public SimulacroDTO() {
 		
@@ -41,7 +47,7 @@ public class SimulacroDTO {
 
 	public SimulacroDTO(Long id_simulacro,String simu_nombre,
 			String simu_descripcion,Integer simu_puntaje_maximo, String simu_estado,
-			Long programa, Date simu_fecha_inicial, Date simu_fecha_final) {
+			Long programa, Date simu_fecha_inicial, Date simu_fecha_final, Long convocatoria) {
 		this.id_simulacro = id_simulacro;
 		this.simu_nombre = simu_nombre;
 		this.simu_descripcion = simu_descripcion;
@@ -50,7 +56,22 @@ public class SimulacroDTO {
 		this.programa = programa;
 		this.simu_fecha_inicial = simu_fecha_inicial;
 		this.simu_fecha_final = simu_fecha_final;
+		this.convocatoria = convocatoria;
 	}
 	
-	
+	public SimulacroDTO(Long id_simulacro,String simu_nombre,
+			String simu_descripcion,Integer simu_puntaje_obtenido,Integer simu_puntaje_maximo, String simu_estado,
+			Long programa, Date simu_fecha_inicial, Date simu_fecha_final, Long convocatoria,String simu_codigo) {
+		this.id_simulacro = id_simulacro;
+		this.simu_nombre = simu_nombre;
+		this.simu_descripcion = simu_descripcion;
+		this.simu_puntaje_maximo = simu_puntaje_maximo;
+		this.simu_puntaje_obtenido = simu_puntaje_obtenido;
+		this.simu_estado = simu_estado;
+		this.programa = programa;
+		this.simu_fecha_inicial = simu_fecha_inicial;
+		this.simu_fecha_final = simu_fecha_final;
+		this.convocatoria = convocatoria;
+		this.simu_codigo = simu_codigo;
+	}
 }
