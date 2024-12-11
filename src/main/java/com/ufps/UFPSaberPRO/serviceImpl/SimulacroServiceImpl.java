@@ -15,6 +15,7 @@ import com.ufps.UFPSaberPRO.converter.SimulacroConverter;
 import com.ufps.UFPSaberPRO.dao.SimulacroRepository;
 import com.ufps.UFPSaberPRO.dto.EstadisticaDTO;
 import com.ufps.UFPSaberPRO.dto.PreguntaDTO;
+import com.ufps.UFPSaberPRO.dto.ResultadoDTO;
 import com.ufps.UFPSaberPRO.dto.SimulacroDTO;
 import com.ufps.UFPSaberPRO.entity.Simulacro;
 import com.ufps.UFPSaberPRO.security.dto.UsuarioDTO;
@@ -30,7 +31,6 @@ public class SimulacroServiceImpl implements SimulacroService{
 	@PersistenceUnit
 	EntityManagerFactory emf;
 
-	@Transactional
 	@Override
 	public SimulacroDTO buscar(Long id_simulacro) {
 		Simulacro simu = simulacroDao.findById(id_simulacro).get();
@@ -38,14 +38,12 @@ public class SimulacroServiceImpl implements SimulacroService{
 		return simulacro;
 	}
 
-	@Transactional
 	@Override
 	public void guardar(SimulacroDTO simulacro) {
 		Simulacro simu = new SimulacroConverter().converterToEntity(simulacro);
 		simulacroDao.save(simu);
 	}
 	
-	@Transactional
 	@Override
 	public void update(SimulacroDTO simulacro) {
 		Simulacro s = new SimulacroConverter().converterToEntity(simulacro);
@@ -53,13 +51,11 @@ public class SimulacroServiceImpl implements SimulacroService{
 				s.getSimu_puntaje_maximo(), s.getSimu_estado(), s.getPrograma());
 	}
 
-	@Transactional
 	@Override
 	public void eliminar(Long id_simulacro) {
 		// TODO Auto-generated method stub
 	}
 
-	@Transactional
 	@Override
 	public List<SimulacroDTO> getSimulacros() {
 		List<SimulacroDTO> simulacros = new ArrayList<>();
@@ -70,7 +66,6 @@ public class SimulacroServiceImpl implements SimulacroService{
 		return simulacros;
 	}
 	
-	@Transactional
 	@Override
 	public List<SimulacroDTO> getSimulacrosUsuPrg(Long id_usuario, Long id_programa) {
 		List<SimulacroDTO> simulacros = new ArrayList<>();
@@ -81,21 +76,21 @@ public class SimulacroServiceImpl implements SimulacroService{
 		return simulacros;
 	}
 	
-	@Transactional
 	@Override
 	public List<SimulacroDTO> getSimulacrosConvo(Long id_usuario, String estado) {
 		return simulacroDao.findAllByConvoUsuEst(new Usuario(id_usuario), estado);
 	}
 	
-	@Transactional
 	@Override
 	public List<SimulacroDTO> getSimulacrosUsu(Long id_usuario) {
 		return simulacroDao.findAllByUsuario(new Usuario(id_usuario));
 	}
 	
-	public List<EstadisticaDTO> getEstadisticasSimuUsu(Long id_simulacro, Long id_usuario, Long id_convocatoria){
+	@Override
+	public ResultadoDTO getEstadisticasSimuUsu(Long id_simulacro, Long id_usuario, Long id_convocatoria){
 		EntityManager em = emf.createEntityManager();
-		String sql = "select p.id_pregunta, p.preg_tipo, sub.id_subcategoria, cate.id_categoria, rsu.rta_puntaje puntaje_obtenido\r\n"
+		ResultadoDTO resultado = new ResultadoDTO();
+		String sql_estadisticas = "select p.id_pregunta, p.preg_tipo, sub.id_subcategoria, cate.id_categoria, rsu.rta_puntaje puntaje_obtenido\r\n"
 				+ "from simu_usu su \r\n"
 				+ "inner join rta_simu_usu rsu on rsu.id_simu_usu = su.id_simu_usu\r\n"
 				+ "inner join respuesta r on r.id_respuesta = rsu.id_respuesta\r\n"
@@ -104,8 +99,9 @@ public class SimulacroServiceImpl implements SimulacroService{
 				+ "inner join categoria cate on cate.id_categoria = sub.id_categoria \r\n"
 				+ "inner join simu_preg sp on sp.id_simulacro = su.id_simulacro and sp.id_pregunta = p.id_pregunta \r\n"
 				+ "where su.id_simulacro = :id_simulacro and su.id_usuario = :id_usuario and su.id_convocatoria = :id_convocatoria ";
-		Query q = em.createNativeQuery(sql).setParameter("id_simulacro", id_simulacro).setParameter("id_usuario", id_usuario).setParameter("id_convocatoria", id_convocatoria);
-		List<Object[]> respuestas = q.getResultList();
+		Query q_estadisticas = em.createNativeQuery(sql_estadisticas).setParameter("id_simulacro", id_simulacro).setParameter("id_usuario", id_usuario).setParameter("id_convocatoria", id_convocatoria);
+		List<Object[]> respuestas = q_estadisticas.getResultList();
+		
 		List<EstadisticaDTO> estadisticas = new ArrayList<>();
 		for (Object[] item : respuestas) {
 			EstadisticaDTO itemDto = new EstadisticaDTO();
@@ -116,6 +112,12 @@ public class SimulacroServiceImpl implements SimulacroService{
 			itemDto.setPuntaje_obtenido(Integer.parseInt(item[4].toString()));
 			estadisticas.add(itemDto);
 		}
-		return estadisticas;
+		resultado.setEstadisticas(estadisticas);
+		return resultado;
+	}
+
+	@Override
+	public void validarSimulacros() {
+		simulacroDao.fn_validarSimulacros();
 	}
 }

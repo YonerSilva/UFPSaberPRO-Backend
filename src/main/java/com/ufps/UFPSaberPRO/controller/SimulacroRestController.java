@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ufps.UFPSaberPRO.dto.DatogeneralDTO;
 import com.ufps.UFPSaberPRO.dto.EstadisticaDTO;
 import com.ufps.UFPSaberPRO.dto.PreguntaDTO;
+import com.ufps.UFPSaberPRO.dto.ResultadoDTO;
 import com.ufps.UFPSaberPRO.dto.Simu_UsuDTO;
 import com.ufps.UFPSaberPRO.dto.SimulacroDTO;
 import com.ufps.UFPSaberPRO.serviceImpl.PreguntaServiceImpl;
@@ -332,16 +333,16 @@ public class SimulacroRestController {
 
 		Map<String,Object> datos = new LinkedHashMap<>();
 		try {
-			List<EstadisticaDTO> estadisticas = simulacroService.getEstadisticasSimuUsu(id_simu, id_usu, id_convo);
-			if(estadisticas.size()>0) {
+			ResultadoDTO resultado = simulacroService.getEstadisticasSimuUsu(id_simu, id_usu, id_convo);
+			if(resultado.getEstadisticas().size()>0) {
 				datos.put("error", null);
 				datos.put("message", "¡Proceso Exitoso!");
-				datos.put("estadisticas", estadisticas);
+				datos.put("resultado", resultado);
 				return new ResponseEntity<Object>(datos, HttpStatus.OK);
 			}else {
 				datos.put("error", "No se encontraron estadisticas");
 				datos.put("message", "No se encontraron estadisticas registradas.");
-				datos.put("estadisticas", estadisticas);
+				datos.put("estadisticas", null);
 				return new ResponseEntity<Object>(datos, HttpStatus.OK);
 			}
 		} catch (Exception e) {

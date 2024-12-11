@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,6 +24,7 @@ import com.ufps.UFPSaberPRO.dto.Convo_UsuDTO;
 import com.ufps.UFPSaberPRO.dto.ConvocatoriaDTO;
 import com.ufps.UFPSaberPRO.dto.DatogeneralDTO;
 import com.ufps.UFPSaberPRO.serviceImpl.ConvocatoriaServiceImpl;
+import com.ufps.UFPSaberPRO.serviceImpl.SimulacroServiceImpl;
 
 import io.swagger.v3.oas.annotations.Operation;
 
@@ -32,6 +34,9 @@ public class ConvocatoriaRestController {
 	
 	@Autowired
 	private ConvocatoriaServiceImpl convocatoriaService;
+	
+	@Autowired
+	private SimulacroServiceImpl simulacroService;
 	
 	private DatogeneralDTO datoGeneral;
 	
@@ -226,5 +231,12 @@ public class ConvocatoriaRestController {
 			datos.put("message", "Ha ocurrido un error interno con los datos.");
 			return new ResponseEntity<Object>(datos, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+	
+	@Scheduled(cron = "0 * * * * ?")
+	private void validarConvocatoriasSimulacros() {
+		System.out.println("Validando Convocatorias y Simulacros.");
+		convocatoriaService.validarConvocatorias();
+		simulacroService.validarSimulacros();
 	}
 }

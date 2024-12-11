@@ -19,6 +19,7 @@ import com.ufps.UFPSaberPRO.security.entity.Usuario;
 @Repository
 public interface SimulacroRepository extends CrudRepository<Simulacro, Long>{
 	
+	@Transactional
 	@Modifying
 	@Query(value = "UPDATE public.simulacro\r\n"
 			+ "SET simu_descripcion=:descripcion, simu_estado=:estado, \r\n"
@@ -27,6 +28,7 @@ public interface SimulacroRepository extends CrudRepository<Simulacro, Long>{
 	public void update(@Param("id") Long id,@Param("nombre") String nombre,@Param("descripcion") String descripcion,
 			@Param("puntaje") Integer puntaje,@Param("estado") String estado, @Param("programa") Long programa);
 	
+	@Transactional
 	@Modifying
 	@Query(value = "SELECT s.* from public.simulacro s\r\n"
 			+ "WHERE s.programa = :id_programa and EXISTS(SELECT u.* from public.usuario u WHERE u.id_usuario = :id_usuario and u.id_rol = 1)", nativeQuery = true)
@@ -54,5 +56,10 @@ public interface SimulacroRepository extends CrudRepository<Simulacro, Long>{
 			+ "INNER JOIN Convocatoria c on c = su.convocatoria \r\n"
 			+ "WHERE u = :usuario and su.simu_usu_presentado = true and s.simu_estado!='A'")
 	public List<SimulacroDTO> findAllByUsuario(Usuario usuario);
+	
+	@Transactional
+	@Modifying
+	@Query(value = "CALL public.fn_validar_simulacros() ", nativeQuery = true)
+	public void fn_validarSimulacros();
 	
 }

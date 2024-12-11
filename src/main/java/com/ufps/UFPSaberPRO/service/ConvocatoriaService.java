@@ -24,4 +24,7 @@ public interface ConvocatoriaService {
 	public List<ConvocatoriaDTO> getConvocatoriasByUsu(Long id_usuario);
 	
 	public List<ConvocatoriaDTO> getConvocatoriasByPrgEstUsu(Long usuario, Long programa, String estado);
+	
+	public void validarConvocatorias();
+
 }

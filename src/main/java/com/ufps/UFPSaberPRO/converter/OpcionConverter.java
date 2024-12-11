@@ -16,6 +16,7 @@ public class OpcionConverter {
 		OpcionDTO opcion = new OpcionDTO();
 		opcion.setId_opcion(entity.getId_opcion());
 		opcion.setOpc_imagen(entity.getOpc_imagen());
+		opcion.setOpc_orden(entity.getOpc_orden());
 		opcion.setOpc_descripcion(entity.getOpc_descripcion());
 		opcion.setOpc_respuesta(entity.getOpc_respuesta());
 		opcion.setPregunta(entity.getPregunta().getId_pregunta());
@@ -26,6 +27,7 @@ public class OpcionConverter {
 		Opcion opcion = new Opcion();
 		opcion.setId_opcion(dto.getId_opcion());
 		opcion.setOpc_imagen(dto.getOpc_imagen());
+		opcion.setOpc_orden(dto.getOpc_orden());
 		opcion.setOpc_descripcion(dto.getOpc_descripcion());
 		opcion.setOpc_respuesta(dto.getOpc_respuesta());
 		opcion.setPregunta(new Pregunta(dto.getPregunta()));

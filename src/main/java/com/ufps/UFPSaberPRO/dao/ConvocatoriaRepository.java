@@ -54,6 +54,11 @@ public interface ConvocatoriaRepository extends CrudRepository<Convocatoria, Lon
 	
 	@Transactional
 	@Modifying
+	@Query(value = "CALL public.fn_validar_convocatorias() ", nativeQuery = true)
+	public void fn_validarConvocatorias();
+	
+	@Transactional
+	@Modifying
 	@Query(value = "INSERT INTO public.convo_usu\r\n"
 			+ "(id_convocatoria, id_usuario)\r\n"
 			+ "VALUES(:id_convocatoria,:id_usuario)", nativeQuery = true)

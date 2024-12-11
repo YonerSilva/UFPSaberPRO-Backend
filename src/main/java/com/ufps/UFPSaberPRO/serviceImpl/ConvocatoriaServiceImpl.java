@@ -23,7 +23,6 @@ public class ConvocatoriaServiceImpl implements ConvocatoriaService{
 	private ConvocatoriaRepository convocatoriaDao;
 
 	@Override
-	@Transactional
 	public ConvocatoriaDTO buscar(Long id_convocatoria) {
 		Convocatoria convo = convocatoriaDao.findById(id_convocatoria).get();
 		ConvocatoriaDTO convocatoria = new ConvocatoriaConverter().converterToDTO(convo);
@@ -31,20 +30,17 @@ public class ConvocatoriaServiceImpl implements ConvocatoriaService{
 	}
 
 	@Override
-	@Transactional
 	public void guardar(ConvocatoriaDTO convocatoria) {
 		Convocatoria convo = new ConvocatoriaConverter().converterToEntity(convocatoria);
 		convocatoriaDao.save(convo);
 	}
 	
 	@Override
-	@Transactional
 	public void guardarUsuario(Convo_UsuDTO convo_usu) {
 		convocatoriaDao.guardarUsuario(convo_usu.getId_convocatoria(), convo_usu.getId_usuario());
 	}
 	
 	@Override
-	@Transactional
 	public void update(ConvocatoriaDTO convocatoria) {
 		Convocatoria convo = new ConvocatoriaConverter().converterToEntity(convocatoria);
 		convocatoriaDao.update(convo.getId_convocatoria(), convo.getConvo_nombre(), convo.getConvo_descripcion(),
@@ -59,7 +55,6 @@ public class ConvocatoriaServiceImpl implements ConvocatoriaService{
 	}
 
 	@Override
-	@Transactional
 	public List<ConvocatoriaDTO> getConvocatorias() {
 		List<ConvocatoriaDTO> convocatorias = new ArrayList<>();
 		ConvocatoriaConverter converter = new ConvocatoriaConverter();
@@ -70,7 +65,6 @@ public class ConvocatoriaServiceImpl implements ConvocatoriaService{
 	}
 	
 	@Override
-	@Transactional
 	public List<ConvocatoriaDTO> getConvocatoriasByUsuPrg(Long id_usuario,Long id_programa) {
 		List<ConvocatoriaDTO> convocatorias = new ArrayList<>();
 		ConvocatoriaConverter converter = new ConvocatoriaConverter();
@@ -81,7 +75,6 @@ public class ConvocatoriaServiceImpl implements ConvocatoriaService{
 	}
 	
 	@Override
-	@Transactional
 	public List<ConvocatoriaDTO> getConvocatoriasByUsu(Long id_usuario) {
 		List<ConvocatoriaDTO> convocatorias = new ArrayList<>();
 		ConvocatoriaConverter converter = new ConvocatoriaConverter();
@@ -92,7 +85,6 @@ public class ConvocatoriaServiceImpl implements ConvocatoriaService{
 	}
 	
 	@Override
-	@Transactional
 	public List<ConvocatoriaDTO> getConvocatoriasByPrgEstUsu(Long usuario,Long programa, String estado) {
 		List<ConvocatoriaDTO> convocatorias = new ArrayList<>();
 		ConvocatoriaConverter converter = new ConvocatoriaConverter();
@@ -100,5 +92,10 @@ public class ConvocatoriaServiceImpl implements ConvocatoriaService{
 			convocatorias.add(converter.converterToDTO(convo));
 		}
 		return convocatorias;
+	}
+
+	@Override
+	public void validarConvocatorias() {
+		convocatoriaDao.fn_validarConvocatorias();
 	}
 }
